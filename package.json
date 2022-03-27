@@ -1,0 +1,29 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:host": "nuxt --hostname '0' --port 8000",
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/sitemap": "^2.4.0",
+    "contentful": "^8.3.7",
+    "contentful-export": "^7.12.23",
+    "core-js": "^3.9.1",
+    "nuxt": "^2.15.3",
+    "nuxt-i18n": "^6.27.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.4",
+    "less": "^4.1.1",
+    "less-loader": "^7.3.0",
+    "webpack": "^4.1.0"
+  }
+}

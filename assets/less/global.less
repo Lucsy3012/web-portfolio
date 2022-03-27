@@ -1,0 +1,116 @@
+@import "variables";
+@import "utilities";
+@import "shorthands";
+
+// Custom Properties
+:root {
+
+  // Regular color
+  --site-color:               @color-black;
+  --site-color-75:            fade(@color-black, 75);
+  --site-color-66:            fade(@color-black, 66);
+  --site-color-50:            fade(@color-black, 50);
+  --site-color-33:            fade(@color-black, 33);
+  --site-color-25:            fade(@color-black, 25);
+  --site-color-10:            fade(@color-black, 10);
+  --site-color-hover:         lighten(@color-black, 5%);
+  --site-color-active:        lighten(@color-black, 10%);
+
+  // Contrast color
+  --site-contrast:            @color-white;
+  --site-contrast-75:         fade(@color-white, 75);
+  --site-contrast-66:         fade(@color-white, 66);
+  --site-contrast-50:         fade(@color-white, 50);
+  --site-contrast-33:         fade(@color-white, 33);
+  --site-contrast-25:         fade(@color-white, 25);
+  --site-contrast-10:         fade(@color-white, 10);
+  --site-contrast-hover:      darken(@color-white, 5%);
+  --site-contrast-active:     darken(@color-white, 10%);
+
+  // Contrast color
+  --site-accent:            @color-accent;
+  --site-accent-75:         fade(@color-accent, 75);
+  --site-accent-66:         fade(@color-accent, 66);
+  --site-accent-50:         fade(@color-accent, 50);
+  --site-accent-33:         fade(@color-accent, 33);
+  --site-accent-25:         fade(@color-accent, 25);
+  --site-accent-10:         fade(@color-accent, 10);
+  --site-accent-hover:      darken(@color-accent, 5%);
+  --site-accent-active:     darken(@color-accent, 10%);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Basier Circle', -apple-system, 'Arial', sans-serif;
+  font-size: clamp(14px, 4.2vw, 16px);
+  font-weight: 400;
+  line-height: 1.74;
+  color: var(--site-color-75, @color-black-75);
+  background-color: var(--site-contrast, @color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--site-color, @color-black);
+  text-decoration: none;
+  .transit();
+
+  &:hover,
+  &:active {
+    color: var(--site-color, @color-black);
+  }
+
+  &.disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+}
+
+p, small {
+  font-size: inherit;
+  color: var(--site-color-75, @color-black-75);
+  word-break: break-word;
+}
+
+p:only-child {
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+}
+
+h1, h2, h3, h4, h5, h6, b, strong {
+  margin: unset;
+  color: var(--site-color, @color-black);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+hr {
+  margin: clamp(40px, 6vw, 70px) 0;
+  border-color: var(--site-color-10, @color-black-10);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+address {
+  font-style: inherit;
+}
+
+article > a {
+  display: flow-root;
+}
+
+@import "_globals/grid";
+@import "_globals/font";
+@import "components";
+@import "pages";

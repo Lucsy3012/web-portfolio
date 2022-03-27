@@ -1,0 +1,187 @@
+.header {
+  --section-padding: 20px;
+
+  .logo {
+    width: auto;
+    max-height: 40px;
+  }
+
+  // Menu opener (Mobile)
+  .menu-opener {
+    .flex();
+    // align-content: space-evenly;
+    // justify-content: center;
+    box-sizing: content-box;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 8px;;
+    z-index: 111;
+
+    > div {
+      --transition-delay: 0.15s;
+      --transition-duration: 0.30s;
+      position: absolute;
+      left: 50%;
+      width: 24px;
+      height: 2px;
+      background-color: var(--site-color, @color-black);
+      transform: translate(-50%, 0);
+      transform-origin: center center;
+      .transit();
+
+      &:nth-child(1) { top: 11px; }
+      &:nth-child(2) { top: 19px; }
+      &:nth-child(3) { top: 28px; }
+    }
+
+    &:hover {
+      > div {
+        &:nth-child(2) {
+          width: 18px;
+        }
+      }
+    }
+
+    @media screen and (min-width: @vw-min-tablet) {
+      display: none;
+    }
+  }
+
+  // Navigation default
+  nav {
+    --transition-property: background;
+    .transit();
+
+    ul {
+      .flex();
+      list-style: none;
+
+      li {
+        padding: 0 10px;
+
+        a {
+          display: inline-block;
+          padding: 10px;
+
+          &.nuxt-link-exact-active {
+            font-variation-settings: "wght" 700;
+            color: var(--site-color, @color-black);
+          }
+        }
+      }
+    }
+
+    // Background
+    &::before {
+      --transition-delay: 0.35s;
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 100;
+      .transit();
+    }
+  }
+
+  // Navigation is active
+  .navigation-holder[active] {
+    .menu-opener {
+      > div {
+        background-color: var(--site-contrast, @color-white);
+
+        &:nth-child(1) { top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
+        &:nth-child(2) { top: 50%; width: 0; }
+        &:nth-child(3) { top: 50%; transform: translate(-50%, -50%) rotate(-45deg); }
+      }
+    }
+  }
+
+  @media screen and (max-width: @vw-max-tablet - 1px) {
+    --section-padding: 15px;
+
+    .logo {
+      max-height: 30px;
+    }
+
+    // Navigation default before active
+    nav {
+      .flex();
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      pointer-events: none;
+
+      ul {
+        position: relative;
+        flex-direction: column;
+        text-align: center;
+        z-index: 100;
+
+        // Each item
+        li {
+          --transition-property: all;
+          --transition-timing-function: cubic-bezier(0.165,0.84,0.44,1);
+          // --transition-duration: 0s;
+          --transition-duration: 0.5s;
+          transform: translateY(30px);
+          opacity: 0;
+          .transit();
+
+          &:nth-child(1) { --transition-delay: 0.1s; }
+          &:nth-child(2) { --transition-delay: 0.2s; }
+          &:nth-child(3) { --transition-delay: 0.3s; }
+          &:nth-child(4) { --transition-delay: 0.4s; }
+          &:nth-child(5) { --transition-delay: 0.5s; }
+
+          // Link
+          a {
+            --transition-property: color;
+            font-size: 8vw;
+            font-variation-settings: "wght" 800;
+            color: var(--site-contrast, @color-white);
+
+            &.nuxt-link-exact-active {
+              font-variation-settings: "wght" 800;
+              color: var(--site-contrast-25, @color-white-25);
+              pointer-events: none;
+            }
+          }
+        }
+      }
+    }
+
+    // Navigation is active
+    .navigation-holder[active] {
+      nav {
+        pointer-events: initial;
+
+        ul {
+
+          // Each item
+          li {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        // Background
+        &::before {
+          --transition-delay: 0s;
+          background-color: fade(@color-black, 95%);
+          pointer-events: initial;
+        }
+      }
+    }
+  }
+}
