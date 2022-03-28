@@ -1,9 +1,9 @@
 <template>
   <div id="language-switch" class="language-switch">
     <div class="language--display">
-      <span>{{ this.$i18n.locale.toUpperCase() }}</span>
+      <span>{{ thisLocale.localeProperties.name }}</span>
       <span class="separator"></span>
-      <span>{{ this.$i18n.localeProperties.name }}</span>
+      <span>{{ thisLocale.locale.toUpperCase() }}</span>
     </div>
     <div class="language--tooltip">
       <ul>
@@ -26,6 +26,11 @@ export default {
   },
   mounted() {
     console.log(this.$i18n)
+  },
+  computed: {
+    thisLocale() {
+      return this.$i18n;
+    }
   }
 }
 </script>

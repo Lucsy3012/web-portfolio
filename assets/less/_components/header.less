@@ -1,3 +1,5 @@
+@import (reference) "../shorthands";
+
 .header {
   --section-padding: 20px;
 
@@ -61,12 +63,42 @@
         padding: 0 10px;
 
         a {
+          position: relative;
           display: inline-block;
           padding: 10px;
+          .transit();
 
-          &.nuxt-link-exact-active {
-            font-variation-settings: "wght" 700;
+          // Indicator
+          &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0 auto;
+            width: 18px;
+            height: 3px;
+            border-radius: 3px;
+            background-color: var(--site-color, @color-black);
+            transform: scaleX(0);
+            .transit();
+          }
+
+          // Hover
+          &:hover {
+            &::before {
+              transform: scaleX(1);
+            }
+          }
+
+          // Active
+          &.nuxt-link-active {
+            font-weight: 500;
             color: var(--site-color, @color-black);
+
+            &::before {
+              transform: scaleX(1);
+            }
           }
         }
       }

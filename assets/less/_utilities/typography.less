@@ -14,11 +14,11 @@
 @t7:  clamp(24px, 7.2vw, 104px); /* font-size: 104px; */
 
 @tl: 400;
-@tm: 600;
-@tb: 700;
-@tf: 800;
+@tm: 500;
+@tb: 600;
+@tf: 700;
 
-@secondary: "Soulmaze", 'Basier Circle', -apple-system, 'Arial', sans-serif;
+@soulmaze: "Soulmaze", 'Basier Circle', -apple-system, 'Arial', sans-serif;
 
 // Sizes Hardcoded
 .t-4, .tl-4, .tm-4, .tb-4, .tf-4  { font-size: @t-4; }
@@ -37,8 +37,8 @@
 // Weights Hardcoded
 .tl, .tl1, .tl2, .tl3, .tl4, .tl5, .tl6, .tl7, .tl-1, .tl-2, .tl-3, .tl-4 { font-weight: @tl; }
 .tm, .tm1, .tm2, .tm3, .tm4, .tm5, .tm6, .tm7, .tm-1, .tm-2, .tm-3, .tm-4 { font-weight: @tm; }
-.tb, .tb1, .tb2, .tb3, .tb4, .tb5, .tb6, .tb7, .tb-1, .tb-2, .tb-3, .tb-4 { font-weight: @tb; font-family: @secondary; }
-.tf, .tf1, .tf2, .tf3, .tf4, .tf5, .tf6, .tf7, .tf-1, .tf-2, .tf-3, .tf-4 { font-weight: @tf; font-family: @secondary; }
+.tb, .tb1, .tb2, .tb3, .tb4, .tb5, .tb6, .tb7, .tb-1, .tb-2, .tb-3, .tb-4 { font-weight: @tb; font-family: @soulmaze; }
+.tf, .tf1, .tf2, .tf3, .tf4, .tf5, .tf6, .tf7, .tf-1, .tf-2, .tf-3, .tf-4 { font-weight: @tf; font-family: @soulmaze; }
 
 // < 480px
 @media screen and (min-width: @vw-min-mobile) {
@@ -58,8 +58,8 @@
   // Weights Hardcoded
   .tl-xs, .tl1-xs, .tl2-xs, .tl3-xs, .tl4-xs, .tl5-xs, .tl6-xs, .tl7-xs, .tl-1-xs, .tl-2-xs, .tl-3-xs, .tl-4-xs { font-weight: @tl; }
   .tm-xs, .tm1-xs, .tm2-xs, .tm3-xs, .tm4-xs, .tm5-xs, .tm6-xs, .tm7-xs, .tm-1-xs, .tm-2-xs, .tm-3-xs, .tm-4-xs { font-weight: @tm; }
-  .tb-xs, .tb1-xs, .tb2-xs, .tb3-xs, .tb4-xs, .tb5-xs, .tb6-xs, .tb7-xs, .tb-1-xs, .tb-2-xs, .tb-3-xs, .tb-4-xs { font-weight: @tb; font-family: @secondary; }
-  .tf-xs, .tf1-xs, .tf2-xs, .tf3-xs, .tf4-xs, .tf5-xs, .tf6-xs, .tf7-xs, .tf-1-xs, .tf-2-xs, .tf-3-xs, .tf-4-xs { font-weight: @tf; font-family: @secondary; }
+  .tb-xs, .tb1-xs, .tb2-xs, .tb3-xs, .tb4-xs, .tb5-xs, .tb6-xs, .tb7-xs, .tb-1-xs, .tb-2-xs, .tb-3-xs, .tb-4-xs { font-weight: @tb; font-family: @soulmaze; }
+  .tf-xs, .tf1-xs, .tf2-xs, .tf3-xs, .tf4-xs, .tf5-xs, .tf6-xs, .tf7-xs, .tf-1-xs, .tf-2-xs, .tf-3-xs, .tf-4-xs { font-weight: @tf; font-family: @soulmaze; }
 }
 
 // < 480px
@@ -80,8 +80,8 @@
   // Weights Hardcoded
   .tl-s, .tl1-s, .tl2-s, .tl3-s, .tl4-s, .tl5-s, .tl6-s, .tl7-s, .tl-1-s, .tl-2-s, .tl-3-s, .tl-4-s { font-weight: @tl; }
   .tm-s, .tm1-s, .tm2-s, .tm3-s, .tm4-s, .tm5-s, .tm6-s, .tm7-s, .tm-1-s, .tm-2-s, .tm-3-s, .tm-4-s { font-weight: @tm; }
-  .tb-s, .tb1-s, .tb2-s, .tb3-s, .tb4-s, .tb5-s, .tb6-s, .tb7-s, .tb-1-s, .tb-2-s, .tb-3-s, .tb-4-s { font-weight: @tb; font-family: @secondary; }
-  .tf-s, .tf1-s, .tf2-s, .tf3-s, .tf4-s, .tf5-s, .tf6-s, .tf7-s, .tf-1-s, .tf-2-s, .tf-3-s, .tf-4-s { font-weight: @tf; font-family: @secondary; }
+  .tb-s, .tb1-s, .tb2-s, .tb3-s, .tb4-s, .tb5-s, .tb6-s, .tb7-s, .tb-1-s, .tb-2-s, .tb-3-s, .tb-4-s { font-weight: @tb; font-family: @soulmaze; }
+  .tf-s, .tf1-s, .tf2-s, .tf3-s, .tf4-s, .tf5-s, .tf6-s, .tf7-s, .tf-1-s, .tf-2-s, .tf-3-s, .tf-4-s { font-weight: @tf; font-family: @soulmaze; }
 }
 
 // < 960px
@@ -102,8 +102,8 @@
   // Weights Hardcoded
   .tl-m, .tl1-m, .tl2-m, .tl3-m, .tl4-m, .tl5-m, .tl6-m, .tl7-m, .tl-1-m, .tl-2-m, .tl-3-m, .tl-4-m { font-weight: @tl; }
   .tm-m, .tm1-m, .tm2-m, .tm3-m, .tm4-m, .tm5-m, .tm6-m, .tm7-m, .tm-1-m, .tm-2-m, .tm-3-m, .tm-4-m { font-weight: @tm; }
-  .tb-m, .tb1-m, .tb2-m, .tb3-m, .tb4-m, .tb5-m, .tb6-m, .tb7-m, .tb-1-m, .tb-2-m, .tb-3-m, .tb-4-m { font-weight: @tb; font-family: @secondary; }
-  .tf-m, .tf1-m, .tf2-m, .tf3-m, .tf4-m, .tf5-m, .tf6-m, .tf7-m, .tf-1-m, .tf-2-m, .tf-3-m, .tf-4-m { font-weight: @tf; font-family: @secondary; }
+  .tb-m, .tb1-m, .tb2-m, .tb3-m, .tb4-m, .tb5-m, .tb6-m, .tb7-m, .tb-1-m, .tb-2-m, .tb-3-m, .tb-4-m { font-weight: @tb; font-family: @soulmaze; }
+  .tf-m, .tf1-m, .tf2-m, .tf3-m, .tf4-m, .tf5-m, .tf6-m, .tf7-m, .tf-1-m, .tf-2-m, .tf-3-m, .tf-4-m { font-weight: @tf; font-family: @soulmaze; }
 }
 
 // < 1280px
@@ -124,8 +124,8 @@
   // Weights Hardcoded
   .tl-l, .tl1-l, .tl2-l, .tl3-l, .tl4-l, .tl5-l, .tl6-l, .tl7-l, .tl-1-l, .tl-2-l, .tl-3-l, .tl-4-l { font-weight: @tl; }
   .tm-l, .tm1-l, .tm2-l, .tm3-l, .tm4-l, .tm5-l, .tm6-l, .tm7-l, .tm-1-l, .tm-2-l, .tm-3-l, .tm-4-l { font-weight: @tm; }
-  .tb-l, .tb1-l, .tb2-l, .tb3-l, .tb4-l, .tb5-l, .tb6-l, .tb7-l, .tb-1-l, .tb-2-l, .tb-3-l, .tb-4-l { font-weight: @tb; font-family: @secondary; }
-  .tf-l, .tf1-l, .tf2-l, .tf3-l, .tf4-l, .tf5-l, .tf6-l, .tf7-l, .tf-1-l, .tf-2-l, .tf-3-l, .tf-4-l { font-weight: @tf; font-family: @secondary; }
+  .tb-l, .tb1-l, .tb2-l, .tb3-l, .tb4-l, .tb5-l, .tb6-l, .tb7-l, .tb-1-l, .tb-2-l, .tb-3-l, .tb-4-l { font-weight: @tb; font-family: @soulmaze; }
+  .tf-l, .tf1-l, .tf2-l, .tf3-l, .tf4-l, .tf5-l, .tf6-l, .tf7-l, .tf-1-l, .tf-2-l, .tf-3-l, .tf-4-l { font-weight: @tf; font-family: @soulmaze; }
 }
 
 // < 1680px
@@ -146,6 +146,6 @@
   // Weights Hardcoded
   .tl-xl, .tl1-xl, .tl2-xl, .tl3-xl, .tl4-xl, .tl5-xl, .tl6-xl, .tl7-xl, .tl-1-xl, .tl-2-xl, .tl-3-xl, .tl-4-xl { font-weight: @tl; }
   .tm-xl, .tm1-xl, .tm2-xl, .tm3-xl, .tm4-xl, .tm5-xl, .tm6-xl, .tm7-xl, .tm-1-xl, .tm-2-xl, .tm-3-xl, .tm-4-xl { font-weight: @tm; }
-  .tb-xl, .tb1-xl, .tb2-xl, .tb3-xl, .tb4-xl, .tb5-xl, .tb6-xl, .tb7-xl, .tb-1-xl, .tb-2-xl, .tb-3-xl, .tb-4-xl { font-weight: @tb; font-family: @secondary; }
-  .tf-xl, .tf1-xl, .tf2-xl, .tf3-xl, .tf4-xl, .tf5-xl, .tf6-xl, .tf7-xl, .tf-1-xl, .tf-2-xl, .tf-3-xl, .tf-4-xl { font-weight: @tf; font-family: @secondary; }
+  .tb-xl, .tb1-xl, .tb2-xl, .tb3-xl, .tb4-xl, .tb5-xl, .tb6-xl, .tb7-xl, .tb-1-xl, .tb-2-xl, .tb-3-xl, .tb-4-xl { font-weight: @tb; font-family: @soulmaze; }
+  .tf-xl, .tf1-xl, .tf2-xl, .tf3-xl, .tf4-xl, .tf5-xl, .tf6-xl, .tf7-xl, .tf-1-xl, .tf-2-xl, .tf-3-xl, .tf-4-xl { font-weight: @tf; font-family: @soulmaze; }
 }

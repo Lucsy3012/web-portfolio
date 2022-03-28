@@ -1,0 +1,33 @@
+@import (reference) "../shorthands";
+@import (reference) "../variables";
+
+.headline {
+  > * {
+    display: block;
+    line-height: 1;
+    animation: appearFromBottom 1.75s cubic-bezier(0.80, 0.15, 0.3, 0.9);
+    animation-fill-mode: both;
+    .transit();
+
+    &:first-child {
+      text-indent: 0.2em;
+      animation-name: appearFromBottom2;
+      animation-delay: 0.15s;
+      animation-duration: 1.65s;
+      animation-timing-function: cubic-bezier(0.80, 0.15, 0.3, 0.9);
+    }
+  }
+
+  .primary { font-weight: 700; }
+  .secondary { font-weight: 600; }
+}
+
+@keyframes appearFromBottom {
+  0%    { transform: translateY(100%); clip-path: polygon(0 -100%, 100% -100%, 100% 0%, 0% 0%); }
+  100%  { transform: translateY(0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+}
+
+@keyframes appearFromBottom2 {
+  0%    { transform: translateY(120%); clip-path: polygon(0 -125%, 125% -125%, 125% 0%, 0% 0%); opacity: 0; }
+  100%  { transform: translateY(0); clip-path: polygon(0 0, 125% 0, 125% 125%, 0% 125%); opacity: 1; }
+}

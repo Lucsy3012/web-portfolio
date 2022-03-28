@@ -1,18 +1,18 @@
 export default {
-  "de": {
-    "navigation": {
-      "legal": "Impressum",
-      "privacy": "Datenschutz",
-      "contact": "Kontakt",
+  de: {
+    navLegal: {
+      legal: "Impressum",
+      privacy: "Datenschutz",
+      contact: "Kontakt",
     },
-    "address": {
-      "street": "Meine Straße 123",
-      "city": "Stadt",
-      "zip": "48329",
-      "coutry": "Deutschland",
-      "link": {
-        "href": "https://goo.gl/maps/yGtaUc2J8f8XxE7J6",
-        "title": "Finden Sie uns bei Google"
+    navSocial: {
+      gitHub: {
+        name: "GitHub",
+        href: "https://github.com/Lucsy3012",
+      },
+      dribble: {
+        name: "Dribbble",
+        href: "https://dribbble.com/Lucsy3012",
       },
     },
     "contact": {
@@ -22,20 +22,20 @@ export default {
       "phoneTitle": "Rufen Sie uns an"
     }
   },
-  "en": {
-    "navigation": {
-      "legal": "Legal notice",
-      "privacy": "Privacy",
-      "contact": "Contact"
+  en: {
+    navLegal: {
+      legal: "Legal notice",
+      privacy: "Privacy",
+      contact: "Contact",
     },
-    "address": {
-      "street": "My Street 123",
-      "city": "Stadt",
-      "zip": "48329",
-      "coutry": "Germany",
-      "link": {
-        "href": "https://goo.gl/maps/yGtaUc2J8f8XxE7J6",
-        "title": "Find us on Google"
+    navSocial: {
+      gitHub: {
+        name: "GitHub",
+        href: "https://github.com/Lucsy3012",
+      },
+      dribble: {
+        name: "Dribbble",
+        href: "https://dribbble.com/Lucsy3012",
       },
     },
     "contact": {
