@@ -1,0 +1,65 @@
+@import (reference) "../global";
+
+// Section (behind)
+.dynamic-bg--container {
+  .section--xl.dynamic-bg {
+    padding-top: ~'calc((var(--section-padding) * 1) - (var(--gap-row) * 0.5))';
+    padding-bottom: ~'calc((var(--section-padding) * 1) - (var(--gap-row)))';
+    z-index: 1;
+  }
+
+  // Offsets
+  .dynamic-bg--offset--33 {
+    position: relative;
+    transform: translateY(33%);
+    z-index: 2;
+  }
+
+  // Backgrounds
+  .dynamic-bg {
+    .background,
+    .background::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform-origin: center center;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .background {
+      animation-fill-mode: both;
+      animation-name: appearFromTop;
+      animation-delay: 0.5s;
+      animation-duration: 1.5s;
+      animation-timing-function: @bezier-push;
+      overflow: hidden;
+    }
+    .row {
+      animation-fill-mode: both;
+      animation-name: appearFromTopTransform;
+      animation-delay: 0.5s;
+      animation-duration: 1.5s;
+      animation-timing-function: @bezier-push;
+    }
+  }
+  .dynamic-bg--yellow .background::before {
+    transform: scale(5) rotate(-125deg);
+    background: conic-gradient(#FEE195, #F3FCFF, #FEE195);
+  }
+}
+
+
+@keyframes appearFromTop {
+  0%    { transform: translateY(-2.5vh); clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); opacity: 0; }
+  100%  { transform: translateY(0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); opacity: 1; }
+}
+
+@keyframes appearFromTopTransform {
+  0%    { transform: translateY(5vh); opacity: 0; }
+  25%   { opacity: 0; }
+  100%  { transform: translateY(0); opacity: 1; }
+}

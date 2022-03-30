@@ -5,7 +5,7 @@
   > * {
     display: block;
     line-height: 1;
-    animation: appearFromBottom 1.75s cubic-bezier(0.80, 0.15, 0.3, 0.9);
+    animation: appearFromBottom 1.75s @bezier-push;
     animation-fill-mode: both;
     .transit();
 
@@ -14,7 +14,7 @@
       animation-name: appearFromBottom2;
       animation-delay: 0.15s;
       animation-duration: 1.65s;
-      animation-timing-function: cubic-bezier(0.80, 0.15, 0.3, 0.9);
+      animation-timing-function: @bezier-push;
     }
   }
 
