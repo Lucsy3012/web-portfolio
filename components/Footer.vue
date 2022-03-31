@@ -10,7 +10,7 @@
               <LangSwitch />
             </div>
             <div class="grid-item-2">
-              <Logo height="40" />
+              <Logo />
             </div>
             <div class="grid-item-3">
               <FooterNavigation />
@@ -26,8 +26,10 @@
         <div class="row text--center justify-content--center align-items--center">
           <div class="col grid">
             <div class="grid-item-1">
-              <div>
-                Alle Rechte vorbehalten
+              <div class="separator--display">
+                <span>{{ t.footer.copyright.text }}</span>
+                <span class="separator"></span>
+                <a :href="`mailto:${t.footer.copyright.email}`">{{ t.footer.copyright.email }}</a>
               </div>
             </div>
             <div class="grid-item-2">
@@ -43,50 +45,157 @@
   </footer>
 </template>
 
-<style lang="less" scoped>
+<script>
+export default {
+  name: "Footer",
+  computed: {
+    t() {
+      return {
+        footer: this.$t('footer')
+      }
+    }
+  }
+}
+</script>
+
+<style lang="less">
 @import (reference) "../assets/less/global";
 
-.grid {
-  display: grid;
-  justify-content: space-between;
-  align-items: center;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: 1fr;
+footer {
+  --link-color: var(--site-color-50, @color-black-50);
+  --link-color-active: var(--site-color, @color-black);
 
-  .grid-item-1,
-  .grid-item-2,
-  .grid-item-3 {
-    justify-items: center;
+  position: relative;
+  z-index: 5;
+
+  .logo {
+    display: flex;
+    height: 26px;
   }
 
-  @media screen and (min-width: @vw-min-tablet) {
-    .grid-item-1 {
-      justify-self: flex-start;
+  // Link Defaults
+  a {
+    --transition-property: color;
+    color: var(--link-color);
+    .transit();
+
+    // Hover
+    &:hover {
+      color: var(--link-color-active);
     }
+
+    // Active
+    &.nuxt-link-active {
+      font-weight: 500;
+      color: var(--link-color-active);
+    }
+  }
+
+  // Navigation Defaults
+  nav {
+    --transition-property: background;
+    --navigation-gap: 10px;
+    .transit();
+
+    ul {
+      .flex();
+      list-style: none;
+
+      li {
+        padding: 0 var(--navigation-gap, 10px);
+
+        a {
+          --transition-property: color;
+          position: relative;
+          display: inline-block;
+          padding: var(--navigation-gap, 10px);
+        }
+      }
+    }
+  }
+
+  // Grid Defaults
+  .grid {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: 1fr;
+
+    .grid-item-1,
+    .grid-item-2,
     .grid-item-3 {
-      justify-self: flex-end;
+      justify-items: center;
+    }
+
+    @media screen and (min-width: @vw-min-tablet) {
+      .grid-item-1 {
+        justify-self: flex-start;
+      }
+      .grid-item-3 {
+        justify-self: flex-end;
+      }
+    }
+  }
+
+  // Media Queries
+  @media screen and (max-width: @vw-max-desktop-large) {
+    .logo {
+      height: 20px
+    }
+  }
+  @media screen and (max-width: @vw-max-desktop) {
+    .logo {
+      display: none;
+    }
+    nav {
+      --navigation-gap: 6px;
+    }
+  }
+
+  .footer-primary {
+    .row {
+      position: relative;
+      padding: 10px 0;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: ~'calc(var(--gap-column) / 2)';
+        right: ~'calc(var(--gap-column) / 2)';
+        border-top: 3px solid var(--site-color, @color-black);
+      }
+    }
+  }
+
+  .footer-secondary {
+    --link-color: var(--site-contrast-75, @color-white-75);
+    --link-color-active: var(--site-contrast, @color-white);
+
+    background-color: var(--site-color, @color-black);
+    color: var(--site-contrast, @color-white);
+    font-size: clamp(12px, 4.0vw, 14px); // 14px
+
+    nav {
+      --navigation-gap: 8px;
+    }
+  }
+
+  // Separators
+  .separator--display {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .separator {
+      width: 14px;
+      height: 1px;
+      margin: 0 10px;
+      border-top: 2px solid var(--link-color-active);
+      opacity: .33;
     }
   }
 }
 
-.footer-primary {
-  .row {
-    position: relative;
-    padding: 10px 0;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: ~'calc(var(--gap-column) / 2)';
-      right: ~'calc(var(--gap-column) / 2)';
-      border-top: 3px solid var(--site-color, @color-black);
-    }
-  }
-}
-
-.footer-secondary {
-  background-color: var(--site-color, @color-black);
-  color: var(--site-contrast, @color-white);
-}
 </style>

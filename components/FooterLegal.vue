@@ -17,16 +17,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less" scoped>
-@import (reference) "../assets/less/global";
-
-a {
-  color: @color-white-75;
-
-  &:hover,
-  &.nuxt-link-active {
-    color: @color-white;
-  }
-}
-</style>

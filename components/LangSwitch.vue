@@ -1,6 +1,6 @@
 <template>
   <div id="language-switch" class="language-switch">
-    <div class="language--display">
+    <div class="separator--display">
       <span>{{ thisLocale.localeProperties.name }}</span>
       <span class="separator"></span>
       <span>{{ thisLocale.locale.toUpperCase() }}</span>

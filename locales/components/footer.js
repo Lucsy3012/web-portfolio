@@ -1,48 +1,34 @@
 export default {
   de: {
+    navFooter: {
+      about: "Über mich",
+      projects: "Projekte",
+      services: "Leistungen",
+    },
     navLegal: {
       legal: "Impressum",
       privacy: "Datenschutz",
       contact: "Kontakt",
     },
-    navSocial: {
-      gitHub: {
-        name: "GitHub",
-        href: "https://github.com/Lucsy3012",
-      },
-      dribble: {
-        name: "Dribbble",
-        href: "https://dribbble.com/Lucsy3012",
-      },
+    copyright: {
+      text: "Alle Rechte vorbehalten",
+      email: "lucas@lucasdietrich.de",
     },
-    "contact": {
-      "email": "lucas@lucasdietrich.de",
-      "emailTitle": "Schreiben Sie uns eine E-Mail",
-      "phone": "0151 1580 2400",
-      "phoneTitle": "Rufen Sie uns an"
-    }
   },
   en: {
+    navFooter: {
+      about: "About me",
+      projects: "Projects",
+      services: "Services",
+    },
     navLegal: {
       legal: "Legal notice",
       privacy: "Privacy",
       contact: "Contact",
     },
-    navSocial: {
-      gitHub: {
-        name: "GitHub",
-        href: "https://github.com/Lucsy3012",
-      },
-      dribble: {
-        name: "Dribbble",
-        href: "https://dribbble.com/Lucsy3012",
-      },
+    copyright: {
+      text: "Alle Rechte vorbehalten",
+      email: "lucas@lucasdietrich.de",
     },
-    "contact": {
-      "email": "lucas@lucasdietrich.de",
-      "emailTitle": "Write us an email",
-      "phone": "+49 (0) 151 1580 2400",
-      "phoneTitle": "Call us"
-    }
   }
 }

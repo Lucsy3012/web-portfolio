@@ -1,18 +1,19 @@
 <template>
   <nav id="footer-navigation">
-    <ul class="tm-1 t-s justify-content--center justify-content--end-s">
-      <li>
-        <NuxtLink :to="localePath('news')">{{ $t('footer.navigation.privacy') }}</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink :to="localePath('legal')">{{ $t('footer.navigation.legal') }}</NuxtLink>
+    <ul>
+      <li v-for="(item, index) in navItems" :key="index">
+        <NuxtLink :to="localePath({ name: item })">{{ $t('footer.navFooter.' + item) }}</NuxtLink>
       </li>
     </ul>
   </nav>
 </template>
 
-<style lang="less">
-  #footer-navigation {
-
+<script>
+export default {
+  computed: {
+    navItems() {
+      return Object.keys(this.$t('footer.navFooter'));
+    }
   }
-</style>
+}
+</script>

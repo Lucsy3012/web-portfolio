@@ -53,6 +53,9 @@
   // Navigation default
   nav {
     --transition-property: background;
+    --navigation-gap: 10px;
+    --link-color: var(--site-color-50, @color-black-50);
+    --link-color-active: var(--site-color, @color-black);
     .transit();
 
     ul {
@@ -60,16 +63,20 @@
       list-style: none;
 
       li {
-        padding: 0 10px;
+        padding: 0 var(--navigation-gap, 10px);
 
         a {
+          --transition-property: opacity, color;
           position: relative;
           display: inline-block;
-          padding: 10px;
+          font-size: clamp(14px, 4.2vw, 16px); // 16px
+          color: var(--link-color);
+          padding: var(--navigation-gap, 10px);
           .transit();
 
           // Indicator
           &::before {
+            --transition-property: transform;
             content: "";
             position: absolute;
             left: 0;
@@ -79,13 +86,15 @@
             width: 18px;
             height: 3px;
             border-radius: 3px;
-            background-color: var(--site-color, @color-black);
+            background-color: var(--link-color-active);
             transform: scaleX(0);
             .transit();
           }
 
           // Hover
           &:hover {
+            color: var(--link-color-active);
+
             &::before {
               transform: scaleX(1);
             }
@@ -94,7 +103,7 @@
           // Active
           &.nuxt-link-active {
             font-weight: 500;
-            color: var(--site-color, @color-black);
+            color: var(--link-color-active);
 
             &::before {
               transform: scaleX(1);
@@ -180,11 +189,11 @@
           a {
             --transition-property: color;
             font-size: 8vw;
-            font-variation-settings: "wght" 800;
+            font-weight: 600;
             color: var(--site-contrast, @color-white);
 
             &.nuxt-link-exact-active {
-              font-variation-settings: "wght" 800;
+              font-weight: 600;
               color: var(--site-contrast-25, @color-white-25);
               pointer-events: none;
             }

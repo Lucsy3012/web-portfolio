@@ -46,9 +46,31 @@
       animation-timing-function: @bezier-push;
     }
   }
+
+  // Colors
+  @color-dynamic-yellow: #FEE195;
+  @color-pale-blue: #F3FCFF;
+
+  @color-dynamic-green: #DCFE95;
+  @color-pale-orange: #FFFCF3;
+
+  @color-dynamic-pink: #FE95C1;
+  @color-pale-yellow: #FFF8F3;
+
   .dynamic-bg--yellow .background::before {
     transform: scale(5) rotate(-125deg);
-    background: conic-gradient(#FEE195, #F3FCFF, #FEE195);
+    background-color: @color-dynamic-yellow;
+    background: conic-gradient(@color-dynamic-yellow, @color-pale-blue, @color-dynamic-yellow);
+  }
+  .dynamic-bg--green .background::before {
+    transform: scale(5) rotate(-125deg);
+    background-color: @color-dynamic-green;
+    background: conic-gradient(@color-dynamic-green, @color-pale-orange, @color-dynamic-green);
+  }
+  .dynamic-bg--pink .background::before {
+    transform: scale(5) rotate(-125deg);
+    background-color: @color-dynamic-pink;
+    background: conic-gradient(@color-dynamic-pink, @color-pale-yellow, @color-dynamic-pink);
   }
 }
 

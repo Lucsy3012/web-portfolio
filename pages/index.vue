@@ -14,6 +14,7 @@
 
 <script>
 import client from '~/plugins/contentful'
+
 export default {
   asyncData({ i18n }) {
     return client.getEntries({

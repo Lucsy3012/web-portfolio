@@ -1,8 +1,16 @@
 <template>
   <nav id="footer-social">
     <ul>
-      <li v-for="(item, index) in navItems" :key="index">
-        <a :href="$t('footer.navSocial.' + item + '.href')" target="_blank" :class="$t('footer.navSocial.' + item + 'name')"></a>
+      <li v-for="(item, index) in socialLinks" :key="index">
+        <a :href="item.href" target="_blank">
+          <img
+            :src="`/social-${item.name.toLowerCase()}.svg`"
+            :alt="item.name"
+            width="22"
+            height="22"
+            loading="lazy"
+          >
+        </a>
       </li>
     </ul>
   </nav>
@@ -10,6 +18,32 @@
 
 <script>
 export default {
+  data() {
+    return {
+      socialLinks: [
+        {
+          name: "Instagram",
+          href: "https://www.instagram.com/lucasdietrich_/",
+        },
+        {
+          name: "Dribbble",
+          href: "https://dribbble.com/Lucsy3012",
+        },
+        {
+          name: "Figma",
+          href: "https://www.figma.com/@LucasDietrich",
+        },
+        {
+          name: "GitHub",
+          href: "https://github.com/Lucsy3012",
+        },
+        {
+          name: "Codepen",
+          href: "https://codepen.io/your-work/",
+        },
+      ],
+    }
+  },
   computed: {
     navItems() {
       return Object.keys(this.$t('footer.navSocial'));
@@ -23,22 +57,32 @@ export default {
 
 #footer-social {
   ul {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    grid-auto-columns: 1fr;
-    grid-gap: 24px;
 
     li {
-      grid-row: 1;
-    }
-  }
-  a {
-    width: 22px;
-    height: 22px;
-    .transit();
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
 
-    &:hover {
-      opacity: .5;
+      a {
+        --transition-duration: .15s;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 22px;
+        height: 22px;
+        padding: 12px;
+        box-sizing: content-box;
+        .transit();
+
+        &:hover {
+          opacity: .5;
+        }
+      }
     }
   }
 }

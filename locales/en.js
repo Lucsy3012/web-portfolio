@@ -4,7 +4,8 @@ import footer from '~/locales/components/footer'
 
 // Pages
 import home from '~/locales/pages/home'
-import news from '~/locales/pages/news'
+import projects from '~/locales/pages/projects'
+import contact from '~/locales/pages/contact'
 import legal from '~/locales/pages/legal'
 
 export default {
@@ -12,6 +13,7 @@ export default {
   "footer": footer.en,
 
   "home": home.en,
-  "news": news.en,
+  "projects": projects.en,
+  "contact": contact.en,
   "legal": legal.en
 }
