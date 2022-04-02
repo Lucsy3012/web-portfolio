@@ -1,12 +1,28 @@
 @import "../variables";
 
 // Text
-// .--indented         { letter-spacing: 0.03em; }
-// .--condensed        { letter-spacing: -0.03em; }
-.--eyebrow          { letter-spacing: 0.25em; text-transform: uppercase; }
+.--eyebrow {
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-family: 'Basier Circle', -apple-system, 'Arial', sans-serif;
+  font-size: clamp(11px, 4.0vw, 12px);
+  font-weight: 500;
+
+  @media screen and (min-width: @vw-min-tablet) {
+    font-size: clamp(12px, 4.0vw, 14px);
+    letter-spacing: 0.15em;
+  }
+  @media screen and (min-width: @vw-min-grid) {
+    font-size: clamp(13px, 4.1vw, 15px);
+    letter-spacing: 0.20em;
+  }
+  @media screen and (min-width: @vw-min-desktop) {
+    font-size: clamp(14px, 4.2vw, 16px);
+    letter-spacing: 0.25em;
+  }
+}
 .--line-height-1\.7 { line-height: 1.7; }
 .--line-height-2    { line-height: 2; }
-// .--rounded          { border-radius: 6px; }
 
 // Site Colors
 .--site-color    { color: var(--site-color, @color-black); }

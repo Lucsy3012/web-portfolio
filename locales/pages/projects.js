@@ -1,10 +1,10 @@
 export default {
-  "de": {
-    "title": "Projekte",
-    "lastname": "Dietrich",
+  de: {
+    title: "Projekte",
+    releaseDate: "Release Datum:",
   },
-  "en": {
-    "title": "Projects",
-    "lastname": "Dietrich",
+  en: {
+    title: "Projects",
+    releaseDate: "Release Date:",
   }
 }

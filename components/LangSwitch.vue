@@ -24,9 +24,6 @@ export default {
       availableLocales: this.$i18n.locales
     }
   },
-  mounted() {
-    console.log(this.$i18n)
-  },
   computed: {
     thisLocale() {
       return this.$i18n;

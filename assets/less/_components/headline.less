@@ -2,37 +2,87 @@
 @import (reference) "../variables";
 
 .headline {
+  position: relative;
+
   > * {
     display: block;
     line-height: 1;
-    animation: appearFromBottom 1.75s @bezier-push;
+    text-indent: var(--text-indent, 0.025em);
+    animation: headlineAppearFromBottom 1.75s @bezier-push;
     animation-fill-mode: both;
+    animation-play-state: var(--animation-play-state);
     .transit();
 
     &:first-child {
-      text-indent: 0.2em;
-      animation-name: appearFromBottom2;
+      --text-indent: 0.225em;
+      animation-name: headlineAppearFromBottom2;
       animation-delay: 0.15s;
       animation-duration: 1.65s;
       animation-timing-function: @bezier-push;
     }
+    &.tertiary {
+      animation-name: headlineAppearFromTop;
+      animation-delay: 0.3s;
+      animation-duration: 1.50s;
+      animation-timing-function: @bezier-push;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
+  &.text--center  > *:first-child,
+  & > .centered {
+    text-indent: 0.424em;
+  }
+
+  // Fonts
   .primary { font-weight: 700; }
   .secondary { font-weight: 600; }
+  .tertiary {
+    .--eyebrow();
+    position: absolute;
+    top: 100%;
+    // transform: translateY(~'calc(100% +  clamp(20px, 5vw, 40px))');
+  }
 
+  // Offsets
   &.simulate-offset-33 {
     margin-top: 0.91385em;
     margin-bottom: 0.91385em;
   }
 }
 
-@keyframes appearFromBottom {
+// Positions
+.headline--container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .headline-position--left & {
+    justify-content: flex-start;
+    padding-left: ~'calc(var(--section-inner-padding, 20px) + var(--gap-column, 20px))';
+  }
+  .headline-position--center & {
+    justify-content: center;
+  }
+  .headline-position--right & {
+    justify-content: flex-end;
+    padding-right: ~'calc(var(--section-inner-padding, 20px) + var(--gap-column, 20px))';
+  }
+}
+
+@keyframes headlineAppearFromBottom {
   0%    { transform: translateY(100%); clip-path: polygon(0 -100%, 100% -100%, 100% 0%, 0% 0%); }
   100%  { transform: translateY(0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
 }
 
-@keyframes appearFromBottom2 {
+@keyframes headlineAppearFromBottom2 {
   0%    { transform: translateY(120%); clip-path: polygon(0 -125%, 125% -125%, 125% 0%, 0% 0%); opacity: 0; }
   100%  { transform: translateY(0); clip-path: polygon(0 0, 125% 0, 125% 125%, 0% 125%); opacity: 1; }
+}
+
+@keyframes headlineAppearFromTop {
+  0%    { transform: translateY(0%); clip-path: polygon(0 -100%, 100% -100%, 100% 0%, 0% 0%); }
+  100%  { transform: translateY(100%); clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%) ; }
 }

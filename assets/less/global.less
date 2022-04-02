@@ -111,6 +111,16 @@ article > a {
   display: flow-root;
 }
 
+// Animations
+.animate--js {
+  --animation-play-state: paused;
+}
+
+html.js-disabled .animate--js,
+.animate--js.in {
+  --animation-play-state: running;
+}
+
 @import "_globals/grid";
 @import "_globals/font";
 @import "components";
