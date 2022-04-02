@@ -54,7 +54,10 @@
                       :src="project.fields.mainImage.fields.file.url"
                       :title="project.fields.mainImage.fields.description"
                       :alt="project.fields.mainImage.fields.description"
+                      :width="project.fields.mainImage.fields.file.details.image.width"
+                      :height="project.fields.mainImage.fields.file.details.image.height"
                       class="dynamic-bg--image"
+                      loading="lazy"
                     >
                   </picture>
                 </NuxtLink>
