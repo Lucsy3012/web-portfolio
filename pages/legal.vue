@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <section class="dynamic-bg--container pb0">
+    <section class="dynamic-bg--container pb0 animate--js in">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
-          <div class="headline tb5 tb6-m tb7-xl text--center">
+          <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
             <span class="secondary">{{ t.title }}</span>
             <h1 class="primary">{{ t.title }}</h1>
           </div>

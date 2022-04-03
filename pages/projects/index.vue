@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <section>
+    <section class="animate--js in">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
-            <div class="headline tb5 tb6-m tb7-xl text--center simulate-offset-33">
+            <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33">
               <span class="secondary">{{ t.title }}</span>
               <h1 class="primary">{{ t.title }}</h1>
             </div>
@@ -86,6 +86,7 @@ export default {
     return client.getEntries({
       content_type: 'project',
       order: '-sys.createdAt',
+      limit: 6,
       locale: i18n.locale
     })
       .then(entries => {
@@ -111,7 +112,6 @@ export default {
         month: '2-digit',
         day: '2-digit'
       }
-      console.log(iso)
 
       return new Date(dateString).toLocaleDateString(iso, options);
     },

@@ -11,7 +11,6 @@
     animation: headlineAppearFromBottom 1.75s @bezier-push;
     animation-fill-mode: both;
     animation-play-state: var(--animation-play-state);
-    .transit();
 
     &:first-child {
       --text-indent: 0.225em;
@@ -70,6 +69,32 @@
     justify-content: flex-end;
     padding-right: ~'calc(var(--section-inner-padding, 20px) + var(--gap-column, 20px))';
   }
+}
+
+// Animation Shorthands
+.headlineAppearFromBottom {
+  animation: headlineAppearFromBottom 1.75s @bezier-push;
+  animation-fill-mode: both;
+  animation-delay: 0s;
+  animation-play-state: var(--animation-play-state);
+}
+.headlineAppearFromBottom2 {
+  animation: headlineAppearFromBottom2 1.65s @bezier-push;
+  animation-fill-mode: both;
+  animation-delay: 0.15s;
+  animation-play-state: var(--animation-play-state);
+}
+.headlineAppearFromTop {
+  animation: headlineAppearFromTop 1.50s @bezier-push;
+  animation-fill-mode: both;
+  animation-delay: 0.3s;
+  animation-play-state: var(--animation-play-state);
+}
+.appearFromTop {
+  animation: appearFromTop 1.50s @bezier-push;
+  animation-fill-mode: both;
+  animation-delay: 0.3s;
+  animation-play-state: var(--animation-play-state);
 }
 
 @keyframes headlineAppearFromBottom {

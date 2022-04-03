@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <section class="dynamic-bg--container pb0 animate--js">
+    <section class="dynamic-bg--container pb0 animate--js in">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
-          <div class="headline tb5 tb6-m tb7-xl text--center">
+          <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
             <span class="secondary">{{ t.title }}</span>
             <h1 class="primary">{{ t.title }}</h1>
           </div>
@@ -16,7 +16,7 @@
             <div class="col col-12 col-s-11 text--center">
               <ul>
                 <li v-for="(item, index) in t.links" :key="index">
-                  <a :href="item.href" :title="item.name" class="tb4 tb5-s tb6-l">{{ item.name }}</a>
+                  <a :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l">{{ item.name }}</a>
                 </li>
               </ul>
             </div>

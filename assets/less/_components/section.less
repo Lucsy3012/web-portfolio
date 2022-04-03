@@ -1,5 +1,34 @@
 @import (reference) "../global";
 
+// Section BG
+.static-bg {
+  z-index: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: ~'calc(100% - var(--section-padding) - var(--gap-row))';
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  // Offsets
+  @media screen and (min-width: @vw-min-grid) {
+    &.static-bg--offset-bottom--33::before {
+      height: ~'calc(66% - var(--section-padding) - var(--gap-row))';
+    }
+  }
+
+  // Backgrounds
+  &.static-bg--gray::before {
+    background: linear-gradient(fade(#C7C7C7, 0), fade(#C7C7C7, 50));
+  }
+}
+
 // Section (behind)
 .dynamic-bg--container {
   .section--xl.dynamic-bg {
@@ -61,16 +90,6 @@
     animation-timing-function: @bezier-push;
     animation-play-state: var(--animation-play-state);
   }
-
-  // Colors
-  @color-dynamic-yellow: #FEE195;
-  @color-pale-blue: #F3FCFF;
-
-  @color-dynamic-green: #DCFE95;
-  @color-pale-orange: #FFFCF3;
-
-  @color-dynamic-pink: #FE95C1;
-  @color-pale-yellow: #FFF8F3;
 
   .dynamic-bg--yellow .background::before {
     transform: scale(5) rotate(-125deg);
