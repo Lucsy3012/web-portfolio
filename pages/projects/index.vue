@@ -15,6 +15,20 @@
 
     <!-- Projects -->
     <div id="projects">
+      <template v-for="project in projects">
+        <ProjectBanner
+          :slug="project.fields.slug"
+          :title="project.fields.title"
+          :subline="project.fields.subline"
+          :img="project.fields.mainImage"
+          :video="project.fields.mainVideo"
+          :releaseDate="project.fields.releaseDate"
+          :headlinePosition="project.fields.headlinePosition"
+          :accentColor="project.fields.accentColor"
+          :key="project.fields.slug"
+        />
+      </template>
+      <!--
       <section
         v-for="project in projects"
         class="dynamic-bg--container p0 animate--js"
@@ -69,6 +83,7 @@
           </div>
         </section>
       </section>
+      -->
     </div>
   </div>
 </template>
@@ -85,7 +100,7 @@ export default {
   asyncData({ i18n }) {
     return client.getEntries({
       content_type: 'project',
-      order: '-sys.createdAt',
+      order: '-fields.releaseDate',
       limit: 6,
       locale: i18n.locale
     })
@@ -101,30 +116,6 @@ export default {
       return this.$t('projects')
     }
   },
-  methods: {
-    resizeImageSrcSet(img, width, format) {
-      return `${img.fields.file.url}?w=${width}&fm=${format} 1x, ${img.fields.file.url}?w=${width * 2}&fm=${format} 2x`
-    },
-    date(dateString) {
-      const iso = this.$i18n.localeProperties.iso;
-      const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-      }
-
-      return new Date(dateString).toLocaleDateString(iso, options);
-    },
-    tagsCategories(project) {
-      const tags = project.metadata.tags;
-
-      for (let i = 0; i < tags.length; i++) {
-        console.log(tags[i].sys.id)
-      }
-
-      return tags
-    },
-  }
 }
 </script>
 
@@ -135,29 +126,6 @@ export default {
   img {
     width: 100%;
     display: block;
-  }
-  .project-image {
-    .col {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
-  .release-date {
-    position: absolute;
-    bottom: 100%;
-    margin-bottom: 2em;
-    line-height: 1;
-  }
-
-  .animate--js {
-    .release-date {
-      animation-name: headlineAppearFromBottom2;
-      animation-delay: 0.5s;
-      animation-duration: 1.66s;
-      animation-timing-function: @bezier-push;
-      animation-play-state: var(--animation-play-state, paused);
-      animation-fill-mode: both;
-    }
   }
 }
 </style>

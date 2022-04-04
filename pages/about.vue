@@ -1,24 +1,25 @@
 <template>
   <div class="container">
-    <section>
+    <section class="animate--js in">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
-            <div class="headline tb5 tb6-m tb7-xl --site-color simulate-offset-33">
-              <span class="secondary">{{ t.firstname }}</span>
-              <span class="primary">{{ t.lastname }}</span>
-              <h1 class="tertiary">{{ t.jobTitle }}</h1>
+            <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33">
+              <span class="secondary">{{ t.title }}</span>
+              <h1 class="primary">{{ t.title }}</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section class="static-bg static-bg--gray static-bg--offset-bottom--33 mt3 mt4-l" id="about">
+    <section class="static-bg static-bg--solar mt3 mt4-l" id="about">
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-me">
             <h2 class="tf3 tf4-s tf5-xl --site-color headlineAppearFromBottom pt2">{{ t.about.me.title }}</h2>
             <p class="mt1 mt2-m --site-color-66 appearFromTop">{{ t.about.me.desc }}</p>
+          </div>
+          <div class="col col-10 col-s-8 col-m-5 col--about-me mt4-m">
             <picture>
               <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutMe, 604, 'webp')" type="image/webp">
               <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutMe, 604, 'jpg')">
@@ -30,29 +31,6 @@
               <source :srcset="resizeImageSrcSet(images.aboutMe, 420, 'jpg')">
               <img
                 class="mt4 mt3-m mt4-l image--about-me"
-                :src="resizeImageSrcSet(images.aboutMe, 420, 'jpg')"
-                :title="t.about.me.title"
-                :alt="t.about.me.title"
-                :width="540"
-                :height="684"
-                loading="lazy"
-              >
-            </picture>
-          </div>
-          <div class="col col-10 col-s-8 col-m-5 col--about-work">
-            <h2 class="tf3 tf4-s tf5-xl --site-color headlineAppearFromBottom">{{ t.about.work.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 appearFromTop">{{ t.about.work.desc }}</p>
-            <picture>
-              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'webp')" type="image/webp">
-              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'jpg')">
-              <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutWork, 540, 'webp')" type="image/webp">
-              <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutWork, 540, 'jpg')">
-              <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(images.aboutWork, 420, 'webp')" type="image/webp">
-              <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(images.aboutWork, 420, 'jpg')">
-              <source :srcset="resizeImageSrcSet(images.aboutWork, 420, 'webp')" type="image/webp">
-              <source :srcset="resizeImageSrcSet(images.aboutWork, 420, 'jpg')">
-              <img
-                class="mt4 mt3-m mt4-l image--about-work"
                 :src="resizeImageSrcSet(images.aboutMe, 420, 'jpg')"
                 :title="t.about.me.title"
                 :alt="t.about.me.title"
@@ -96,7 +74,7 @@ export default {
   },
   computed: {
     t() {
-      return this.$t('home')
+      return this.$t('about')
     },
   },
   methods: {
@@ -126,8 +104,7 @@ export default {
     }
   }
 
-  .col--about-me,
-  .col--about-work {
+  .col--about-me, .col--about-work {
     max-width: ~'min(var(--about-col-size), 100% / var(--columns, 12) * var(--column-fraction, 12))';
   }
   .col--about-work {
@@ -136,13 +113,13 @@ export default {
 
   // Col sizes
   @media screen and (min-width: @vw-max-grid) {
-    --about-col-size: 560px;
-  }
-  @media screen and (min-width: @vw-max-desktop) {
     --about-col-size: 580px;
   }
+  @media screen and (min-width: @vw-max-desktop) {
+    --about-col-size: 600px;
+  }
   @media screen and (min-width: @vw-min-desktop-large) {
-    --about-col-size: 620px;
+    --about-col-size: 640px;
   }
 }
 </style>

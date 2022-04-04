@@ -1,10 +1,12 @@
 export default {
   de: {
     title: "Projekte",
-    releaseDate: "Release Datum:",
+    releaseDate: "Veröffentlichung:",
+    inProgress: "In Arbeit",
   },
   en: {
     title: "Projects",
     releaseDate: "Release Date:",
+    inProgress: "In Progress",
   }
 }
