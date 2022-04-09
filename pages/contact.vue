@@ -51,7 +51,7 @@ ul {
       color: var(--site-color, @color-black);
 
       &:hover {
-        font-weight: 800;
+        font-weight: 700;
       }
     }
   }

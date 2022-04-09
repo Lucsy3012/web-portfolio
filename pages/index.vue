@@ -13,6 +13,8 @@
         </div>
       </div>
     </section>
+
+    <!-- About -->
     <section class="static-bg static-bg--gray static-bg--offset-bottom--33 mt3 mt4-l" id="about">
       <div class="inner">
         <div class="row justify-content--space-evenly">
@@ -65,6 +67,103 @@
         </div>
       </div>
     </section>
+
+    <!-- Projects -->
+    <div id="projects">
+      <section class="overflow--hidden">
+        <div class="tb3 tb4-s tb5-xl --site-color rolling-title">
+          <h2 class="tf3 tf4-s tf5-xl">{{ t.projects.title }}</h2>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span class="tf3 tf4-s tf5-xl">{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+          <span>{{ t.projects.title }}</span>
+        </div>
+      </section>
+      <template v-for="project in projects">
+        <ProjectBanner
+          :slug="project.fields.slug"
+          :title="project.fields.title"
+          :subline="project.fields.subline"
+          :img="project.fields.mainImage"
+          :video="project.fields.mainVideo"
+          :releaseDate="project.fields.releaseDate"
+          :headlinePosition="project.fields.headlinePosition"
+          :accentColor="project.fields.accentColor"
+          :key="project.fields.slug"
+        />
+      </template>
+
+      <!-- CTA -->
+      <section>
+        <div class="inner">
+          <div class="row">
+            <div class="col col-12 text--center">
+              <h3 class="--eyebrow --site-color mb1">{{ t.projects.cta.eyebrow }}</h3>
+              <NuxtLink :to="localePath('projects')" class="tb3 tb4-s tb5-xl cta">
+                <span>{{ t.projects.cta.btn[0] }}</span>
+                <span>{{ t.projects.cta.btn[1] }}</span>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Services -->
+    <section class="dynamic-bg--container pb0 animate--js" id="services">
+      <div class="row dynamic-bg--offset--33">
+        <div class="col col-12">
+          <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
+            <span class="secondary">{{ t.services.title }}</span>
+            <h2 class="primary">{{ t.services.title }}</h2>
+          </div>
+        </div>
+      </div>
+      <section class="section--xl dynamic-bg dynamic-bg--blue">
+        <div class="background"></div>
+        <div class="inner">
+          <div class="row justify-content--center">
+            <div class="col col-12 col-s-11">
+              <ul>
+                <li>
+                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.web.title }}</h3>
+                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.web.services" :key="index">
+                    {{ service }}
+                  </span>
+                </li>
+                <li>
+                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.app.title }}</h3>
+                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.app.services" :key="index">
+                    {{ service }}
+                  </span>
+                </li>
+                <li>
+                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.branding.title }}</h3>
+                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.branding.services" :key="index">
+                    {{ service }}
+                  </span>
+                </li>
+                <li>
+                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.tools.title }}</h3>
+                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.tools.services" :key="index">
+                    {{ service }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
   </div>
 </template>
 
@@ -83,8 +182,8 @@ export default {
   asyncData({ i18n }) {
     return client.getEntries({
       content_type: 'project',
-      order: '-sys.createdAt',
-      limit: 6,
+      order: '-fields.releaseDate',
+      limit: 3,
       locale: i18n.locale
     })
     .then(entries => {
@@ -110,6 +209,7 @@ export default {
 <style lang="less" scoped>
 @import (reference) "@/assets/less/global";
 
+// About
 #about {
   --about-col-size: 540px;
 
@@ -145,4 +245,48 @@ export default {
     --about-col-size: 620px;
   }
 }
+
+// Projects
+.rolling-title {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  text-indent: 0.5em;
+  max-width: 100vw;
+
+  > * {
+    animation: rollingTitle 10s linear infinite;
+  }
+}
+
+@keyframes rollingTitle {
+  0% { transform: translateX(-700%); }
+  100% { transform: translateX(0%); }
+}
+
+.cta {
+  > span:nth-child(1) { font-weight: 700; }
+  > span:nth-child(2) { font-weight: 600; }
+
+  &:hover {
+    > span:nth-child(1) { font-weight: 600; }
+    > span:nth-child(2) { font-weight: 700; }
+  }
+}
+
+// Services
+#services {
+  ul {
+    li {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+
+      > * + * {
+        text-indent: 0.25em;
+      }
+    }
+  }
+}
+
 </style>
