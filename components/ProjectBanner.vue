@@ -67,7 +67,7 @@
               </picture>
             </NuxtLink>
             <div class="release-date --eyebrow --site-color t-1 t-l">
-              <span class="display--none display--inline-block-s">{{ t.releaseDate }}</span>
+              <span class="display--none display--inline-block-l">{{ t.releaseDate }}</span>
               <span v-if="formattedDate">{{ formattedDate }}</span>
               <span v-else>{{ t.inProgress }}</span>
             </div>

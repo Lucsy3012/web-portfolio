@@ -128,8 +128,12 @@
           </div>
         </div>
       </div>
-      <section class="section--xl dynamic-bg dynamic-bg--blue">
-        <div class="background"></div>
+      <section class="section--xl dynamic-bg">
+        <ThreejsConeBackground
+          class="background"
+          materialTexture="texture-cyan.png"
+          :orbitControls="false"
+        />
         <div class="inner">
           <div class="row justify-content--center">
             <div class="col col-12 col-s-11">

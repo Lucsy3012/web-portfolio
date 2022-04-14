@@ -3,7 +3,6 @@ export default {
     navFooter: {
       about: "Über mich",
       projects: "Projekte",
-      services: "Leistungen",
     },
     navLegal: {
       legal: "Impressum",
@@ -19,7 +18,6 @@ export default {
     navFooter: {
       about: "About me",
       projects: "Projects",
-      services: "Services",
     },
     navLegal: {
       legal: "Legal notice",

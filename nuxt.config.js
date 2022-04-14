@@ -82,10 +82,6 @@ export default {
         de: '/projekte/:slug',
         en: '/projects/:slug',
       },
-      'services': {
-        de: '/leistungen',
-        en: '/services',
-      },
       'contact': {
         de: '/kontakt',
         en: '/contact',
@@ -108,6 +104,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: [
+      'three',
+      'dat.gui',
+    ],
     optimization: {
       minimize: true
     }

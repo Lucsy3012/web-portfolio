@@ -9,8 +9,13 @@
           </div>
         </div>
       </div>
-      <section class="section--xl dynamic-bg dynamic-bg--green">
+      <section class="section--xl dynamic-bg">
         <div class="background"></div>
+        <ThreejsConeBackground
+          class="background"
+          materialTexture="texture-green.png"
+          :orbitControls="false"
+        />
         <div class="inner">
           <div class="row justify-content--center">
             <div class="col col-12 col-s-11 text--center">
