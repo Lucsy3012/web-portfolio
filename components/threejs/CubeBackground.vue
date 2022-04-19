@@ -148,9 +148,6 @@ export default {
       this.scene.add(this.lights.ambientLight)
        */
 
-      // this.helperGrid()
-      // this.helperLight()
-
       // Camera
       // ------------------------
       this.camera.position.y = 35;
@@ -160,7 +157,7 @@ export default {
       requestAnimationFrame(this.animate);
 
       // Animation
-      this.frameAnimationRotate(0.001, 0.001);
+      this.frameAnimationRotate(this.objects.group,0.001, 0.001);
       this.frameAnimationCameraPosition(-3);
 
       // Updates Renderer
@@ -168,10 +165,10 @@ export default {
     },
 
     // Animations
-    frameAnimationRotate(x = 0, y = 0, z = 0) {
-      this.objects.group.rotation.x -= x;
-      this.objects.group.rotation.y -= y;
-      this.objects.group.rotation.z -= z;
+    frameAnimationRotate(obj, x = 0, y = 0, z = 0) {
+      obj.rotation.x -= x;
+      obj.rotation.y -= y;
+      obj.rotation.z -= z;
     },
     frameAnimationCameraPosition(multiplier = 1) {
       this.camera.position.x = this.mouse.position.x * multiplier;
@@ -224,6 +221,10 @@ export default {
     },
 
     // Helpers
+    helperGrid() {
+      this.helpers.grid = new THREE.GridHelper(10, 10);
+      this.scene.add(this.helpers.grid);
+    },
     helperLight(size = 1, color = '#f55') {
       this.helpers.lightHelper = new THREE.PointLightHelper(this.lights.pointLight, size, color);
       this.scene.add(this.helpers.lightHelper);

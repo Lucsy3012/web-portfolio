@@ -12,12 +12,20 @@
         </div>
       </div>
     </section>
-    <section class="static-bg static-bg--solar mt3 mt4-l" id="about">
+
+    <!-- Person -->
+    <section class="static-bg static-bg--solar mt3 mt4-l section--about-me animate--js">
       <div class="inner">
         <div class="row justify-content--space-evenly">
-          <div class="col col-10 col-s-8 col-m-5 col--about-me">
-            <h2 class="tf3 tf4-s tf5-xl --site-color headlineAppearFromBottom pt2">{{ t.about.me.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 appearFromTop">{{ t.about.me.desc }}</p>
+          <div class="col col-10 col-s-8 col-m-5 col--about-me mb0 mb4-m">
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">{{ t.about.me.title }}</h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">{{ t.about.me.desc }}</p>
+            <dl class="mt3 mt4-xl --site-color animate appearFromBottomTransform">
+              <template v-for="(item, index) in t.about.me.list">
+                <dt class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom" :key="index">{{ item.title }}</dt>
+                <dd class="tm">{{ item.desc }}</dd>
+              </template>
+            </dl>
           </div>
           <div class="col col-10 col-s-8 col-m-5 col--about-me mt4-m">
             <picture>
@@ -30,7 +38,7 @@
               <source :srcset="resizeImageSrcSet(images.aboutMe, 420, 'webp')" type="image/webp">
               <source :srcset="resizeImageSrcSet(images.aboutMe, 420, 'jpg')">
               <img
-                class="mt4 mt3-m mt4-l image--about-me"
+                class="mt4 mt3-m mt4-l image--about-me animate appearFromBottomTransform"
                 :src="resizeImageSrcSet(images.aboutMe, 420, 'jpg')"
                 :title="t.about.me.title"
                 :alt="t.about.me.title"
@@ -42,6 +50,82 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Work -->
+    <section class="static-bg static-bg--accent mt3 mt4-l section--about-me animate--js">
+      <div class="inner">
+        <div class="row justify-content--space-evenly">
+          <div class="col col-10 col-s-8 col-m-5 col--about-work mb0 mb4-m">
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">{{ t.about.work.title }}</h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">{{ t.about.work.desc }}</p>
+            <dl class="mt3 mt4-xl --site-color animate appearFromBottomTransform">
+              <template v-for="(item, index) in t.about.work.list">
+                <dt class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom" :key="index">{{ item.title }}</dt>
+                <dd class="tm">{{ item.desc }}</dd>
+              </template>
+            </dl>
+          </div>
+          <div class="col col-10 col-s-8 col-m-5 col--about-work mt4-m">
+            <picture>
+              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'webp')" type="image/webp">
+              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'jpg')">
+              <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutWork, 540, 'webp')" type="image/webp">
+              <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutWork, 540, 'jpg')">
+              <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(images.aboutWork, 420, 'webp')" type="image/webp">
+              <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(images.aboutWork, 420, 'jpg')">
+              <source :srcset="resizeImageSrcSet(images.aboutWork, 420, 'webp')" type="image/webp">
+              <source :srcset="resizeImageSrcSet(images.aboutWork, 420, 'jpg')">
+              <img
+                class="mt4 mt3-m mt4-l image--about-work animate appearFromBottomTransform"
+                :src="resizeImageSrcSet(images.aboutWork, 420, 'jpg')"
+                :title="t.about.work.title"
+                :alt="t.about.work.title"
+                :width="540"
+                :height="684"
+                loading="lazy"
+              >
+            </picture>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Career -->
+    <section class="dynamic-bg--container pb0 animate--js" id="career">
+      <div class="row dynamic-bg--offset--33">
+        <div class="col col-12">
+          <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
+            <span class="secondary">{{ t.career.title }}</span>
+            <h2 class="primary">{{ t.career.title }}</h2>
+          </div>
+        </div>
+      </div>
+      <section class="section--xl dynamic-bg">
+        <ThreejsConeBackground
+          class="background"
+          materialTexture="texture-pink.png"
+          :orbitControls="false"
+        />
+        <div class="inner">
+          <div class="row justify-content--center">
+            <div class="col col-12 col-s-11">
+              <ul>
+                <li
+                  v-for="(item, index) in t.career.list"
+                  class="--site-color"
+                  :class="{ 'mt2 mt3-l': index !== 0 }"
+                  :key="index"
+                >
+                  <div class="time tm">{{ item.time }}</div>
+                  <h3 class="title tf3 --line-height-normal">{{ item.title }}</h3>
+                  <h4 class="company tf3 --line-height-normal">{{ item.company }}</h4>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   </div>
 </template>
@@ -88,7 +172,7 @@ export default {
 <style lang="less" scoped>
 @import (reference) "@/assets/less/global";
 
-#about {
+.section--about-me {
   --about-col-size: 540px;
 
   img {
@@ -107,9 +191,6 @@ export default {
   .col--about-me, .col--about-work {
     max-width: ~'min(var(--about-col-size), 100% / var(--columns, 12) * var(--column-fraction, 12))';
   }
-  .col--about-work {
-    margin-top: ~'calc(var(--section-padding) * 3.5)';
-  }
 
   // Col sizes
   @media screen and (min-width: @vw-max-grid) {
@@ -120,6 +201,42 @@ export default {
   }
   @media screen and (min-width: @vw-min-desktop-large) {
     --about-col-size: 640px;
+  }
+}
+dl {
+  dd {
+    margin: 0;
+
+    @media screen and (min-width: @vw-min-desktop-large) {
+      margin-top: 10px;
+    }
+  }
+}
+
+// Career
+#career {
+  li {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+
+    .time {
+      grid-column: span 2;
+      grid-row: 1;
+    }
+    .title {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .company {
+      grid-column: 2;
+      grid-row: 2;
+      text-align: right;
+    }
+
+    @media screen and (min-width: @vw-min-desktop-large) {
+      grid-gap: 10px;
+    }
   }
 }
 </style>

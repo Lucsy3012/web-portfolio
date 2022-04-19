@@ -106,6 +106,7 @@ export default {
   build: {
     transpile: [
       'three',
+      'gsap',
       'dat.gui',
     ],
     optimization: {

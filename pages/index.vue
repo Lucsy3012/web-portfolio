@@ -19,8 +19,8 @@
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-me">
-            <h2 class="tf3 tf4-s tf5-xl --site-color headlineAppearFromBottom pt2">{{ t.about.me.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 appearFromTop">{{ t.about.me.desc }}</p>
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">{{ t.about.me.title }}</h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromTop">{{ t.about.me.desc }}</p>
             <picture>
               <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutMe, 604, 'webp')" type="image/webp">
               <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutMe, 604, 'jpg')">
@@ -42,8 +42,8 @@
             </picture>
           </div>
           <div class="col col-10 col-s-8 col-m-5 col--about-work">
-            <h2 class="tf3 tf4-s tf5-xl --site-color headlineAppearFromBottom">{{ t.about.work.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 appearFromTop">{{ t.about.work.desc }}</p>
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom">{{ t.about.work.title }}</h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromTop">{{ t.about.work.desc }}</p>
             <picture>
               <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'webp')" type="image/webp">
               <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'jpg')">

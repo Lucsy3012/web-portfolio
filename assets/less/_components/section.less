@@ -27,6 +27,9 @@
   &.static-bg--gray::before {
     background: linear-gradient(fade(#C7C7C7, 0), fade(#C7C7C7, 50));
   }
+  &.static-bg--accent::before {
+    background: linear-gradient(fade(@color-accent, 0), fade(@color-accent, 50));
+  }
   &.static-bg--solar::before {
     background: linear-gradient(fade(@color-project-solar, 0), fade(@color-project-solar, 50));
   }
@@ -76,7 +79,7 @@
     }
     .row {
       animation-fill-mode: both;
-      animation-name: appearFromTopTransform;
+      animation-name: appearFromBottomTransform;
       animation-delay: 0.5s;
       animation-duration: 1.5s;
       animation-timing-function: @bezier-push;
@@ -119,16 +122,4 @@
     background: conic-gradient(@color-dynamic-blue, @color-pale-cyan, @color-dynamic-blue);
   }
   */
-}
-
-
-@keyframes appearFromTop {
-  0%    { transform: translateY(-2.5vh); clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); opacity: 0; }
-  100%  { transform: translateY(0); clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); opacity: 1; }
-}
-
-@keyframes appearFromTopTransform {
-  0%    { transform: translateY(5vh); opacity: 0; }
-  25%   { opacity: 0; }
-  100%  { transform: translateY(0); opacity: 1; }
 }
