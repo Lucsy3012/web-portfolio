@@ -32,7 +32,6 @@ export default {
       scene: null,
       camera: null,
       controls: null,
-      clock: null,
       lights: {
         pointLight: null,
         hemisphereLight: null,
@@ -59,7 +58,7 @@ export default {
             snapshot: 0
           }
         }
-      }
+      },
     }
   },
   props: {
@@ -96,7 +95,7 @@ export default {
     orbitControls: {
       type: Boolean,
       required: false,
-      default: true,
+      default: false,
     }
   },
   mounted() {
@@ -138,9 +137,6 @@ export default {
 
       // Fog
       this.scene.fog = new THREE.FogExp2(this.colorBackground, 0.025);
-
-      // Clock
-      this.clock = new THREE.Clock();
 
       // Add Scene to DOM
       this.$refs.container.appendChild(this.renderer.domElement)
@@ -207,7 +203,6 @@ export default {
     },
     animate() {
       requestAnimationFrame(this.animate);
-      const time = this.clock.getElapsedTime();
 
       // Animation
       this.frameAnimationRotate(this.objects.coin, 0, 0.0033);
@@ -323,6 +318,8 @@ export default {
       this.mouse.position.x = ((width * -0.5) + e.clientX) / width * 2;
       this.mouse.position.y = ((height * -0.5) + e.clientY) / height * 2;
     },
+
+    // GSAP
     mouseDown() {
       this.saveSnapshot()
       gsap.to(this.animation.rotation.y, {
@@ -333,20 +330,6 @@ export default {
     },
     mouseUp() {
       this.saveSnapshot()
-
-      /*
-      gsap.to(this.animation.rotation.y, {
-        multiplier: 20,
-        duration: 0.5,
-        ease: "power3.inOut",
-      })
-      gsap.to(this.animation.rotation.y, {
-        delay: 1,
-        multiplier: 1,
-        duration: 3,
-        ease: "power3.in",
-      })
-      */
 
       gsap.to(this.animation.rotation.y, {
         multiplier: 1,

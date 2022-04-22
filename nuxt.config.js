@@ -37,7 +37,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/contentful' },
-    { src: '~/plugins/animate.js', mode: 'client' },
+    { src: '~/plugins/animate.js', mode: 'client', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
