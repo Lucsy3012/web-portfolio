@@ -6,7 +6,7 @@ export default {
     },
     navLegal: {
       legal: "Impressum",
-      privacy: "Datenschutz",
+      // privacy: "Datenschutz",
       contact: "Kontakt",
     },
     copyright: {
@@ -21,11 +21,11 @@ export default {
     },
     navLegal: {
       legal: "Legal notice",
-      privacy: "Privacy",
+      // privacy: "Privacy",
       contact: "Contact",
     },
     copyright: {
-      text: "Alle Rechte vorbehalten",
+      text: "All rights reserved",
       email: "lucas@lucasdietrich.de",
     },
   }
