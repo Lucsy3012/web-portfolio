@@ -97,7 +97,7 @@ export default {
     this.scaleUp();
 
     // Events
-    window.addEventListener('resize', this.windowResizing, true);
+    // window.addEventListener('resize', this.windowResizing, true);
     window.addEventListener('mousemove', this.mouseMovingCameraPosition, true);
 
     // Dev
@@ -159,8 +159,7 @@ export default {
       this.camera.lookAt(this.objects.tetrahedron)
     },
     animate() {
-      requestAnimationFrame(this.animate)
-      this.windowResizing('container')
+      this.windowResizing('container') // optimise function
 
       this.clock.elapsedTime = this.clock.getElapsedTime()
 
@@ -172,6 +171,7 @@ export default {
 
       // Updates Renderer
       this.renderer.render(this.scene, this.camera)
+      requestAnimationFrame(this.animate)
     },
 
     // Animations
@@ -236,11 +236,12 @@ export default {
 
     // Non ThreeJS specific
     windowResizing(size) {
-      const container = document.querySelector('#triangle-container')
+      // const container = document.querySelector('#triangle-container')
 
       if (size === 'container') {
-        this.mouse.area.width = container.offsetWidth;
-        this.mouse.area.height = container.offsetHeight;
+        if (!this.$refs.container) return;
+        this.mouse.area.width = this.$refs.container?.offsetWidth;
+        this.mouse.area.height = this.$refs.container?.offsetHeight;
       } else {
         this.mouse.area.width = window.offsetWidth;
         this.mouse.area.height = window.offsetHeight;
@@ -274,7 +275,7 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.windowResizing, true)
+    // window.removeEventListener('resize', this.windowResizing, true) // doesn't work
     window.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
   }
 }

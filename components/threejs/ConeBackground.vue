@@ -65,7 +65,17 @@ export default {
       required: false,
       default: "texture-pink.png"
     },
+    materialTextureExternal: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     orbitControls: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    dev: {
       type: Boolean,
       required: false,
       default: false,
@@ -81,8 +91,10 @@ export default {
     window.addEventListener('mousemove', this.mouseMovingCameraPosition, true)
 
     // Dev
-    // this.helperGrid();
-    // this.helperLight();
+    if (this.dev) {
+      this.helperGrid();
+      this.helperLight();
+    }
   },
   methods: {
     init() {
@@ -105,7 +117,13 @@ export default {
       // Geometries
       // ------------------------
       const textureLoader = new THREE.TextureLoader();
-      const matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
+      let matcapTexture;
+
+      if (this.materialTextureExternal) {
+        matcapTexture = textureLoader.load(this.materialTexture)
+      } else {
+        matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
+      }
 
       const geometry = new THREE.ConeGeometry(350, 100, 512)
       const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
@@ -127,7 +145,6 @@ export default {
       this.camera.lookAt(this.objects.cone)
     },
     animate() {
-      requestAnimationFrame(this.animate);
       this.windowResizing('container');
 
       // Animation
@@ -139,6 +156,7 @@ export default {
 
       // Updates Renderer
       this.renderer.render(this.scene, this.camera);
+      requestAnimationFrame(this.animate);
     },
 
     // Animations
@@ -177,11 +195,12 @@ export default {
 
     // Non ThreeJS specific
     windowResizing(size) {
-      const container = document.querySelector('#container')
+      // const container = document.querySelector('#container')  // optimise function
 
       if (size === 'container') {
-        this.mouse.area.width = container.offsetWidth;
-        this.mouse.area.height = container.offsetHeight;
+        if (!this.$refs.container) return;
+        this.mouse.area.width = this.$refs.container?.offsetWidth;
+        this.mouse.area.height = this.$refs.container?.offsetHeight;
       } else {
         this.mouse.area.width = window.offsetWidth;
         this.mouse.area.height = window.offsetHeight;

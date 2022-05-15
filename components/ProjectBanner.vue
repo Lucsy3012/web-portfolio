@@ -30,7 +30,7 @@
             <NuxtLink :to="{ name: 'projects-slug', params: { slug }}">
 
               <!-- Video -->
-              <video v-if="video" loop autoplay muted playsinline :poster="resizeImageSrc(img, 3840, 'jpg', 85)" class="dynamic-bg--image">
+              <video v-if="video" loop autoplay muted playsinline :poster="resizeImageSrc(img, 1920, 'jpg', 85)" class="dynamic-bg--image">
                 <source :src="video.fields.file.url" :type="video.fields.file.contentType">
                 <img
                   :src="img.fields.file.url"
@@ -45,16 +45,16 @@
 
               <!-- Image only -->
               <picture v-else>
-                <source media="(min-width: 1920px)" :srcset="resizeImageSrcSet(img, 2560, 'webp')" type="image/webp">
-                <source media="(min-width: 1920px)" :srcset="resizeImageSrcSet(img, 2560, 'jpg')">
-                <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(img, 1920, 'webp')" type="image/webp">
-                <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(img, 1920, 'jpg')">
-                <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(img, 1280, 'webp')" type="image/webp">
-                <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(img, 1280, 'jpg')">
-                <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(img, 768, 'webp')" type="image/webp">
-                <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(img, 768, 'jpg')">
-                <source :srcset="resizeImageSrcSet(img, 480, 'webp')" type="image/webp">
-                <source :srcset="resizeImageSrcSet(img, 480, 'jpg')">
+                <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(img, 1920, 'webp', 90)" type="image/webp">
+                <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(img, 1920, 'jpg', 90)">
+                <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(img, 1440, 'webp', 90)" type="image/webp">
+                <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(img, 1440, 'jpg', 90)">
+                <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(img, 1280, 'webp', 90)" type="image/webp">
+                <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(img, 1280, 'jpg', 90)">
+                <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(img, 768, 'webp', 85)" type="image/webp">
+                <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(img, 768, 'jpg', 85)">
+                <source :srcset="resizeImageSrcSet(img, 480, 'webp', 85)" type="image/webp">
+                <source :srcset="resizeImageSrcSet(img, 480, 'jpg', 85)">
                 <img
                   :src="img.fields.file.url"
                   :title="img.fields.description"
@@ -62,7 +62,6 @@
                   :width="img.fields.file.details.image.width"
                   :height="img.fields.file.details.image.height"
                   class="dynamic-bg--image"
-                  loading="lazy"
                 >
               </picture>
             </NuxtLink>
@@ -118,11 +117,11 @@ export default {
     },
   },
   methods: {
-    resizeImageSrc(img, width, format, quality) {
+    resizeImageSrc(img, width, format, quality = 100) {
       return `${img.fields.file.url}?w=${width}&fm=${format}&q=${quality}`
     },
-    resizeImageSrcSet(img, width, format) {
-      return `${img.fields.file.url}?w=${width}&fm=${format} 1x, ${img.fields.file.url}?w=${width * 2}&fm=${format} 2x`
+    resizeImageSrcSet(img, width, format, quality = 100) {
+      return `${img.fields.file.url}?w=${width}&fm=${format}&q=${quality} 1x, ${img.fields.file.url}?w=${width * 2}&fm=${format}&q=${quality} 2x`
     },
   },
   computed: {

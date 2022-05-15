@@ -17,6 +17,10 @@
   }
 
   // Offsets
+  &.static-bg--offset-bottom--normal::before {
+    height: ~'calc(100% - ((var(--section-padding) - var(--gap-row)) / 2))';
+  }
+
   @media screen and (min-width: @vw-min-grid) {
     &.static-bg--offset-bottom--33::before {
       height: ~'calc(66% - var(--section-padding) - var(--gap-row))';
@@ -43,6 +47,11 @@
   .section--xl.dynamic-bg {
     padding-top: ~'calc((var(--section-padding) * 1) - (var(--gap-row) * 0.5))';
     padding-bottom: ~'calc((var(--section-padding) * 1) - (var(--gap-row)))';
+    z-index: 1;
+  }
+  .section--filled.dynamic-bg {
+    padding-top: ~'calc((var(--section-padding) * 1) - (var(--gap-row) * 0.5))';
+    padding-bottom: ~'calc((var(--section-padding) * 1) - (var(--gap-row) * 0.5))';
     z-index: 1;
   }
 
@@ -94,7 +103,7 @@
     transform-origin: center center;
     animation-fill-mode: both;
     animation-name: appearFromTop;
-    animation-delay: 0.15s;
+    animation-delay: 0s;
     animation-duration: 1.5s;
     animation-timing-function: @bezier-push;
     animation-play-state: var(--animation-play-state);

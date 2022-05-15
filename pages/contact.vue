@@ -10,7 +10,6 @@
         </div>
       </div>
       <section class="section--xl dynamic-bg">
-        <div class="background"></div>
         <ThreejsConeBackground
           class="background"
           materialTexture="texture-green.png"

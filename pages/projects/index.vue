@@ -55,7 +55,8 @@ export default {
     return client.getEntries({
       content_type: 'project',
       order: '-fields.releaseDate',
-      limit: 6,
+      select: 'fields,sys.id,sys.createdAt',
+      limit: 10,
       locale: i18n.locale
     })
       .then(entries => {

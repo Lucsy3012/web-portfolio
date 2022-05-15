@@ -187,6 +187,7 @@ export default {
     return client.getEntries({
       content_type: 'project',
       order: '-fields.releaseDate',
+      select: 'fields,sys.id,sys.createdAt',
       limit: 3,
       locale: i18n.locale
     })
