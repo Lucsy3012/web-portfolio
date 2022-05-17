@@ -14,6 +14,10 @@ export default {
         name: "Discord",
         href: "https://www.discord.com/",
       },
+      {
+        name: "Xing",
+        href: "https://www.xing.com/profile/Lucas_Dietrich3/",
+      },
     ],
   },
   en: {
@@ -30,6 +34,10 @@ export default {
       {
         name: "Discord",
         href: "https://www.discord.com/",
+      },
+      {
+        name: "Xing",
+        href: "https://www.xing.com/profile/Lucas_Dietrich3/",
       },
     ],
   }

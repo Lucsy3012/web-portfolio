@@ -55,7 +55,7 @@
     </section>
 
     <!-- Person -->
-    <section class="static-bg static-bg--solar mt3 mt4-l section--keyfacts animate--js">
+    <section class="static-bg static-bg--accent mt3 mt4-l section--keyfacts animate--js" :style="`--site-accent: ${accentColor}`">
       <div class="inner">
         <div class="row" :class="{ 'justify-content--space-evenly': !!urlSideImage }">
           <div class="col col-10 col-s-8 col-m-5 col--keyfacts mb0 mb4-m">
@@ -84,6 +84,79 @@
                 :width="sideImage.fields.file.details.image.width"
                 :height="sideImage.fields.file.details.image.height"
                 loading="lazy"
+              >
+            </picture>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impressions Title -->
+    <section class="pt0 dynamic-bg--container animate--js headline-position--center">
+      <div class="inner">
+        <div class="row dynamic-bg--offset--33">
+          <div class="col col-12 headline--container">
+            <div class="headline tb5 tb6-m tb7-xl">
+              <span class="secondary">{{ t.impressions }}</span>
+              <h3 class="primary">{{ t.impressions }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impressions First -->
+      <section class="p0 project-image" v-if="impressionsFirst">
+        <div class="inner">
+          <div class="row">
+            <div class="col col-12">
+              <picture>
+                <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 1920, 'webp', 100)" type="image/webp">
+                <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 1920, 'jpg', 100)">
+                <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 1440, 'webp', 100)" type="image/webp">
+                <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 1440, 'jpg', 100)">
+                <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 1280, 'webp', 95)" type="image/webp">
+                <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 1280, 'jpg', 95)">
+                <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 768, 'webp', 90)" type="image/webp">
+                <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 768, 'jpg', 90)">
+                <source :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 480, 'webp', 85)" type="image/webp">
+                <source :srcset="resizeImageSrcSet(impressionsFirst.fields.file.url, 480, 'jpg', 85)">
+                <img
+                  :src="impressionsFirst.fields.file.url"
+                  :title="impressionsFirst.fields.description"
+                  :alt="impressionsFirst.fields.description"
+                  :width="impressionsFirst.fields.file.details.image.width"
+                  :height="impressionsFirst.fields.file.details.image.height"
+                  class="dynamic-bg--image"
+                >
+              </picture>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="pt0 dynamic-bg--container animate--js project-image" v-for="impression in impressionsRest" :key="impression.sys.id">
+      <div class="inner">
+        <div class="row">
+          <div class="col col-12">
+            <picture>
+              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 1920, 'webp', 100)" type="image/webp">
+              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 1920, 'jpg', 100)">
+              <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 1440, 'webp', 100)" type="image/webp">
+              <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 1440, 'jpg', 100)">
+              <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 1280, 'webp', 95)" type="image/webp">
+              <source media="(min-width: 768px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 1280, 'jpg', 95)">
+              <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 768, 'webp', 90)" type="image/webp">
+              <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(impression.fields.file.url, 768, 'jpg', 90)">
+              <source :srcset="resizeImageSrcSet(impression.fields.file.url, 480, 'webp', 85)" type="image/webp">
+              <source :srcset="resizeImageSrcSet(impression.fields.file.url, 480, 'jpg', 85)">
+              <img
+                :src="impression.fields.file.url"
+                :title="impression.fields.description"
+                :alt="impression.fields.description"
+                :width="impression.fields.file.details.image.width"
+                :height="impression.fields.file.details.image.height"
+                class="dynamic-bg--image"
               >
             </picture>
           </div>
@@ -234,6 +307,12 @@ export default {
     urlSideImage() {
       return this.contentfulImage(this?.sideImage?.fields?.file?.url) || '';
     },
+    impressionsFirst() {
+      return this.impressions[0]
+    },
+    impressionsRest() {
+      return this.impressions.slice(1)
+    },
   },
   methods: {
     resizeImageSrc(img, width, format, quality = 100) {
@@ -317,6 +396,21 @@ dl {
           font-weight: 700;
         }
       }
+    }
+  }
+}
+
+// Impressions
+.project-image {
+  .col {
+    position: relative;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   }
 }

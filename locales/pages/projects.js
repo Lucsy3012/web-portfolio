@@ -4,6 +4,7 @@ export default {
     releaseDate: "Veröffentlichung:",
     inProgress: "In Arbeit",
     keyfacts: "Keyfacts",
+    impressions: "Impressionen",
     links: "Links",
   },
   en: {
@@ -11,6 +12,7 @@ export default {
     releaseDate: "Release Date:",
     inProgress: "In Progress",
     keyfacts: "Keyfacts",
+    impressions: "Impressions",
     links: "Links",
   }
 }

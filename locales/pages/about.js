@@ -1,6 +1,7 @@
 export default {
   de: {
     title: "Über mich",
+    titlePrimary: "Uber mich",
     about: {
       me: {
         title: "Person",
@@ -59,6 +60,7 @@ export default {
   },
   en: {
     title: "About me",
+    titlePrimary: "About me",
     about: {
       me: {
         title: "Person",

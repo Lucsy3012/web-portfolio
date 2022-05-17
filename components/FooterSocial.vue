@@ -39,7 +39,7 @@ export default {
         },
         {
           name: "Codepen",
-          href: "https://codepen.io/your-work/",
+          href: "https://codepen.io/lucsy3012",
         },
       ],
     }

@@ -6,9 +6,9 @@
           <div class="col col-12">
 
             <!-- Headline -->
-            <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33">
-              <span class="secondary">{{ t.title }}</span>
-              <h1 class="primary">{{ t.title }}</h1>
+            <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33 offset-overflow">
+              <h1 class="secondary">{{ t.title }}</h1>
+              <span class="primary">{{ t.titlePrimary }}</span>
             </div>
 
             <!-- Background Object Animation -->

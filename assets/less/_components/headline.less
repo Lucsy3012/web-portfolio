@@ -3,6 +3,7 @@
 
 .headline {
   position: relative;
+  cursor: default;
 
   > * {
     display: block;
@@ -28,6 +29,19 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+  }
+
+  &.offset-overflow > * {
+    line-height: 1.5;
+    margin-top: -0.25em;
+
+    + * {
+      margin-top: -0.5em;
+    }
+
+    &:last-child {
+      margin-bottom: -0.25em;
     }
   }
 
