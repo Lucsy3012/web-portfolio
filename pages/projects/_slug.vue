@@ -20,6 +20,7 @@
         <ThreejsConeBackground
           v-else
           class="background"
+          :customID="'links'"
           :materialTexture="urlMaterialTexture"
           :materialTextureExternal="true"
           :orbitControls="false"
@@ -170,7 +171,7 @@
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
             <span class="secondary">{{ t.links }}</span>
-            <h1 class="primary">{{ t.links }}</h1>
+            <h3 class="primary">{{ t.links }}</h3>
           </div>
         </div>
       </div>
@@ -184,12 +185,26 @@
         <div class="inner">
           <div class="row justify-content--center">
             <div class="col col-12 col-s-11 text--center">
-              <ul>
-                <li v-for="(item, index) in linksList" :key="index">
-                  <a v-if="showsColorOnTexture" :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l" :style="{ '--site-color': colorOnTexture }">{{ item.name }}</a>
-                  <a v-else :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l">{{ item.name }}</a>
-                </li>
-              </ul>
+
+              <!-- Color on Texture -->
+              <template v-if="showsColorOnTexture">
+                <ul :style="{ '--site-color': colorOnTexture }">
+                  <li v-for="(item, index) in linksList" :key="index">
+                    <a v-if="showsColorOnTexture" :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l" :style="{ '--site-color': colorOnTexture }">{{ item.name }}</a>
+                    <a v-else :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l">{{ item.name }}</a>
+                  </li>
+                </ul>
+              </template>
+
+              <!-- Regular color -->
+              <template v-else>
+                <ul>
+                  <li v-for="(item, index) in linksList" :key="index">
+                    <a v-if="showsColorOnTexture" :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l" :style="{ '--site-color': colorOnTexture }">{{ item.name }}</a>
+                    <a v-else :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l">{{ item.name }}</a>
+                  </li>
+                </ul>
+              </template>
             </div>
           </div>
         </div>
@@ -231,6 +246,7 @@ export default {
     return {
       title: '',
       subline: '',
+      metaDescription: '',
       description: '',
       longDescription: '',
       keyfacts: [],

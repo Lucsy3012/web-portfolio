@@ -1,5 +1,5 @@
 <template>
-  <div ref="container" id="container"></div>
+  <div ref="container" :id="customID"></div>
 </template>
 
 <style lang="less" scoped>
@@ -55,6 +55,11 @@ export default {
     }
   },
   props: {
+    customID: {
+      type: String,
+      required: false,
+      default: "container"
+    },
     colorBackground: {
       type: String,
       required: false,
@@ -111,7 +116,7 @@ export default {
       this.renderer.setClearColor(this.colorBackground)
 
       // Add Scene to DOM
-      document.querySelector('#container').appendChild(this.renderer.domElement)
+      document.querySelector(`#${this.customID}`).appendChild(this.renderer.domElement)
 
 
       // Geometries
@@ -195,7 +200,7 @@ export default {
 
     // Non ThreeJS specific
     windowResizing(size) {
-      // const container = document.querySelector('#container')  // optimise function
+      // const container = document.querySelector(`#${this.customID}`)  // optimise function
 
       if (size === 'container') {
         if (!this.$refs.container) return;
