@@ -202,6 +202,31 @@
 import client from '~/plugins/contentful'
 
 export default {
+  head() {
+    return {
+      title: this.title,
+      meta: [
+
+        // Meta
+        { hid: 'description', name: 'description', content: this.seoDescription },
+        { hid: 'image', itemprop: 'image', content: this.seoImage },
+
+        // Open Graph
+        { hid: 'og:description', property: 'og:description', content: this.seoDescription },
+        { hid: 'og:image', property: 'og:image', content: this.seoImage },
+
+        // Twitter
+        { hid: 'twitter:description', name: 'twitter:description', content: this.seoDescription },
+        { hid: 'twitter:image', name: 'twitter:image', content: this.seoImage },
+      ],
+      link: [
+        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-cyan.ico' },
+        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-cyan.ico' },
+        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-cyan.ico' },
+        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-cyan.ico' },
+      ]
+    }
+  },
   data() {
     return {
       title: '',
@@ -240,6 +265,7 @@ export default {
           slug,
           title: entry?.title,
           subline: entry?.subline,
+          metaDescription: entry?.metaDescription,
           description: entry?.description,
           longDescription: entry?.longDescription,
           keyfacts: entry?.keyfacts,
@@ -260,6 +286,18 @@ export default {
   computed: {
     t() {
       return this.$t('projects')
+    },
+    seoDescription() {
+      if (this?.metaDescription) {
+        return this?.metaDescription
+      } else if (this?.description) {
+        return this?.description
+      } else {
+        return this.t.seoDescription
+      }
+    },
+    seoImage() {
+      return !!this?.mainImage ? this.resizeImageSrc(this.urlMainImage, 2400, 'jpg', 90) : this.t.seoImage
     },
     showsColorOnTexture() {
       return !!this?.colorOnTexture

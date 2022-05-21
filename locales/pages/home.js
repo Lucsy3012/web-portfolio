@@ -55,12 +55,14 @@ export default {
           'Contentful',
         ]
       }
-    }
+    },
+    seoDescription: "Creative Developer aus Münster. Entdecke meine spannenden Werke aus kürzester Zeit.",
+    seoImage: "/og-image/og-image-home.jpg",
   },
   en: {
     firstname: "Lucas",
     lastname: "Dietrich",
-    jobTitle: "Creative Developer from Münster",
+    jobTitle: "Creative Developer based in Münster",
     about: {
       me: {
         title: "About me",
@@ -113,6 +115,8 @@ export default {
           'Contentful',
         ]
       }
-    }
+    },
+    seoDescription: "Creative Developer based in Münster. Discover my latest, most excited works.",
+    seoImage: "/og-image/og-image-home.jpg",
   }
 }

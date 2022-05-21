@@ -152,6 +152,25 @@ export default {
       }
     }
   },
+  head() {
+    return {
+      title: this.t.title,
+      meta: [
+
+        // Meta
+        { hid: 'description', name: 'description', content: this.t.seoDescription },
+        { hid: 'image', itemprop: 'image', content: this.t.seoImage },
+
+        // Open Graph
+        { hid: 'og:description', property: 'og:description', content: this.t.seoDescription },
+        { hid: 'og:image', property: 'og:image', content: this.t.seoImage },
+
+        // Twitter
+        { hid: 'twitter:description', name: 'twitter:description', content: this.t.seoDescription },
+        { hid: 'twitter:image', name: 'twitter:image', content: this.t.seoImage },
+      ],
+    }
+  },
   asyncData({ i18n }) {
     return client.getEntries({
       content_type: 'project',

@@ -11,18 +11,45 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Nuxt Starter',
+    titleTemplate: '%s ▹ Lucas Dietrich ▸ Portfolio',
     meta: [
       { charset: 'utf-8', hid: 'charset' },
       { name: 'author', content: 'Lucas Dietrich' },
       { name: 'robots', content: 'index, follow' },
-      { name: 'application-name', content: 'Nuxt Starter' },
+      { name: 'application-name', content: 'Lucas Dietrich - Portfolio' },
+      { name: 'theme-color', content: '#FFFFFF' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover' },
+      { itemprop: 'copyrightHolder', content: 'Lucas Dietrich' },
       { itemprop: 'copyrightYear', content: currentYear },
-      { itemprop: 'isFamilyFriendly', content: 'true' }
+      { itemprop: 'isFamilyFriendly', content: 'true' },
+
+      // Meta
+      { hid: 'description', name: 'description', content: 'Creative Developer based in Münster' },
+      { hid: 'image', itemprop: 'image', content: '/og-image/og-image-home.jpg' },
+
+      // Open Graph
+      { hid: 'og:site_name', property: 'og:site_name', content: 'Lucas Dietrich - Portfolio' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:description', property: 'og:description', content: 'Creative Developer based in Münster' },
+      { hid: 'og:image', property: 'og:image', content: '/og-image/og-image-home.jpg' },
+
+      // Twitter
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@lucsy3012' },
+      { hid: 'twitter:description', name: 'twitter:description', content: 'Creative Developer based in Münster' },
+      { hid: 'twitter:image', name: 'twitter:image', content: '/og-image/og-image-home.jpg' },
+
+      // Apple
+      { name: 'mobile-web-app-capable', content: 'yes' },
+      { name: 'apple-mobile-web-app-title', content: 'Lucas Dietrich - Portfolio' },
+      { name: 'apple-mobile-web-app-capable', content: 'yes' },
+      { name: 'apple-mobile-web-app-status-bar-style', content: '#000000' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-magenta.ico' },
+      { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-magenta.ico' },
+      { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-magenta.ico' },
+      { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-magenta.ico' },
     ]
   },
 

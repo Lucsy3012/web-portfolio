@@ -34,6 +34,31 @@
 <script>
 export default {
   name: "Contact",
+  head() {
+    return {
+      title: this.t.title,
+      meta: [
+
+        // Meta
+        { hid: 'description', name: 'description', content: this.t.seoDescription },
+        { hid: 'image', itemprop: 'image', content: this.t.seoImage },
+
+        // Open Graph
+        { hid: 'og:description', property: 'og:description', content: this.t.seoDescription },
+        { hid: 'og:image', property: 'og:image', content: this.t.seoImage },
+
+        // Twitter
+        { hid: 'twitter:description', name: 'twitter:description', content: this.t.seoDescription },
+        { hid: 'twitter:image', name: 'twitter:image', content: this.t.seoImage },
+      ],
+      link: [
+        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-green.ico' },
+        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-green.ico' },
+        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-green.ico' },
+        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-green.ico' },
+      ]
+    }
+  },
   computed: {
     t() {
       return this.$t('contact')

@@ -56,7 +56,9 @@ export default {
           company: "Freiberuflich"
         },
       ]
-    }
+    },
+    seoDescription: "Creative Developer aus Münster",
+    seoImage: "/og-image/og-image-about-me-de.jpg",
   },
   en: {
     title: "About me",
@@ -115,6 +117,8 @@ export default {
           company: "Freelance"
         },
       ]
-    }
+    },
+    seoDescription: "Creative Developer based in Münster",
+    seoImage: "/og-image/og-image-about-me-en.jpg",
   }
 }
