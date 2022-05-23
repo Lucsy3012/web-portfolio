@@ -13,6 +13,7 @@
         <ThreejsConeBackground
           class="background"
           materialTexture="texture-green.png"
+          :colorBackground="'#DCFE95'"
           :orbitControls="false"
         />
         <div class="inner">

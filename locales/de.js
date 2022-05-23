@@ -1,4 +1,5 @@
 // Components
+import announcement from '~/locales/components/announcement'
 import navigation from '~/locales/components/navigation'
 import footer from '~/locales/components/footer'
 
@@ -10,6 +11,7 @@ import contact from '~/locales/pages/contact'
 import legal from '~/locales/pages/legal'
 
 export default {
+  announcement: announcement.de,
   navigation: navigation.de,
   footer: footer.de,
 

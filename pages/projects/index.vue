@@ -46,11 +46,6 @@
 import client from '~/plugins/contentful'
 
 export default {
-  data() {
-    return {
-      projects: [],
-    }
-  },
   head() {
     return {
       title: this.t.title,
@@ -74,6 +69,11 @@ export default {
         { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-cyan.ico' },
         { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-cyan.ico' },
       ]
+    }
+  },
+  data() {
+    return {
+      projects: [],
     }
   },
   asyncData({ i18n }) {

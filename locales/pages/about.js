@@ -38,22 +38,26 @@ export default {
         {
           time: "2013 – 2016",
           title: "Junior Frontend-Designer",
-          company: "Shopmacher"
+          company: "Shopmacher",
+          hasAt: true,
         },
         {
           time: "2016 – 2017",
           title: "Lead Designer",
-          company: "FineVisuals"
+          company: "FineVisuals",
+          hasAt: true,
         },
         {
           time: "Seit 2017",
           title: "Web Designer",
-          company: "Shopware"
+          company: "Shopware",
+          hasAt: true,
         },
         {
           time: "Seit 2022",
           title: "UI / UX Designer",
-          company: "Freiberuflich"
+          company: "Freiberuflich",
+          hasAt: false,
         },
       ]
     },
@@ -99,22 +103,26 @@ export default {
         {
           time: "2013 – 2016",
           title: "Junior Frontend-Designer",
-          company: "Shopmacher"
+          company: "Shopmacher",
+          hasAt: true,
         },
         {
           time: "2016 – 2017",
           title: "Lead Designer",
-          company: "FineVisuals"
+          company: "FineVisuals",
+          hasAt: true,
         },
         {
           time: "Since 2017",
           title: "Web Designer",
-          company: "Shopware"
+          company: "Shopware",
+          hasAt: true,
         },
         {
           time: "Since 2022",
           title: "UI / UX Designer",
-          company: "Freelance"
+          company: "Freelance",
+          hasAt: false,
         },
       ]
     },

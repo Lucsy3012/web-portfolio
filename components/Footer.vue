@@ -9,10 +9,10 @@
             <div class="grid-item-1">
               <LangSwitch />
             </div>
-            <div class="grid-item-2">
+            <div class="grid-item-2 display--none display--block-s">
               <Logo />
             </div>
-            <div class="grid-item-3">
+            <div class="grid-item-3 display--none display--block-s">
               <FooterNavigation />
             </div>
           </div>
@@ -99,6 +99,7 @@ footer {
 
     ul {
       .flex();
+      justify-content: center;
       list-style: none;
 
       li {
@@ -119,7 +120,7 @@ footer {
     display: grid;
     justify-content: space-between;
     align-items: center;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 
     .grid-item-1,
@@ -129,8 +130,13 @@ footer {
     }
 
     @media screen and (min-width: @vw-min-tablet) {
+      grid-template-columns: 1fr auto 1fr;
+
       .grid-item-1 {
         justify-self: flex-start;
+      }
+      .grid-item-2 {
+        justify-self: center;
       }
       .grid-item-3 {
         justify-self: flex-end;
@@ -138,25 +144,9 @@ footer {
     }
   }
 
-  // Media Queries
-  @media screen and (max-width: @vw-max-desktop-large) {
-    .logo {
-      height: 20px
-    }
-  }
-  @media screen and (max-width: @vw-max-desktop) {
-    .logo {
-      display: none;
-    }
-    nav {
-      --navigation-gap: 6px;
-    }
-  }
-
   .footer-primary {
     .row {
       position: relative;
-      padding: 10px 0;
 
       &::before {
         content: "";
@@ -182,6 +172,13 @@ footer {
     }
   }
 
+  .footer-primary,
+  .footer-secondary {
+    .row {
+      padding: 10px 0;
+    }
+  }
+
   // Separators
   .separator--display {
     display: inline-flex;
@@ -194,6 +191,43 @@ footer {
       margin: 0 10px;
       border-top: 2px solid var(--link-color-active);
       opacity: .33;
+    }
+  }
+
+  // Media Queries
+  @media screen and (max-width: @vw-max-desktop-large) {
+    .logo {
+      height: 20px
+    }
+  }
+  @media screen and (max-width: @vw-max-desktop) {
+    .logo {
+      display: none;
+    }
+    nav {
+      --navigation-gap: 6px;
+    }
+  }
+  @media screen and (max-width: @vw-max-tablet) {
+    .footer-primary,
+    .footer-secondary {
+      .row {
+        padding: 20px 0;
+      }
+    }
+
+    // Footer Secondary
+    .footer-secondary {
+      .grid {
+        grid-gap: 10px;
+
+        .grid-item-1 {
+          margin-top: 10px;
+          padding-top: 24px;
+          border-top: 1px solid var(--site-contrast-25);
+          order: 3;
+        }
+      }
     }
   }
 }

@@ -63,7 +63,7 @@
     </section>
 
     <!-- Work -->
-    <section class="static-bg static-bg--accent mt3 mt4-l section--about-me animate--js">
+    <section class="static-bg static-bg--accent mt4 mt5-l section--about-me animate--js">
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-work mb0 mb4-m">
@@ -102,7 +102,7 @@
     </section>
 
     <!-- Career -->
-    <section class="dynamic-bg--container pb0 animate--js" id="career">
+    <section class="dynamic-bg--container mt4 mt5-l pb0 animate--js" id="career">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
@@ -115,6 +115,7 @@
         <ThreejsConeBackground
           class="background"
           materialTexture="texture-pink.png"
+          :colorBackground="'#FE95C1'"
           :orbitControls="false"
         />
         <div class="inner">
@@ -128,8 +129,11 @@
                   :key="index"
                 >
                   <div class="time tm">{{ item.time }}</div>
-                  <h3 class="title tf3 --line-height-normal">{{ item.title }}</h3>
-                  <h4 class="company tf3 --line-height-normal">{{ item.company }}</h4>
+                  <h3 class="title mt1 tf4 tf3-m --line-height-normal">{{ item.title }}</h3>
+                  <h4 class="company mt1 tm1 tf3-m --line-height-normal">
+                    <span class="display--inline-block display--none-xs" v-if="item.hasAt">@</span>
+                    {{ item.company }}
+                  </h4>
                 </li>
               </ul>
             </div>
@@ -144,14 +148,6 @@
 import client from '~/plugins/contentful'
 
 export default {
-  data() {
-    return {
-      images: {
-        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/0cbbc598dd4bb6c318b11c06a6872090/about-me.jpg",
-        aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",
-      }
-    }
-  },
   head() {
     return {
       title: this.t.title,
@@ -169,6 +165,20 @@ export default {
         { hid: 'twitter:description', name: 'twitter:description', content: this.t.seoDescription },
         { hid: 'twitter:image', name: 'twitter:image', content: this.t.seoImage },
       ],
+      link: [
+        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-magenta.ico' },
+        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-magenta.ico' },
+        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-magenta.ico' },
+        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-magenta.ico' },
+      ]
+    }
+  },
+  data() {
+    return {
+      images: {
+        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/0cbbc598dd4bb6c318b11c06a6872090/about-me.jpg",
+        aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",
+      }
     }
   },
   asyncData({ i18n }) {
@@ -255,24 +265,32 @@ dl {
 // Career
 #career {
   li {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
+    @media screen and (max-width: @vw-max-grid) {
+      + li {
+        margin-top: 40px;
+        padding-top: 40px;
+        border-top: 2px solid var(--site-color, @color-black);
+      }
+    }
+    @media screen and (min-width: @vw-min-grid) {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto;
 
-    .time {
-      grid-column: span 2;
-      grid-row: 1;
+      .time {
+        grid-column: span 2;
+        grid-row: 1;
+      }
+      .title {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      .company {
+        grid-column: 2;
+        grid-row: 2;
+        text-align: right;
+      }
     }
-    .title {
-      grid-column: 1;
-      grid-row: 2;
-    }
-    .company {
-      grid-column: 2;
-      grid-row: 2;
-      text-align: right;
-    }
-
     @media screen and (min-width: @vw-min-desktop-large) {
       grid-gap: 10px;
     }

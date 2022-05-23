@@ -78,8 +78,8 @@
               <source :srcset="resizeImageSrcSet(urlSideImage, 400, 'webp')" type="image/webp">
               <source :srcset="resizeImageSrcSet(urlSideImage, 400, 'png')">
               <img
-                class="m animate appearFromBottomTransform"
-                :src="resizeImageSrcSet(urlSideImage, 400, 'png')"
+                class="m mt4 mt0-m animate appearFromBottomTransform"
+                :src="resizeImageSrc(urlSideImage, 400, 'png')"
                 :title="title"
                 :alt="title"
                 :width="sideImage.fields.file.details.image.width"
@@ -93,11 +93,11 @@
     </section>
 
     <!-- Impressions Title -->
-    <section class="pt0 dynamic-bg--container animate--js headline-position--center">
+    <section class="pt0 dynamic-bg--container animate--js headline-position--center mt5" id="impressions">
       <div class="inner">
         <div class="row dynamic-bg--offset--33">
           <div class="col col-12 headline--container">
-            <div class="headline tb5 tb6-m tb7-xl">
+            <div class="headline tb4 tb5-xs tb6-m tb7-xl">
               <span class="secondary">{{ t.impressions }}</span>
               <h3 class="primary">{{ t.impressions }}</h3>
             </div>
@@ -180,6 +180,7 @@
           class="background"
           :materialTexture="urlMaterialTexture"
           :materialTextureExternal="true"
+          :colorBackground="accentColor"
           :orbitControls="false"
         />
         <div class="inner">
@@ -405,7 +406,8 @@ video {
 
   img {
     width: 100%;
-    max-width: 400px;
+    margin-bottom: -5rem;
+    max-width: ~'clamp(320px, 50vw, 400px)';
     height: auto;
     display: block;
   }
@@ -415,11 +417,15 @@ video {
   }
 
   // Col sizes
-  @media screen and (min-width: @vw-max-grid) {
+  @media screen and (min-width: @vw-min-grid) {
     --keyfacts-col-size: 580px;
   }
-  @media screen and (min-width: @vw-max-desktop) {
+  @media screen and (min-width: @vw-min-desktop) {
     --keyfacts-col-size: 600px;
+
+    img {
+      max-width: ~'clamp(320px, 30vw, 400px)';
+    }
   }
   @media screen and (min-width: @vw-min-desktop-large) {
     --keyfacts-col-size: 640px;

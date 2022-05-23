@@ -1,9 +1,9 @@
 <template>
-  <section class="section--xl pt0 dynamic-bg--container animate--js" :class="headlinePositionClass">
+  <section class="project-banner section--xl pt0 dynamic-bg--container animate--js" :class="headlinePositionClass">
     <div class="inner">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12 headline--container">
-          <NuxtLink :to="{ name: 'projects-slug', params: { slug }}">
+          <NuxtLink :to="{ name: 'projects-slug', params: { slug }}" :title="title">
             <div class="headline tb5 tb6-m tb7-xl">
               <span class="secondary">{{ title }}</span>
 
@@ -27,7 +27,7 @@
       <div class="inner">
         <div class="row">
           <div class="col col-12">
-            <NuxtLink :to="{ name: 'projects-slug', params: { slug }}">
+            <NuxtLink :to="{ name: 'projects-slug', params: { slug }}" :title="title">
 
               <!-- Video -->
               <video v-if="video" loop autoplay muted playsinline :poster="resizeImageSrc(img, 1920, 'jpg', 85)" class="dynamic-bg--image">
@@ -155,6 +155,16 @@ export default {
 
 <style lang="less" scoped>
 @import (reference) "@/assets/less/global";
+
+.project-banner {
+  .dynamic-bg--offset--33 {
+    pointer-events: none;
+  }
+  a * {
+    pointer-events: initial;
+    cursor: pointer;
+  }
+}
 
 // Images
 img, video {

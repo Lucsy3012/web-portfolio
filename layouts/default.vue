@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Announcement />
     <Header />
     <Nuxt />
     <Footer />

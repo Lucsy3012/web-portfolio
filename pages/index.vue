@@ -1,14 +1,24 @@
 <template>
   <div class="container">
-    <section>
+    <section class="animate--js in">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
-            <div class="headline tb5 tb6-m tb7-xl --site-color simulate-offset-33">
+
+            <!-- Headline -->
+            <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33">
               <span class="secondary">{{ t.firstname }}</span>
               <span class="primary">{{ t.lastname }}</span>
               <h1 class="tertiary">{{ t.jobTitle }}</h1>
             </div>
+
+            <!-- Background Object Animation -->
+            <ThreejsTriangle
+              class="background behind-headline"
+              colorMaterial="#AA95FE"
+              colorLight="#F7FFF3"
+              :orbitControls="false"
+            />
           </div>
         </div>
       </div>
@@ -132,6 +142,7 @@
         <ThreejsConeBackground
           class="background"
           materialTexture="texture-cyan.png"
+          :colorBackground="'#95EBFE'"
           :orbitControls="false"
         />
         <div class="inner">
@@ -175,6 +186,17 @@
 import client from '~/plugins/contentful'
 
 export default {
+  head() {
+    return {
+      title: 'Home',
+      link: [
+        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-purple.ico' },
+        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-purple.ico' },
+        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-purple.ico' },
+        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-purple.ico' },
+      ]
+    }
+  },
   data() {
     return {
       images: {
@@ -213,6 +235,22 @@ export default {
 
 <style lang="less" scoped>
 @import (reference) "@/assets/less/global";
+
+.headline {
+  position: relative;
+  z-index: 1;
+}
+.behind-headline {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.tertiary {
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
 
 // About
 #about {

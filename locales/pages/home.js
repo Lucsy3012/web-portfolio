@@ -6,7 +6,7 @@ export default {
     about: {
       me: {
         title: "Über mich",
-        desc: "I'm Lucas Dietrich, born in 1994 and raised in my hometown Münster, Germany. My friends and family would describe me as someone close to a perfectionist. I like clean, organized and minimalistic places and workspaces. I'm a creative introvert and see myself as very honest, trustworthy and thoughtful. I'm the opposite of impulsive with my decisions, everything I do has a purpose or needed a lot of thought. I'm an analyst and a problem solver who likes to learn new skills if I see benefit in the skill in question.",
+        desc: "Hey! Ich bin Lucas Dietrich, 1994 geboren und in Münster in Deutschland aufgewachsen. Meine Freunde und Familie würden mich als jemanden beschreiben, der einem Perfektionist nahe kommt. Ordentlich, organisiert, minimalistisch. Ich selber sehe mich als eine kreative und introvertierte Seele, die offen und optimistisch der Zukunft entgegenblickt. Ich bin ein begeisterter Problemlöser, der gerne neue Fähigkeiten erlernt, egal ob sie dafür benötigt werden oder nicht.",
       },
       work: {
         title: "Arbeit",
@@ -66,7 +66,7 @@ export default {
     about: {
       me: {
         title: "About me",
-        desc: "I'm Lucas Dietrich, born in 1994 and raised in my hometown Münster, Germany. My friends and family would describe me as someone close to a perfectionist. I like clean, organized and minimalistic places and workspaces. I'm a creative introvert and see myself as very honest, trustworthy and thoughtful. I'm the opposite of impulsive with my decisions, everything I do has a purpose or needed a lot of thought. I'm an analyst and a problem solver who likes to learn new skills if I see benefit in the skill in question.",
+        desc: "Hey! I'm Lucas Dietrich, born in 1994 and raised in my hometown Münster, Germany. My friends and family would describe me as someone close to a perfectionist. I like clean, organized and minimalistic places and workspaces. I'm a creative introvert and see myself as very honest, trustworthy and thoughtful. I'm the opposite of impulsive with my decisions, everything I do has a purpose or needed a lot of thought. I'm an analyst and a problem solver who likes to learn new skills if I see benefit in the skill in question.",
       },
       work: {
         title: "Work",

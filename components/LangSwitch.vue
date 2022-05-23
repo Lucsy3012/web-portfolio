@@ -8,8 +8,7 @@
     <div class="language--tooltip">
       <ul>
         <li v-for="locale in availableLocales" :key="locale.code">
-          <!-- <NuxtLink :to="switchLocalePath(locale.code)">{{ locale.name }}</NuxtLink> -->
-          <NuxtLink :to="`/${locale.code}`">{{ locale.name }}</NuxtLink>
+          <NuxtLink :to="switchLocalePath(locale.code)">{{ locale.name }}</NuxtLink>
         </li>
       </ul>
     </div>
