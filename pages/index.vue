@@ -83,19 +83,19 @@
       <section class="overflow--hidden">
         <div class="tb3 tb4-s tb5-xl --site-color rolling-title">
           <h2 class="tf3 tf4-s tf5-xl">{{ t.projects.title }}</h2>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
           <span class="tf3 tf4-s tf5-xl">{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
-          <span>{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ t.projects.title }}</span>
         </div>
       </section>
       <template v-for="project in projects">
@@ -327,6 +327,14 @@ export default {
 
       > * + * {
         text-indent: 0.25em;
+      }
+
+      @media screen and (max-width: @vw-max-grid) {
+        + li {
+          margin-top: 30px;
+          padding-top: 30px;
+          border-top: 2px solid var(--site-color, @color-black);
+        }
       }
     }
   }

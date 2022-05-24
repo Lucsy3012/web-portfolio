@@ -3,7 +3,7 @@
     <div class="inner">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12 headline--container">
-          <NuxtLink :to="{ name: 'projects-slug', params: { slug }}" :title="title">
+          <NuxtLink :to="localePath({ name: 'projects-slug', params: { slug: slug }})" :title="title">
             <div class="headline tb5 tb6-m tb7-xl">
               <span class="secondary">{{ title }}</span>
 
@@ -27,7 +27,7 @@
       <div class="inner">
         <div class="row">
           <div class="col col-12">
-            <NuxtLink :to="{ name: 'projects-slug', params: { slug }}" :title="title">
+            <NuxtLink :to="localePath({ name: 'projects-slug', params: { slug: slug }})" :title="title">
 
               <!-- Video -->
               <video v-if="video" loop autoplay muted playsinline :poster="resizeImageSrc(img, 1920, 'jpg', 85)" class="dynamic-bg--image">

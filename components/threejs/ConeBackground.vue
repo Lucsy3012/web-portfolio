@@ -130,7 +130,7 @@ export default {
         matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
       }
 
-      const geometry = new THREE.ConeGeometry(350, 100, 512)
+      const geometry = new THREE.ConeGeometry(400, 100, 512)
       const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 
       this.objects.cone = new THREE.Mesh(geometry, material)

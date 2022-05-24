@@ -101,7 +101,7 @@ export default {
         de: '/ueber-mich',
         en: '/about-me',
       },
-      'projects': {
+      'projects/index': {
         de: '/projekte',
         en: '/projects',
       },
@@ -122,11 +122,7 @@ export default {
     gzip: true,
     routes() {
       return sitemapRoutes()
-    },
-    exclude: [
-      '/news',
-      '/legal',
-    ]
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
