@@ -11,7 +11,7 @@ import contact from '~/locales/pages/contact'
 import legal from '~/locales/pages/legal'
 
 export default {
-  announcement: announcement.de,
+  announcement: announcement.en,
   navigation: navigation.en,
   footer: footer.en,
 

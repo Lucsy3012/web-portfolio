@@ -151,25 +151,25 @@
               <ul>
                 <li>
                   <h3 class="tf3 tf4-s tf5-l">{{ t.services.web.title }}</h3>
-                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.web.services" :key="index">
+                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.web.services" :key="index">
                     {{ service }}
                   </span>
                 </li>
                 <li>
                   <h3 class="tf3 tf4-s tf5-l">{{ t.services.app.title }}</h3>
-                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.app.services" :key="index">
+                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.app.services" :key="index">
                     {{ service }}
                   </span>
                 </li>
                 <li>
                   <h3 class="tf3 tf4-s tf5-l">{{ t.services.branding.title }}</h3>
-                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.branding.services" :key="index">
+                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.branding.services" :key="index">
                     {{ service }}
                   </span>
                 </li>
                 <li>
                   <h3 class="tf3 tf4-s tf5-l">{{ t.services.tools.title }}</h3>
-                  <span class="tb3 tb4-s tb5-l" v-for="(service, index) in t.services.tools.services" :key="index">
+                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.tools.services" :key="index">
                     {{ service }}
                   </span>
                 </li>
@@ -296,9 +296,10 @@ export default {
   align-items: center;
   text-indent: 0.5em;
   max-width: 100vw;
+  text-shadow: 0 0 var(--site-color-50, @color-black-50);
 
   > * {
-    animation: rollingTitle 10s linear infinite;
+    animation: rollingTitle 16s linear infinite;
   }
 }
 
@@ -325,6 +326,9 @@ export default {
       flex-wrap: wrap;
       align-items: baseline;
 
+      > * {
+        line-height: 1.33;
+      }
       > * + * {
         text-indent: 0.25em;
       }
@@ -334,6 +338,38 @@ export default {
           margin-top: 30px;
           padding-top: 30px;
           border-top: 2px solid var(--site-color, @color-black);
+        }
+      }
+      @media screen and (min-width: @vw-min-mobile) {
+        h3 {
+          &::after {
+            content: "";
+            display: inline-flex;
+            background: var(--site-color, @color-black);
+            width: 0.7em;
+            height: 0.7em;
+            margin-left: 0.15em;
+            transform: scale(0.5);
+            clip-path: polygon(15% 0, 0% 100%, 100% 55%);
+          }
+        }
+      }
+      @media screen and (max-width: @vw-max-mobile) {
+        justify-content: center;
+        text-align: center;
+
+        h3 {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        span {
+          text-shadow: 0 0 var(--site-color-50, @color-black-50);
+
+          + span {
+            &::before {
+              content: "+"
+            }
+          }
         }
       }
     }

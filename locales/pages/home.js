@@ -27,7 +27,7 @@ export default {
       web: {
         title: "Web",
         services: [
-          'Concept',
+          'Konzepte',
           'Design',
           'Development',
         ]
@@ -35,7 +35,7 @@ export default {
       app: {
         title: "App",
         services: [
-          'Concept',
+          'Konzepte',
           'Design',
           'Prototyping',
         ]

@@ -61,8 +61,11 @@
   0%    { transform: translateY(120%); clip-path: polygon(0 -125%, 125% -125%, 125% 0%, 0% 0%); opacity: 0; }
   100%  { transform: translateY(0); clip-path: polygon(0 0, 125% 0, 125% 125%, 0% 125%); opacity: 1; }
 }
-
 @keyframes headlineAppearFromTop {
   0%    { transform: translateY(0%); clip-path: polygon(0 -100%, 100% -100%, 100% 0%, 0% 0%); }
   100%  { transform: translateY(100%); clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%) ; }
+}
+@keyframes headlineAppearFromTop100 {
+  0%    { transform: translateY(-100%); clip-path: polygon(0 -100%, 100% -100%, 100% 0%, 0% 0%); }
+  100%  { transform: translateY(0%); clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%) ; }
 }

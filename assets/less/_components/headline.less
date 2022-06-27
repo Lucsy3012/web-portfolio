@@ -52,7 +52,7 @@
 
   // Fonts
   .primary { font-weight: 700; }
-  .secondary { font-weight: 600; }
+  .secondary { font-weight: 600; text-shadow: 0 0 var(--site-color-50, @color-black-50); }
   .tertiary {
     .--eyebrow();
     position: absolute;
@@ -109,4 +109,27 @@
   animation-fill-mode: both;
   animation-delay: 0.3s;
   animation-play-state: var(--animation-play-state);
+}
+
+@media screen and (max-width: @vw-max-tablet) {
+  .headline.headline--xs {
+    display: flex;
+    flex-wrap: wrap;
+
+    *:first-child {
+      --text-indent: 0;
+    }
+    .primary {
+      width: 100%;
+    }
+    .tertiary {
+      position: static;
+      top: auto;
+      animation-name: headlineAppearFromTop100;
+      line-height: 1.5;
+      white-space: initial;
+      opacity: .66;
+      order: -1;
+    }
+  }
 }

@@ -1,7 +1,21 @@
 <template>
   <section class="project-banner section--xl pt0 dynamic-bg--container animate--js" :class="headlinePositionClass">
     <div class="inner">
-      <div class="row dynamic-bg--offset--33">
+
+      <!-- Mobile -->
+      <div class="row mb2 container-mobile">
+        <div class="col col-12">
+          <NuxtLink :to="localePath({ name: 'projects-slug', params: { slug: slug }})" :title="title">
+            <div class="headline headline--xs">
+              <h2 class="primary tf4 tf5-xs mt1 mb1">{{ title }}</h2>
+              <h3 class="tertiary" v-if="subline">{{ subline }}</h3>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Desktop -->
+      <div class="row dynamic-bg--offset--33 container-desktop">
         <div class="col col-12 headline--container">
           <NuxtLink :to="localePath({ name: 'projects-slug', params: { slug: slug }})" :title="title">
             <div class="headline tb5 tb6-m tb7-xl">
@@ -65,7 +79,7 @@
                 >
               </picture>
             </NuxtLink>
-            <div class="release-date --eyebrow --site-color t-1 t-l">
+            <div class="release-date --eyebrow --site-color t-1 t-l display--none display--block-s">
               <span class="display--none display--inline-block-l">{{ t.releaseDate }}</span>
               <span v-if="formattedDate">{{ formattedDate }}</span>
               <span v-else>{{ t.inProgress }}</span>
@@ -204,5 +218,13 @@ img, video {
     animation-play-state: var(--animation-play-state, paused);
     animation-fill-mode: both;
   }
+}
+
+.container-mobile   { display: none; }
+.container-desktop  { display: flex; }
+
+@media screen and (max-width: @vw-min-tablet) {
+  .container-mobile   { display: flex; }
+  .container-desktop  { display: none; }
 }
 </style>
