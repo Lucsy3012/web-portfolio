@@ -113,8 +113,8 @@ export default {
       this.camera = new THREE.PerspectiveCamera(
         70,
         window.innerWidth / window.innerHeight,
-        0.1,
-        500
+        1,
+        50
       )
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
       this.renderer.setSize(window.innerWidth, window.innerHeight)
@@ -159,7 +159,7 @@ export default {
       this.camera.lookAt(this.objects.tetrahedron)
     },
     animate() {
-      this.windowResizing('container') // optimise function
+      this.windowResizing('container'); // optimise function
 
       this.clock.elapsedTime = this.clock.getElapsedTime()
 

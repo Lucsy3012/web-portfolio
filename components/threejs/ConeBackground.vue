@@ -29,18 +29,13 @@ export default {
       scene: null,
       camera: null,
       controls: null,
-      lights: {
-        pointLight: null,
-        hemisphereLight: null,
-        ambientLight: null,
-      },
+      clock: null,
       objects: {
         cone: null,
         group: null,
       },
       helpers: {
         grid: null,
-        lightHelper: null,
       },
       mouse: {
         position: {
@@ -98,22 +93,25 @@ export default {
     // Dev
     if (this.dev) {
       this.helperGrid();
-      this.helperLight();
+      this.addGUI();
     }
   },
   methods: {
     init() {
       this.scene = new THREE.Scene()
       this.camera = new THREE.PerspectiveCamera(
-        70,
+        25,
         window.innerWidth / window.innerHeight,
-        0.1,
-        500
+        20,
+        80
       )
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-      this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.setSize(window.innerWidth, window.innerHeight)
+      this.renderer.setPixelRatio(window.devicePixelRatio)
       this.renderer.setClearColor(this.colorBackground)
+
+      // Clock
+      this.clock = new THREE.Clock()
 
       // Add Scene to DOM
       document.querySelector(`#${this.customID}`).appendChild(this.renderer.domElement)
@@ -130,7 +128,7 @@ export default {
         matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
       }
 
-      const geometry = new THREE.ConeGeometry(400, 100, 512)
+      const geometry = new THREE.ConeGeometry(200, 50, 256)
       const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 
       this.objects.cone = new THREE.Mesh(geometry, material)
@@ -150,10 +148,12 @@ export default {
       this.camera.lookAt(this.objects.cone)
     },
     animate() {
-      this.windowResizing('container');
+      this.windowResizing('container'); // optimise function
+
+      this.clock.elapsedTime = this.clock.getElapsedTime()
 
       // Animation
-      this.frameAnimationRotate(this.objects.group, 0, 0.003);
+      this.frameAnimationRotate(this.objects.group, 0, 0.5);
       this.frameAnimationCameraPosition(
         this.mouse.area.width / this.mouse.area.height * -4,
         this.mouse.area.height / this.mouse.area.width * -8
@@ -166,9 +166,9 @@ export default {
 
     // Animations
     frameAnimationRotate(obj, x = 0, y = 0, z = 0) {
-      obj.rotation.x -= x;
-      obj.rotation.y -= y;
-      obj.rotation.z -= z;
+      obj.rotation.x = -x * this.clock.elapsedTime;
+      obj.rotation.y = -y * this.clock.elapsedTime;
+      obj.rotation.z = -z * this.clock.elapsedTime;
     },
     frameAnimationCameraPosition(multiplierX = 1, multiplierY = 1) {
       this.camera.position.x = this.mouse.position.x * multiplierX;
@@ -188,15 +188,34 @@ export default {
       this.controls.update();
     },
 
+    // Add-ons
+    addGUI() {
+      const dat = require('dat.gui')
+      const gui = new dat.GUI()
+
+      // Folders
+      const guiGeometry = gui.addFolder('Geometry')
+
+      // Geometry
+      guiGeometry.add(this.objects.cone.position, 'x').min(-50).max(50).step(0.01).name('Cone Position X')
+      guiGeometry.add(this.objects.cone.position, 'y').min(-50).max(50).step(0.01).name('Cone Position Y')
+      guiGeometry.add(this.objects.cone.position, 'z').min(-50).max(50).step(0.01).name('Cone Position Z')
+      guiGeometry.add(this.objects.cone.rotation, 'x').min(0).max(Math.PI * 2).step(0.001).name('Cone X')
+      guiGeometry.add(this.objects.cone.rotation, 'y').min(0).max(Math.PI * 2).step(0.001).name('Cone Y')
+      guiGeometry.add(this.objects.cone.rotation, 'z').min(0).max(Math.PI * 2).step(0.001).name('Cone Z')
+    },
+
     // Helpers
     helperGrid() {
       this.helpers.grid = new THREE.GridHelper(10, 10);
       this.scene.add(this.helpers.grid);
     },
+    /*
     helperLight(size = 1, color = '#f55') {
       this.helpers.lightHelper = new THREE.PointLightHelper(this.lights.pointLight, size, color);
       this.scene.add(this.helpers.lightHelper);
     },
+     */
 
     // Non ThreeJS specific
     windowResizing(size) {
