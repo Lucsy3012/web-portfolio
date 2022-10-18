@@ -112,7 +112,7 @@ export default {
     // Dev
     // this.helperGrid();
     // this.helperLight();
-    this.addGUI();
+    // this.addGUI();
   },
   computed: {
     deg() {

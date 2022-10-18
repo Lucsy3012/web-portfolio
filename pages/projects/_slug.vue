@@ -55,7 +55,7 @@
       </section>
     </section>
 
-    <!-- Person -->
+    <!-- Keyfacts -->
     <section class="static-bg static-bg--accent mt3 mt4-l section--keyfacts animate--js" :style="`--site-accent: ${accentColor}`">
       <div class="inner">
         <div class="row" :class="{ 'justify-content--space-evenly': !!urlSideImage }">
@@ -91,6 +91,31 @@
         </div>
       </div>
     </section>
+
+    <!-- Todo Description Title
+    <section class="pt0 dynamic-bg--container animate--js headline-position--center mt5" id="description" v-if="hasDescription">
+      <div class="inner">
+        <div class="row dynamic-bg--offset--33">
+          <div class="col col-12 headline--container">
+            <div class="headline tb4 tb5-xs tb6-m tb7-xl">
+              <span class="secondary">{{ t.description }}</span>
+              <h3 class="primary">{{ t.description }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pt0 dynamic-bg--container animate--js" v-if="hasDescription">
+      <div class="inner">
+        <div class="row justify-content--center">
+          <div class="col col-12 col-s-8 col-max">
+            <div v-html="longDescriptionRendered"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    -->
 
     <!-- Impressions Title -->
     <section class="pt0 dynamic-bg--container animate--js headline-position--center mt5" id="impressions">
@@ -216,6 +241,8 @@
 
 <script>
 import client from '~/plugins/contentful'
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 export default {
   head() {
@@ -249,7 +276,7 @@ export default {
       subline: '',
       metaDescription: '',
       description: '',
-      longDescription: '',
+      longDescription: {},
       keyfacts: [],
       accentColor: '',
       link: '',
@@ -368,6 +395,23 @@ export default {
     impressionsRest() {
       return this.impressions.slice(1)
     },
+    hasDescription() {
+      return !!this.longDescription
+    },
+    longDescriptionRendered() {
+      const options = {
+        renderMark: {
+          [MARKS.BOLD]: text => `<b>${text}</b>`,
+          [MARKS.ITALIC]: text => `<i>${text}</i>`
+        },
+        renderNode: {
+          [BLOCKS.PARAGRAPH]: (node, next) => `<p>${next(node.content)}</p>`
+        }
+      }
+      if (this.hasDescription) {
+        return documentToHtmlString(this.longDescription, options)
+      }
+    }
   },
   methods: {
     resizeImageSrc(img, width, format, quality = 100) {
@@ -382,7 +426,7 @@ export default {
       } else {
         return `https:${img}`
       }
-    }
+    },
   }
 }
 </script>
@@ -473,5 +517,12 @@ dl {
       height: auto;
     }
   }
+}
+
+// Description Button
+.btn {
+  position: absolute;
+  bottom: ~'calc(var(--section-padding, 120px) * 2)';
+  transform: translateY(50%);
 }
 </style>

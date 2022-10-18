@@ -37,7 +37,9 @@
         </div>
       </div>
     </div>
-    <section class="p0 project-image" v-if="img">
+
+    <!-- Image or Video -->
+    <section class="p0 project-image" v-if="img && !webGL">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
@@ -88,6 +90,26 @@
         </div>
       </div>
     </section>
+
+    <!-- Experiment -->
+    <section class="p0 project-image" v-if="webGL">
+      <div class="inner">
+        <div class="row">
+          <div class="col col-12 position--relative">
+            <div class="hint-interactive">
+              <span>{{ t.interactiveElement }}</span>
+              <img
+                src="/icon-lightning.svg"
+                alt="Interactive"
+                width="18"
+                height="18"
+              >
+            </div>
+            <slot name="experiment"></slot>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 
@@ -114,6 +136,10 @@ export default {
     },
     video: {
       type: Object,
+      required: false,
+    },
+    webGL: {
+      type: Boolean,
       required: false,
     },
     releaseDate: {
@@ -217,6 +243,39 @@ img, video {
     animation-timing-function: @bezier-push;
     animation-play-state: var(--animation-play-state, paused);
     animation-fill-mode: both;
+  }
+}
+:root {
+  --btn-padding-top-bottom: 0.66em;
+  --btn-padding-left-right: 1.66em;
+}
+
+.hint-interactive {
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  right: ~'calc(2.5em + (var(--gap-column, 80px) / 2))';
+  bottom: 2.5em;
+  padding: 0.5em 1.33em;
+  color: var(--site-contrast);
+  background-color: var(--site-color);
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border-radius: 32px;
+  grid-gap: 0.5em;
+  gap: 0.5em;
+
+  span {
+    display: block;
+  }
+  img {
+    width: 14px;
+    height: 14px;
+  }
+  &:hover {
+    cursor: default;
   }
 }
 

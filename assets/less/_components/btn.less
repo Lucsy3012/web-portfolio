@@ -1,0 +1,39 @@
+:root {
+  --btn-padding-top-bottom: 0.66em;
+  --btn-padding-left-right: 1.66em;
+}
+
+.btn {
+  padding: var(--btn-padding-top-bottom, 0.66em) var(--btn-padding-left-right, 1.66em);
+  color: var(--site-contrast);
+  border: 2px solid transparent;
+  background-color: var(--site-color);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: 6px;
+
+  span {
+    display: block;
+    transform: translateY(1px);
+  }
+
+  // Active
+  &.active,
+  &.nuxt-link-active {
+    color: var(--site-contrast);
+  }
+}
+
+// Border Button
+.btn.btn-border {
+  color: var(--site-color);
+  border-color: var(--site-color);
+  background-color: transparent;
+
+  // Active
+  &.active,
+  &.nuxt-link-active {
+    color: var(--site-contrast);
+    background-color: var(--site-color);
+  }
+}

@@ -46,6 +46,7 @@ export default {
       { name: 'apple-mobile-web-app-status-bar-style', content: '#000000' },
     ],
     link: [
+      // https://favicon.io/favicon-converter/
       { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-magenta.ico' },
       { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-magenta.ico' },
       { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-magenta.ico' },
@@ -108,6 +109,10 @@ export default {
       'projects/_slug': {
         de: '/projekte/:slug',
         en: '/projects/:slug',
+      },
+      'experiments/index': {
+        de: '/experimente',
+        en: '/experiments',
       },
       'contact': {
         de: '/kontakt',

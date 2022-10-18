@@ -2,9 +2,9 @@
   <div class="row navigation-holder" :active="this.active">
     <nav>
       <ul>
-        <li v-for="(item, index) in navItems" :key="index">
-          <NuxtLink :to="localePath({ name: item })">
-            <span @click="navigationDeactivate()">{{ $t('navigation.' + item) }}</span>
+        <li v-for="item in navItems" :key="item.key">
+          <NuxtLink :to="localePath({ name: item.key })" :class="{ 'btn btn-border': item.button }">
+            <span @click="navigationDeactivate()">{{ item.name }}</span>
           </NuxtLink>
         </li>
       </ul>
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     navItems() {
-      return Object.keys(this.$t('navigation'));
+      return this.$t('navigation');
     }
   }
 }

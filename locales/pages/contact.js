@@ -14,8 +14,12 @@ export default {
         name: "Xing",
         href: "https://www.xing.com/profile/Lucas_Dietrich3/",
       },
+      {
+        name: "LinkedIn",
+        href: "https://www.linkedin.com/in/lucas-dietrich-5a3b4824b/",
+      },
     ],
-    seoDescription: "Du hast ein Projekt für mich? Kontaktiere mich doch einfach!",
+    seoDescription: "Du hast ein Projekt für mich? Kontaktiere mich und wir sprechen drüber!",
     seoImage: "/og-image/og-image-contact-de.jpg",
   },
   en: {
@@ -32,6 +36,10 @@ export default {
       {
         name: "Xing",
         href: "https://www.xing.com/profile/Lucas_Dietrich3/",
+      },
+      {
+        name: "LinkedIn",
+        href: "https://www.linkedin.com/in/lucas-dietrich-5a3b4824b/",
       },
     ],
     seoDescription: "Do you have an interesting project for me? Let's talk and contact me!",

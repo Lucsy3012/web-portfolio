@@ -1,8 +1,8 @@
 <template>
   <section class="announcement">
-    <p class="tm-2 --site-contrast text--center">
+    <NuxtLink class="tm-2 --site-contrast" :to="localePath({ name: t.linkInternal })">
       {{ t.message }}
-    </p>
+    </NuxtLink>
   </section>
 </template>
 
@@ -21,7 +21,16 @@ export default {
 @import (reference) "@/assets/less/global";
 
 section.announcement {
-  padding: 12px 30px;
-  background: var(--site-color, @color-black);
+  padding: 0;
+
+  p, a {
+    display: block;
+    padding: 12px 30px;
+    background: var(--site-color, @color-black);
+    text-align: center;
+  }
+  a:hover {
+    color: var(--site-contrast-75, @color-white-75)
+  }
 }
 </style>

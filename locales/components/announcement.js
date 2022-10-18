@@ -1,8 +1,10 @@
 export default {
   de: {
-    message: "Willkommen auf meiner neuen Website!",
+    message: "Experimente sind jetzt als Seite verfügbar. Schaue sie dir doch direkt einmal an!",
+    linkInternal: 'experiments'
   },
   en: {
-    message: "Welcome to my new website!",
+    message: "New experiments have shipped. Click here to view the page!",
+    linkInternal: 'experiments'
   }
 }

@@ -1,4 +1,7 @@
+@import (reference) "../components";
 @import (reference) "../shorthands";
+
+@break: @vw-min-desktop;
 
 .header {
   --section-padding: 20px;
@@ -45,10 +48,6 @@
         }
       }
     }
-
-    @media screen and (min-width: @vw-min-tablet) {
-      display: none;
-    }
   }
 
   // Navigation default
@@ -75,23 +74,6 @@
           padding: var(--navigation-gap, 10px);
           .transit();
 
-          // Indicator
-          &::before {
-            --transition-property: transform;
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: 0 auto;
-            width: 18px;
-            height: 3px;
-            border-radius: 3px;
-            background-color: var(--link-color-active);
-            transform: scaleX(0);
-            .transit();
-          }
-
           // Hover
           &:hover {
             color: var(--link-color-active);
@@ -108,6 +90,44 @@
 
             &::before {
               transform: scaleX(1);
+            }
+          }
+
+          // Button
+          &.btn {
+            padding-left: var(--btn-padding-left-right, 1.66em);
+            padding-right: var(--btn-padding-left-right, 1.66em);
+            font-weight: 500;
+            letter-spacing: 0.01em;
+
+            &::before {
+              display: none;
+            }
+          }
+
+          // Media Query
+          @media screen and (min-width: @break) {
+
+            // Indicator
+            &::before {
+              --transition-property: transform;
+              content: "";
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              margin: 0 auto;
+              width: 18px;
+              height: 3px;
+              border-radius: 3px;
+              background-color: var(--link-color-active);
+              transform: scaleX(0);
+              .transit();
+            }
+
+            // Buttons
+            &.btn {
+              margin-left: var(--navigation-gap, 10px);
             }
           }
         }
@@ -142,7 +162,13 @@
     }
   }
 
-  @media screen and (max-width: @vw-max-tablet - 1px) {
+  // Mobile
+  @media screen and (min-width: @break) {
+    .menu-opener {
+      display: none;
+    }
+  }
+  @media screen and (max-width: @break - 1px) {
     --section-padding: 15px;
 
     .logo {
@@ -154,7 +180,7 @@
     nav {
       .flex();
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
       position: fixed;
       width: 100%;
       height: 100%;
@@ -166,9 +192,9 @@
       pointer-events: none;
 
       ul {
-        position: relative;
-        flex-direction: column;
-        text-align: center;
+        margin-bottom: ~'clamp(0px, 20vw - 100px, 100px)';
+        padding: ~'calc(var(--navigation-gap, 10px) * 2)';
+        text-align: left;
         z-index: 100;
 
         // Each item
@@ -177,7 +203,9 @@
           --transition-timing-function: cubic-bezier(0.165,0.84,0.44,1);
           // --transition-duration: 0s;
           --transition-duration: 0.5s;
-          transform: translateY(30px);
+          width: 100%;
+          padding: 0;
+          transform: translateY(75%);
           opacity: 0;
           .transit();
 
@@ -190,16 +218,28 @@
           // Link
           a {
             --transition-property: color;
-            font-size: 8vw;
-            font-weight: 600;
-            color: var(--site-contrast, @color-white);
+            width: 100%;
+            font-weight: 300;
+            font-size: ~'clamp(16px, 4.5vw, 20px)';
+            color: var(--site-contrast-75, @color-white-75);
 
             &.nuxt-link-exact-active {
-              font-weight: 600;
-              color: var(--site-contrast-25, @color-white-25);
+              font-weight: 500;
+              color: var(--site-contrast, @color-white);
               pointer-events: none;
             }
+            &.btn {
+              margin-top: ~'calc(var(--navigation-gap, 10px) * 2)';
+              text-align: center;
+              color: var(--site-color, @color-black);
+              background: var(--site-contrast, @color-white);
+              border-color: transparent;
+            }
           }
+        }
+
+        @media screen and (min-width: @vw-min-mobile) {
+          margin-bottom: 0;
         }
       }
     }
@@ -221,7 +261,7 @@
         // Background
         &::before {
           --transition-delay: 0s;
-          background-color: fade(@color-black, 95%);
+          background-color: fade(@color-black, 95);
           pointer-events: initial;
         }
       }
