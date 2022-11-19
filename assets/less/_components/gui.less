@@ -1,0 +1,28 @@
+@import (reference) "../variables";
+
+.three-container,
+.canvas-container {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.gui {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 100px;
+  padding: clamp(12px, 5vw, 24px);
+
+  // Tweakpane settings
+  --tp-font-family: 'Basier Circle', -apple-system, 'Arial', sans-serif;
+  --tp-base-border-radius: 4px;
+  --tp-container-horizontal-padding: 6px;
+  --tp-container-vertical-padding: 6px;
+  --tp-blade-spacing: 6px;
+  --tp-base-background-color: var(--site-color, @color-black);
+
+  .tp-rotv {
+    font-size: 12px;
+  }
+}

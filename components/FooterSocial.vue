@@ -41,6 +41,10 @@ export default {
           name: "Codepen",
           href: "https://codepen.io/lucsy3012",
         },
+        {
+          name: "LinkedIn",
+          href: "https://www.linkedin.com/in/lucas-dietrich-5a3b4824b/",
+        }
       ],
     }
   },

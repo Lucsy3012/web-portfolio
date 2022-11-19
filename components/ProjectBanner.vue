@@ -1,14 +1,17 @@
 <template>
   <section class="project-banner section--xl pt0 dynamic-bg--container animate--js" :class="headlinePositionClass">
     <div class="inner">
-
       <!-- Mobile -->
       <div class="row mb2 container-mobile">
         <div class="col col-12">
           <NuxtLink :to="localePath({ name: 'projects-slug', params: { slug: slug }})" :title="title">
             <div class="headline headline--xs">
-              <h2 class="primary tf4 tf5-xs mt1 mb1">{{ title }}</h2>
-              <h3 class="tertiary" v-if="subline">{{ subline }}</h3>
+              <h2 class="primary tf4 tf5-xs mt1 mb1">
+                {{ title }}
+              </h2>
+              <h3 v-if="subline" class="tertiary">
+                {{ subline }}
+              </h3>
             </div>
           </NuxtLink>
         </div>
@@ -23,14 +26,22 @@
 
               <!-- Accent Color -->
               <template v-if="showsAccentColor">
-                <h2 class="primary" :style="{ 'color': accentColor }">{{ title }}</h2>
-                <h3 class="tertiary" :style="{ 'color': accentColor }" v-if="subline">{{ subline }}</h3>
+                <h2 class="primary" :style="{ 'color': accentColor }">
+                  {{ title }}
+                </h2>
+                <h3 v-if="subline" class="tertiary" :style="{ 'color': accentColor }">
+                  {{ subline }}
+                </h3>
               </template>
 
               <!-- Regular Site Color -->
               <template v-else>
-                <h2 class="primary">{{ title }}</h2>
-                <h3 class="tertiary" v-if="subline">{{ subline }}</h3>
+                <h2 class="primary">
+                  {{ title }}
+                </h2>
+                <h3 v-if="subline" class="tertiary">
+                  {{ subline }}
+                </h3>
               </template>
             </div>
           </NuxtLink>
@@ -39,14 +50,21 @@
     </div>
 
     <!-- Image or Video -->
-    <section class="p0 project-image" v-if="img && !webGL">
+    <section v-if="img && !webGL" class="p0 project-image">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
             <NuxtLink :to="localePath({ name: 'projects-slug', params: { slug: slug }})" :title="title">
-
               <!-- Video -->
-              <video v-if="video" loop autoplay muted playsinline :poster="resizeImageSrc(img, 1920, 'jpg', 85)" class="dynamic-bg--image">
+              <video
+                v-if="video"
+                loop
+                autoplay
+                muted
+                playsinline
+                :poster="resizeImageSrc(img, 1920, 'jpg', 85)"
+                class="dynamic-bg--image"
+              >
                 <source :src="video.fields.file.url" :type="video.fields.file.contentType">
                 <img
                   :src="img.fields.file.url"
@@ -92,11 +110,11 @@
     </section>
 
     <!-- Experiment -->
-    <section class="p0 project-image" v-if="webGL">
+    <section v-if="webGL" class="p0 project-image">
       <div class="inner">
         <div class="row">
           <div class="col col-12 position--relative">
-            <div class="hint-interactive">
+            <div class="tag hint-interactive">
               <span>{{ t.interactiveElement }}</span>
               <img
                 src="/icon-lightning.svg"
@@ -105,7 +123,7 @@
                 height="18"
               >
             </div>
-            <slot name="experiment"></slot>
+            <slot name="experiment" />
           </div>
         </div>
       </div>
@@ -156,14 +174,6 @@ export default {
       required: false,
     },
   },
-  methods: {
-    resizeImageSrc(img, width, format, quality = 100) {
-      return `${img.fields.file.url}?w=${width}&fm=${format}&q=${quality}`
-    },
-    resizeImageSrcSet(img, width, format, quality = 100) {
-      return `${img.fields.file.url}?w=${width}&fm=${format}&q=${quality} 1x, ${img.fields.file.url}?w=${width * 2}&fm=${format}&q=${quality} 2x`
-    },
-  },
   computed: {
     t() {
       return this.$t('projects')
@@ -172,7 +182,7 @@ export default {
       if (!this?.releaseDate) {
         return false
       }
-      const iso = this.$i18n.localeProperties.iso;
+      const {iso} = this.$i18n.localeProperties;
       const options = {
         year: 'numeric',
         month: '2-digit',
@@ -189,6 +199,14 @@ export default {
     accentColorAttr() {
       return this?.accentColor
     }
+  },
+  methods: {
+    resizeImageSrc(img, width, format, quality = 100) {
+      return `${img.fields.file.url}?w=${width}&fm=${format}&q=${quality}`
+    },
+    resizeImageSrcSet(img, width, format, quality = 100) {
+      return `${img.fields.file.url}?w=${width}&fm=${format}&q=${quality} 1x, ${img.fields.file.url}?w=${width * 2}&fm=${format}&q=${quality} 2x`
+    },
   }
 }
 </script>
@@ -251,31 +269,13 @@ img, video {
 }
 
 .hint-interactive {
-  display: inline-flex;
-  align-items: center;
   position: absolute;
   right: ~'calc(2.5em + (var(--gap-column, 80px) / 2))';
   bottom: 2.5em;
-  padding: 0.5em 1.33em;
-  color: var(--site-contrast);
-  background-color: var(--site-color);
-  text-transform: uppercase;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  border-radius: 32px;
-  grid-gap: 0.5em;
-  gap: 0.5em;
 
-  span {
-    display: block;
-  }
   img {
     width: 14px;
     height: 14px;
-  }
-  &:hover {
-    cursor: default;
   }
 }
 

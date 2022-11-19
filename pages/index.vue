@@ -4,12 +4,13 @@
       <div class="inner">
         <div class="row">
           <div class="col col-12">
-
             <!-- Headline -->
             <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33">
               <span class="secondary">{{ t.firstname }}</span>
               <span class="primary">{{ t.lastname }}</span>
-              <h1 class="tertiary">{{ t.jobTitle }}</h1>
+              <h1 class="tertiary">
+                {{ t.jobTitle }}
+              </h1>
             </div>
 
             <!-- Background Object Animation -->
@@ -26,12 +27,16 @@
 
     <!-- About -->
     <!-- <section class="static-bg static-bg--gray static-bg--offset-bottom--33 mt3 mt4-l" id="about"> -->
-    <section class="mt3 mt4-l" id="about">
+    <section id="about" class="mt3 mt4-l">
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-9 col-m-5 col-l-6 col--about-me">
-            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">{{ t.about.me.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 animate appearFromTop">{{ t.about.me.desc }}</p>
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
+              {{ t.about.me.title }}
+            </h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromTop">
+              {{ t.about.me.desc }}
+            </p>
             <picture>
               <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(images.aboutMe, 1440, 'webp')" type="image/webp">
               <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(images.aboutMe, 1440, 'jpg')">
@@ -51,8 +56,12 @@
             </picture>
           </div>
           <div class="col col-10 col-s-9 col-m-5 col-l-6 col--about-work">
-            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom">{{ t.about.work.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 animate appearFromTop">{{ t.about.work.desc }}</p>
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom">
+              {{ t.about.work.title }}
+            </h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromTop">
+              {{ t.about.work.desc }}
+            </p>
             <picture>
               <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(images.aboutWork, 1440, 'webp')" type="image/webp">
               <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(images.aboutWork, 1440, 'jpg')">
@@ -79,7 +88,9 @@
     <div id="projects">
       <section class="section--xl overflow--hidden">
         <div class="tb3 tb4-s tb5-xl --site-color rolling-title">
-          <h2 class="tf3 tf4-s tf5-xl">{{ t.projects.title }}</h2>
+          <h2 class="tf3 tf4-s tf5-xl">
+            {{ t.projects.title }}
+          </h2>
           <span class="--site-color-33">{{ t.projects.title }}</span>
           <span class="--site-color-33">{{ t.projects.title }}</span>
           <span class="--site-color-33">{{ t.projects.title }}</span>
@@ -97,6 +108,7 @@
       </section>
       <template v-for="project in projects">
         <ProjectBanner
+          :key="project.fields.slug"
           :slug="project.fields.slug"
           :title="project.fields.title"
           :subline="project.fields.subline"
@@ -105,7 +117,6 @@
           :releaseDate="project.fields.releaseDate"
           :headlinePosition="project.fields.headlinePosition"
           :accentColor="project.fields.accentColor"
-          :key="project.fields.slug"
         />
       </template>
 
@@ -114,7 +125,9 @@
         <div class="inner">
           <div class="row">
             <div class="col col-12 text--center">
-              <h3 class="--eyebrow --site-color mb1">{{ t.projects.cta.eyebrow }}</h3>
+              <h3 class="--eyebrow --site-color mb1">
+                {{ t.projects.cta.eyebrow }}
+              </h3>
               <NuxtLink :to="localePath('projects')" class="tb3 tb4-s tb5-xl cta">
                 <span>{{ t.projects.cta.btn[0] }}</span>
                 <span>{{ t.projects.cta.btn[1] }}</span>
@@ -126,12 +139,14 @@
     </div>
 
     <!-- Services -->
-    <section class="dynamic-bg--container pb0 animate--js" id="services">
+    <section id="services" class="dynamic-bg--container pb0 animate--js">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
             <span class="secondary">{{ t.services.title }}</span>
-            <h2 class="primary">{{ t.services.title }}</h2>
+            <h2 class="primary">
+              {{ t.services.title }}
+            </h2>
           </div>
         </div>
       </div>
@@ -145,30 +160,18 @@
         <div class="inner">
           <div class="row justify-content--center">
             <div class="col col-12 col-s-11">
-              <ul>
-                <li>
-                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.web.title }}</h3>
-                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.web.services" :key="index">
-                    {{ service }}
-                  </span>
-                </li>
-                <li>
-                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.app.title }}</h3>
-                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.app.services" :key="index">
-                    {{ service }}
-                  </span>
-                </li>
-                <li>
-                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.branding.title }}</h3>
-                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.branding.services" :key="index">
-                    {{ service }}
-                  </span>
-                </li>
-                <li>
-                  <h3 class="tf3 tf4-s tf5-l">{{ t.services.tools.title }}</h3>
-                  <span class="tb3-xs tb4-s tb5-l" v-for="(service, index) in t.services.tools.services" :key="index">
-                    {{ service }}
-                  </span>
+              <ul class="services--overview">
+                <li v-for="(service, index) in services" :key="index">
+                  <div class="topic tm --eyebrow">
+                    {{ service.title }}
+                  </div>
+                  <ul class="mt1">
+                    <li v-for="singleService in service.services" :key="`${index}-${slugify(singleService)}`" class="title tf2 tf3-xl --line-height-normal">
+                      <NuxtLink :to="localePath({ name: 'projects', query: { [service.type]: singleService }})">
+                        {{ singleService }}
+                      </NuxtLink>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
@@ -181,18 +184,24 @@
 
 <script>
 import client from '~/plugins/contentful'
+import services from '~/assets/js/services'
 
 export default {
-  head() {
-    return {
-      title: 'Home',
-      link: [
-        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-purple.ico' },
-        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-purple.ico' },
-        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-purple.ico' },
-        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-purple.ico' },
-      ]
-    }
+  name: 'HomePage',
+  asyncData({ i18n }) {
+    return client.getEntries({
+      content_type: 'project',
+      order: '-fields.releaseDate',
+      select: 'fields,sys.id,sys.createdAt',
+      limit: 3,
+      locale: i18n.locale
+    })
+      .then(entries => {
+        return {
+          projects: entries.items
+        }
+      })
+      .catch(e => console.error(e))
   },
   data() {
     return {
@@ -204,30 +213,41 @@ export default {
       }
     }
   },
-  asyncData({ i18n }) {
-    return client.getEntries({
-      content_type: 'project',
-      order: '-fields.releaseDate',
-      select: 'fields,sys.id,sys.createdAt',
-      limit: 3,
-      locale: i18n.locale
-    })
-    .then(entries => {
-      return {
-        projects: entries.items
-      }
-    })
-    .catch(e => console.error(e))
+  head() {
+    return {
+      title: 'Home',
+      link: [
+        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-purple.ico' },
+        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-purple.ico' },
+        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-purple.ico' },
+        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-purple.ico' }
+      ]
+    }
   },
   computed: {
     t() {
       return this.$t('home')
+    },
+    isoCode() {
+      return this.$i18n.localeProperties.code
+    },
+    listFormat() {
+      return new Intl.ListFormat(this.isoCode, { style: 'long', type: 'conjunction' });
+    },
+    services() {
+      return services
     },
   },
   methods: {
     resizeImageSrcSet(img, width, format) {
       return `${img}?w=${width}&fm=${format} 1x, ${img}?w=${width * 2}&fm=${format} 2x`
     },
+    listOf(arr) {
+      return this.listFormat.format(arr)
+    },
+    slugify(str) {
+      return this.$slugify(str)
+    }
   }
 }
 </script>
@@ -319,58 +339,42 @@ export default {
 
 // Services
 #services {
-  ul {
+  ul.services--overview {
+    .flex();
+    grid-column-gap: 32px;
+    grid-row-gap: 48px;
+
     li {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
+      flex: 500px 1 1;
 
-      > * {
-        line-height: 1.33;
+      h3 {
+        width: 100%;
       }
-      > * + * {
-        text-indent: 0.25em;
+      .topic {
+        display: block;
+        width: 100%;
+      }
+      a {
+        --transition-duration: 0.15s;
+        --transition-timing-function: ease;
+
+        &:hover {
+          padding-left: 0.15em;
+          text-decoration: underline;
+        }
       }
 
-      @media screen and (max-width: @vw-max-grid) {
+      ul li {
         + li {
-          margin-top: 30px;
-          padding-top: 30px;
-          border-top: 2px solid var(--site-color, @color-black);
+          margin-top: var(--list-margin, 10px);
         }
       }
-      @media screen and (min-width: @vw-min-mobile) {
-        h3 {
-          &::after {
-            content: "";
-            display: inline-flex;
-            background: var(--site-color, @color-black);
-            width: 0.7em;
-            height: 0.7em;
-            margin-left: 0.15em;
-            transform: scale(0.5);
-            clip-path: polygon(15% 0, 0% 100%, 100% 55%);
-          }
-        }
-      }
-      @media screen and (max-width: @vw-max-mobile) {
-        justify-content: center;
-        text-align: center;
+    }
 
-        h3 {
-          width: 100%;
-          margin-bottom: 10px;
-        }
-        span {
-          text-shadow: 0 0 var(--site-color-50, @color-black-50);
-
-          + span {
-            &::before {
-              content: "+"
-            }
-          }
-        }
-      }
+    // max. 959px
+    @media screen and (max-width: @vw-max-grid) {
+      --list-margin: 6px;
+      grid-row-gap: 38px;
     }
   }
 }

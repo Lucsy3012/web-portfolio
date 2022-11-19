@@ -1,28 +1,49 @@
 <template>
-  <div ref="container" id="triangle-container"></div>
+  <div ref="container" class="canvas-container">
+    <div ref="gui" class="gui" />
+  </div>
 </template>
 
-<style lang="less" scoped>
-div::v-deep {
-  canvas {
-    max-width: 100%;
-    height: auto !important;
-  }
-  &.background {
-    canvas {
-      height: 100% !important;
-    }
-  }
-}
-</style>
-
 <script>
+/* eslint-disable */
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap'
 
 export default {
   name: 'Triangle',
+  props: {
+    colorBackground: {
+      type: String,
+      required: false,
+      default: "#FFFFFF"
+    },
+    colorMaterial: {
+      type: String,
+      required: false,
+      default: "#FFFFFF"
+    },
+    materialTexture: {
+      type: String,
+      required: false,
+      default: "texture-pink.png"
+    },
+    orbitControls: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    gui: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    debug: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
+  },
   data() {
     return {
       dat: null,
@@ -63,33 +84,6 @@ export default {
       }
     }
   },
-  props: {
-    colorBackground: {
-      type: String,
-      required: false,
-      default: "#FFFFFF"
-    },
-    colorMaterial: {
-      type: String,
-      required: false,
-      default: "#FFFFFF"
-    },
-    materialTexture: {
-      type: String,
-      required: false,
-      default: "texture-pink.png"
-    },
-    orbitControls: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    dev: {
-      type: Boolean,
-      required: false,
-      default: false,
-    }
-  },
   mounted() {
     this.init();
     this.animate();
@@ -100,12 +94,20 @@ export default {
     // window.addEventListener('resize', this.windowResizing, true);
     window.addEventListener('mousemove', this.mouseMovingCameraPosition, true);
 
+    // GUI
+    if (this.gui) {
+      this.addGUI();
+    }
+
     // Dev
     if (this.dev) {
       this.helperGrid();
       this.helperLight();
-      this.addGUI();
     }
+  },
+  beforeDestroy() {
+    // window.removeEventListener('resize', this.windowResizing, true) // doesn't work
+    window.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
   },
   methods: {
     init() {
@@ -161,12 +163,13 @@ export default {
     animate() {
       this.windowResizing('container'); // optimise function
 
+      // Time
       this.clock.elapsedTime = this.clock.getElapsedTime()
 
       // Animation
       this.frameAnimationRotate(this.objects.tetrahedron, 0.5, 0.5)
       this.frameAnimationScale(this.objects.tetrahedron)
-      this.camera.position.y = 30 - (Math.sin(this.mouse.position.y) * 6) + this.normalize(this.mouse.position.x * 3)
+      this.camera.position.y = 30 - (Math.sin(this.mouse.position.y) * 6) + Math.abs(this.mouse.position.x * 3)
       this.lights.pointLight.position.x = this.mouse.position.x * 5
 
       // Updates Renderer
@@ -175,6 +178,7 @@ export default {
     },
 
     // Animations
+    // ------------------------
     frameAnimationRotate(obj, x = 0, y = 0, z = 0) {
       obj.rotation.x = x * this.clock.elapsedTime;
       obj.rotation.y = y * this.clock.elapsedTime;
@@ -187,6 +191,7 @@ export default {
     },
 
     // Add-ons
+    // ------------------------
     addGUI() {
       const dat = require('dat.gui')
       const gui = new dat.GUI()
@@ -225,6 +230,7 @@ export default {
     },
 
     // Helpers
+    // ------------------------
     helperGrid() {
       this.helpers.grid = new THREE.GridHelper(20, 20)
       this.scene.add(this.helpers.grid)
@@ -235,9 +241,8 @@ export default {
     },
 
     // Non ThreeJS specific
+    // ------------------------
     windowResizing(size) {
-      // const container = document.querySelector('#triangle-container')
-
       if (size === 'container') {
         if (!this.$refs.container) return;
         this.mouse.area.width = this.$refs.container?.offsetWidth;
@@ -260,6 +265,7 @@ export default {
     },
 
     // GSAP
+    // ------------------------
     scaleUp() {
       gsap.to(this.animation.object, {
         scale: 1,
@@ -267,16 +273,22 @@ export default {
         delay: 0.25,
         ease: "power3.inOut",
       })
-    },
-
-    // Math
-    normalize(x, pow = 2) {
-      return Math.sqrt(x**pow);
     }
-  },
-  beforeDestroy() {
-    // window.removeEventListener('resize', this.windowResizing, true) // doesn't work
-    window.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
   }
 }
 </script>
+
+<style lang="less" scoped>
+div::v-deep {
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+  &.background {
+    .canvas-container,
+    canvas {
+      height: 100% !important;
+    }
+  }
+}
+</style>
