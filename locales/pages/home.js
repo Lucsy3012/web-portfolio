@@ -24,37 +24,6 @@ export default {
     },
     services: {
       title: "Leistungen",
-      web: {
-        title: "Web",
-        services: [
-          'Konzepte',
-          'Design',
-          'Development',
-        ]
-      },
-      app: {
-        title: "App",
-        services: [
-          'Konzepte',
-          'Design',
-          'Prototyping',
-        ]
-      },
-      branding: {
-        title: "Branding",
-        services: [
-          'Logos',
-          'Identity Design',
-        ]
-      },
-      tools: {
-        title: "Tools",
-        services: [
-          'Figma',
-          'NuxtJS',
-          'Contentful',
-        ]
-      }
     },
     seoDescription: "Creative Developer aus Münster. Entdecke meine spannenden Werke aus kürzester Zeit.",
     seoImage: "/og-image/og-image-home.jpg",
@@ -84,37 +53,6 @@ export default {
     },
     services: {
       title: "Services",
-      web: {
-        title: "Web",
-        services: [
-          'Concept',
-          'Design',
-          'Development',
-        ]
-      },
-      app: {
-        title: "App",
-        services: [
-          'Concept',
-          'Design',
-          'Prototyping',
-        ]
-      },
-      branding: {
-        title: "Branding",
-        services: [
-          'Logos',
-          'Identity Design',
-        ]
-      },
-      tools: {
-        title: "Tools",
-        services: [
-          'Figma',
-          'NuxtJS',
-          'Contentful',
-        ]
-      }
     },
     seoDescription: "Creative Developer based in Münster. Discover my latest, most excited works.",
     seoImage: "/og-image/og-image-home.jpg",

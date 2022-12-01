@@ -48,8 +48,14 @@ export default {
           hasAt: true,
         },
         {
-          time: "Seit 2017",
+          time: "2017 – 2022",
           title: "Web Designer",
+          company: "Shopware",
+          hasAt: true,
+        },
+        {
+          time: "Seit 2022",
+          title: "Frontend-Developer",
           company: "Shopware",
           hasAt: true,
         },
@@ -58,7 +64,7 @@ export default {
           title: "UI / UX Designer",
           company: "Freiberuflich",
           hasAt: false,
-        },
+        }
       ]
     },
     seoDescription: "Creative Developer aus Münster",
@@ -113,8 +119,14 @@ export default {
           hasAt: true,
         },
         {
-          time: "Since 2017",
+          time: "2017 – 2022",
           title: "Web Designer",
+          company: "Shopware",
+          hasAt: true,
+        },
+        {
+          time: "Since 2022",
+          title: "Frontend Developer",
           company: "Shopware",
           hasAt: true,
         },
@@ -123,7 +135,7 @@ export default {
           title: "UI / UX Designer",
           company: "Freelance",
           hasAt: false,
-        },
+        }
       ]
     },
     seoDescription: "Creative Developer based in Münster",

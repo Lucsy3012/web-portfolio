@@ -1,66 +1,19 @@
 <template>
-  <div ref="container"></div>
+  <div class="three-container">
+    <div ref="container" class="canvas-container" />
+    <div ref="gui" class="gui" />
+  </div>
 </template>
 
-<style lang="less" scoped>
-div::v-deep {
-  cursor: pointer;
-
-  canvas {
-    max-width: 100%;
-    height: auto !important;
-  }
-  &.background {
-    canvas {
-      height: 100% !important;
-    }
-  }
-}
-</style>
-
 <script>
+/* eslint-disable */
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap'
+import { Pane } from 'tweakpane';
 
 export default {
   name: 'Coin',
-  data() {
-    return {
-      dat: null,
-      renderer: null,
-      scene: null,
-      camera: null,
-      controls: null,
-      lights: {
-        pointLight: null,
-        hemisphereLight: null,
-        ambientLight: null,
-      },
-      objects: {
-        coin: null,
-        group: null,
-      },
-      helpers: {
-        grid: null,
-        lightHelper: null,
-      },
-      mouse: {
-        position: {
-          x: 0,
-          y: 0
-        }
-      },
-      animation: {
-        rotation: {
-          y: {
-            multiplier: 1,
-            snapshot: 0
-          }
-        }
-      },
-    }
-  },
   props: {
     colorBackground: {
       type: String,
@@ -96,6 +49,62 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    gui: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    debug: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
+  },
+  data() {
+    return {
+      // dat: null,
+      renderer: null,
+      scene: null,
+      camera: null,
+      controls: null,
+      clock: null,
+      lights: {
+        pointLight: null,
+        hemisphereLight: null,
+        ambientLight: null,
+      },
+      objects: {
+        coin: null,
+        group: null,
+      },
+      helpers: {
+        grid: null,
+        lightHelper: null,
+      },
+      mouse: {
+        position: {
+          x: 0,
+          y: 0
+        }
+      },
+      animation: {
+        rotation: {
+          y: {
+            multiplier: 1,
+            dynamicMultiplier: 1,
+            snapshot: 0
+          }
+        }
+      },
+    }
+  },
+  computed: {
+    deg() {
+      return Math.PI / 180; // one degree
+    },
+    t() {
+      return this.$t('gui')
     }
   },
   mounted() {
@@ -105,19 +114,26 @@ export default {
 
     // Events
     window.addEventListener('resize', this.windowResizing, true)
-    window.addEventListener('mousemove', this.mouseMovingCameraPosition, true)
+    this.$refs.container.addEventListener('mousemove', this.mouseMovingCameraPosition, true)
     this.$refs.container.addEventListener('mousedown', this.mouseDown, true)
     this.$refs.container.addEventListener('mouseup', this.mouseUp, true)
 
-    // Dev
-    // this.helperGrid();
-    // this.helperLight();
-    // this.addGUI();
-  },
-  computed: {
-    deg() {
-      return Math.PI / 180; // one degree
+    // GUI
+    if (this.gui) {
+      this.addGUI();
     }
+
+    // Dev
+    if (this.debug) {
+      this.helperGrid();
+      this.helperLight();
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.windowResizing, true)
+    this.$refs.container.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
+    this.$refs.container.removeEventListener('mousedown', this.mouseDown, true)
+    this.$refs.container.removeEventListener('mouseup', this.mouseUp, true)
   },
   methods: {
     init() {
@@ -134,6 +150,9 @@ export default {
       this.renderer.setClearColor(this.colorBackground);
       this.renderer.shadowMap.enabled = true;
       this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      // Clock
+      this.clock = new THREE.Clock()
 
       // Fog
       this.scene.fog = new THREE.FogExp2(this.colorBackground, 0.025);
@@ -166,7 +185,7 @@ export default {
         // new THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement }),
         new THREE.MeshPhongMaterial({ map: textureSide, bumpMap: textureSideDisplacement, bumpScale: 0.2 }),
         new THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement, bumpScale: 0.2 }),
-        new THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement, bumpScale: 0.2 }),
+        new THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement, bumpScale: 0.2 })
       ];
 
 
@@ -179,6 +198,7 @@ export default {
       this.objects.coin.rotation.x = 30 * this.deg;
       this.objects.coin.rotation.y = 160 * this.deg;
       this.objects.coin.rotation.z = 90 * this.deg;
+      this.objects.coin.position.x = -1;
       this.scene.add(this.objects.coin)
 
       this.objects.group = new THREE.Group()
@@ -190,7 +210,7 @@ export default {
       // Lights
       // ------------------------
       this.lights.pointLight = new THREE.PointLight(this.colorLight, 0.75, 200)
-      this.lights.pointLight.position.set(-2.5, 1, 1)
+      this.lights.pointLight.position.set(-5, 1, 1)
       this.scene.add(this.lights.pointLight)
 
       this.lights.ambientLight = new THREE.AmbientLight(this.colorMaterial)
@@ -203,6 +223,9 @@ export default {
     },
     animate() {
       requestAnimationFrame(this.animate);
+
+      // Time
+      // this.clock.elapsedTime = this.clock.getElapsedTime()
 
       // Animation
       this.frameAnimationRotate(this.objects.coin, 0, 0.0033);
@@ -218,7 +241,7 @@ export default {
     // Animations
     frameAnimationRotate(obj, x = 0, y = 0, z = 0) {
       obj.rotation.x -= x;
-      obj.rotation.y -= y * this.animation.rotation.y.multiplier;
+      obj.rotation.y -= y * this.animation.rotation.y.multiplier * this.animation.rotation.y.dynamicMultiplier;
       obj.rotation.z -= z;
     },
     frameAnimationCameraPosition() {
@@ -228,16 +251,15 @@ export default {
     },
 
     // Add-ons
+    // ------------------------
     addGUI() {
-      const dat = require('dat.gui');
-      const gui = new dat.GUI();
+      const t = this.t;
 
-      // Folders
-      const guiLight = gui.addFolder('Light');
-      const guiAmbientLight = gui.addFolder('Ambient Light');
-      const guiGeometry = gui.addFolder('Geometry');
-      const guiMaterial = gui.addFolder('Material');
-      const guiScene = gui.addFolder('Scene');
+      const pane = new Pane({
+        container: this.$refs.gui,
+        title: this.t.settingsTitle,
+        expanded: false
+      });
 
       // Color parameters
       let parameters = {
@@ -245,33 +267,58 @@ export default {
         colorLight: this.colorLight,
         colorAmbientLight: this.colorMaterial,
         colorBackground: this.colorBackground,
+        bumpScale: this.objects.coin.material[0].bumpScale
       };
 
+      // Folders
+      // const paneCoinMaterial = pane.addFolder({ title: `Coin ${t.material}` });
+      const paneCoinMaterial = pane.addFolder({ title: t.material });
+      const paneCoinRotation = pane.addFolder({ title: t.rotation });
+      const paneCoinPosition = pane.addFolder({ title: t.position });
+      const paneLight = pane.addFolder({ title: t.folders.light });
+
+      // Coin Material
+      /*
+      paneCoinMaterial.addInput(this.objects.coin.material[1], 'metalness', { min: 0, max: 1, step: 0.001, label: t.metalness });
+      paneCoinMaterial.addInput(this.objects.coin.material[1], 'roughness', { min: 0, max: 1, step: 0.001, label: t.roughness });
+      paneCoinMaterial.addInput(parameters, 'colorMaterial', { picker: 'inline', label: t.color }).on('change', (ev) => {
+        this.objects.coin.material[1].color.set(parameters.colorMaterial);
+      });
+      */
+
+      paneCoinMaterial.addInput(parameters, 'bumpScale', { min: 0, max: 0.5, step: 0.01, label: t.bump }).on('change', (ev) => {
+        this.objects.coin.material[0].bumpScale = parameters.bumpScale;
+        this.objects.coin.material[1].bumpScale = parameters.bumpScale;
+        this.objects.coin.material[2].bumpScale = parameters.bumpScale;
+      });
+      paneCoinMaterial.addInput(parameters, 'colorMaterial', { picker: 'inline', label: t.color }).on('change', (ev) => {
+        this.objects.coin.material[0].color.set(parameters.colorMaterial);
+        this.objects.coin.material[1].color.set(parameters.colorMaterial);
+        this.objects.coin.material[2].color.set(parameters.colorMaterial);
+      });
+
+      // paneLight.addInput(this.scene.fog, 'density', { min: 0, max: 0.5, step: 0.001 });
+
+      // Coin Rotation
+      paneCoinRotation.addInput(this.objects.coin.rotation, 'x', { min: 0, max: Math.PI * 2, step: 0.001, label: t.x });
+      paneCoinRotation.addInput(this.objects.coin.rotation, 'y', { min: 0, max: Math.PI * 2, step: 0.001, label: t.y });
+      paneCoinRotation.addInput(this.objects.coin.rotation, 'z', { min: 0, max: Math.PI * 2, step: 0.001, label: t.z });
+      paneCoinRotation.addInput(this.animation.rotation.y, 'dynamicMultiplier', { min: -10, max: 10, step: 0.1, label: t.speed });
+
+      // Coin Position
+      paneCoinPosition.addInput(this.objects.coin.position, 'x', { min: -3, max: 5, step: 0.01, label: t.distance });
+      paneCoinPosition.addInput(this.objects.coin.position, 'z', { min: -5, max: 5, step: 0.01, label: t.x });
+      paneCoinPosition.addInput(this.objects.coin.position, 'y', { min: -5, max: 5, step: 0.01, label: t.y });
+
       // Lights
-      guiLight.add(this.lights.pointLight, 'intensity').min(0).max(1).step(0.001);
-      guiLight.add(this.lights.pointLight.position, 'x').min(-10).max(10).step(0.01);
-      guiLight.add(this.lights.pointLight.position, 'y').min(-10).max(10).step(0.01);
-      guiLight.add(this.lights.pointLight.position, 'z').min(-10).max(10).step(0.01);
-      guiLight.addColor(parameters, 'colorLight').onChange(() => { this.lights.pointLight.color.set(parameters.colorLight) });
-      guiAmbientLight.add(this.lights.ambientLight, 'intensity').min(0).max(1).step(0.001);
-      guiAmbientLight.addColor(parameters, 'colorAmbientLight').onChange(() => { this.lights.ambientLight.color.set(parameters.colorAmbientLight) });
-
-      // Geometry
-      guiGeometry.add(this.objects.coin.rotation, 'x').min(0).max(Math.PI * 2).step(0.001).name('Coin X');
-      guiGeometry.add(this.objects.coin.rotation, 'y').min(0).max(Math.PI * 2).step(0.001).name('Coin Y');
-      guiGeometry.add(this.objects.coin.rotation, 'z').min(0).max(Math.PI * 2).step(0.001).name('Coin Z');
-      // guiGeometry.add(this.objects.group.rotation, 'x').min(0).max(Math.PI * 2).step(0.001).name('Group X');
-      // guiGeometry.add(this.objects.group.rotation, 'y').min(0).max(Math.PI * 2).step(0.001).name('Group Y');
-      // guiGeometry.add(this.objects.group.rotation, 'z').min(0).max(Math.PI * 2).step(0.001).name('Group Z');
-
-      // Material
-      // guiMaterial.add(this.objects.coin.material[1], 'metalness').min(0).max(1).step(0.001);
-      // guiMaterial.add(this.objects.coin.material[1], 'roughness').min(0).max(1).step(0.001);
-      // guiMaterial.addColor(parameters, 'colorMaterial').onChange(() => { this.objects.coin.material.color.set(parameters.colorMaterial) });
-
-      // Scene
-      // guiScene.add(this.scene.fog, 'density').min(0).max(0.5).step(0.001);
+      paneLight.addInput(this.lights.pointLight.position, 'x', { min: -10, max: 10, step: 0.01, label: t.distance });
+      paneLight.addInput(this.lights.pointLight.position, 'z', { min: -10, max: 10, step: 0.01, label: t.x });
+      paneLight.addInput(this.lights.pointLight.position, 'y', { min: -10, max: 10, step: 0.01, label: t.y });
+      paneLight.addInput(parameters, 'colorLight', { picker: 'inline', label: t.color }).on('change', (ev) => {
+        this.lights.pointLight.color.set(parameters.colorLight);
+      });
     },
+
     addControls(enabled = true) {
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       this.controls.screenSpacePanning = true;
@@ -284,6 +331,7 @@ export default {
     },
 
     // Helpers
+    // ------------------------
     helperGrid() {
       this.helpers.grid = new THREE.GridHelper(10, 10);
       this.scene.add(this.helpers.grid);
@@ -298,6 +346,7 @@ export default {
     },
 
     // Non ThreeJS specific
+    // ------------------------
     windowResizing(size) {
       let width = window.innerWidth;
       let height = window.innerHeight;
@@ -320,8 +369,10 @@ export default {
     },
 
     // GSAP
+    // ------------------------
     mouseDown() {
       this.saveSnapshot()
+
       gsap.to(this.animation.rotation.y, {
         multiplier: 0,
         duration: 0.5,
@@ -342,12 +393,23 @@ export default {
         ease: "circle.inOut",
       })
     },
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.windowResizing, true)
-    window.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
-    this.$refs.container.removeEventListener('mousedown', this.mouseDown, true)
-    this.$refs.container.removeEventListener('mouseup', this.mouseUp, true)
   }
 }
 </script>
+
+<style lang="less" scoped>
+div::v-deep {
+  cursor: pointer;
+
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+  &.background {
+    .canvas-container,
+    canvas {
+      height: 100% !important;
+    }
+  }
+}
+</style>

@@ -43,14 +43,14 @@ export default {
       { name: 'mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-title', content: 'Lucas Dietrich - Portfolio' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
-      { name: 'apple-mobile-web-app-status-bar-style', content: '#000000' },
+      { name: 'apple-mobile-web-app-status-bar-style', content: '#000000' }
     ],
     link: [
       // https://favicon.io/favicon-converter/
       { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-magenta.ico' },
       { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-magenta.ico' },
       { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-magenta.ico' },
-      { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-magenta.ico' },
+      { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-magenta.ico' }
     ]
   },
 
@@ -65,7 +65,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/contentful' },
-    { src: '~/plugins/animate.js', mode: 'client', ssr: false },
+    { src: '~/plugins/slugify' },
+    { src: '~/plugins/animate.js', mode: 'client', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -79,13 +80,13 @@ export default {
   modules: [
     'nuxt-i18n',
     '@nuxtjs/dotenv',
-    '@nuxtjs/sitemap',
+    '@nuxtjs/sitemap'
   ],
 
   i18n: {
     locales: [
       { code: 'de', iso: 'de-DE', name: 'Deutsch', file: 'de.js' },
-      { code: 'en', iso: 'en-US', name: 'English', file: 'en.js' },
+      { code: 'en', iso: 'en-US', name: 'English', file: 'en.js' }
     ],
     baseUrl: process.env.HOSTNAME,
     defaultLocale: 'de',
@@ -135,7 +136,7 @@ export default {
     transpile: [
       'three',
       'gsap',
-      'dat.gui',
+      'dat.gui'
     ],
     optimization: {
       minimize: true

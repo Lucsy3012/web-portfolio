@@ -1,0 +1,108 @@
+@import (reference) "../components";
+@import (reference) "../shorthands";
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 0.5em 1.33em;
+  color: var(--site-contrast);
+  background-color: var(--site-color);
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 32px;
+  grid-gap: 0.5em;
+  gap: 0.5em;
+  z-index: 1;
+  .transit();
+
+  span {
+    display: block;
+  }
+  img {
+    width: 14px;
+    height: 14px;
+  }
+  &:hover {
+    cursor: default;
+  }
+
+  // Tooltip
+  &:has(.tag-tooltip) {
+    cursor: pointer;
+  }
+  .tag-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    padding: 12px 16px;
+    text-align: left;
+    width: 240px;
+    font-weight: 400;
+    text-transform: initial;
+    letter-spacing: normal;
+    color: var(--site-contrast-75);
+    background: var(--site-color);
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+    translate: -50% 0;
+    .transit();
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid var(--site-color);
+      translate: -50% 90%;
+    }
+    &::before {
+      content: "";
+      display: block;
+      width: 75%;
+      height: 24px;
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      translate: -50%;
+    }
+  }
+  &:hover {
+    .tag-tooltip {
+      pointer-events: initial;
+      opacity: 1;
+      translate: -50% -20px;
+    }
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .filter-btn {
+    font-weight: 500;
+  }
+}
+
+@media screen and (max-width: @vw-max-grid) {
+  .tag {
+    font-size: 11px;
+  }
+}
+
+// Variants
+.tag.tag--border {
+  color: var(--site-color);
+  background-color: transparent;
+  box-shadow: 0 0 0 2px inset var(--site-color);
+
+  &:hover {
+    color: var(--site-contrast);
+    background-color: var(--site-color);
+  }
+}
