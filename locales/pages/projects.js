@@ -9,6 +9,10 @@ export default {
     description: "Beschreibung",
     interactiveElement: "Interaktives Element",
     links: "Links",
+    emptyState: {
+      title: "Keine Ergebnisse",
+      description: "Noch keine Projekte mit dieser Leistung gefunden"
+    },
     seoDescription: "Entdecke meine Arbeiten an verschiedensten App- und Website-Projekten",
     seoImage: "/og-image/og-image-projects-de.jpg",
   },
@@ -22,6 +26,10 @@ export default {
     description: "Description",
     interactiveElement: "Interactive element",
     links: "Links",
+    emptyState: {
+      title: "No results",
+      description: "No projects with this service found yet"
+    },
     seoDescription: "Discover my works on various app and website projects",
     seoImage: "/og-image/og-image-projects-en.jpg",
   }

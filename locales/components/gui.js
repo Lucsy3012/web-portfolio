@@ -12,16 +12,21 @@ export default {
     roughness: "Rauheit",
     bump: "Unebenheit",
     color: "Farbe",
+    backgroundColor: "Hintergrundfarbe",
     position: "Position",
     rotation: "Drehung",
     rotationSpeed: "Drehungsgeschwindigkeit",
     distance: "Entfernung",
+    closeness: "Nähe",
     speed: "Geschwindigkeit",
+    intensity: "Intensität",
 
     // Names
     folders: {
+      scene: "Szene",
       light: "Licht",
-      pointLight: "Lichtquelle"
+      pointLight: "Lichtquelle",
+      ambientLight: "Grundbeleuchtung"
     },
   },
   en: {
@@ -37,16 +42,21 @@ export default {
     roughness: "Roughness",
     bump: "Bump",
     color: "Color",
+    backgroundColor: "Background color",
     position: "Position",
     rotation: "Rotation",
     rotationSpeed: "Rotation speed",
     distance: "Distance",
+    closeness: "Closeness",
     speed: "Speed",
+    intensity: "Intensity",
 
     // Names
     folders: {
+      scene: "Scene",
       light: "Light",
-      pointLight: "Point light"
+      pointLight: "Point light",
+      ambientLight: "Ambient light"
     },
   }
 }

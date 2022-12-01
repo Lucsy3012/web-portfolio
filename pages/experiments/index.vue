@@ -44,7 +44,7 @@
         </template>
       </ProjectBanner>
 
-      <!-- Pyramid -->
+      <!-- Tetrahedron -->
       <ProjectBanner
         :key="t.detailedExperiments.tetrahedron.slug"
         :slug="t.detailedExperiments.tetrahedron.slug"
@@ -59,11 +59,31 @@
             colorMaterial="#51B79E"
             colorLight="#9EFFCB"
             :orbitControls="false"
-            :gui="false"
+            :gui="true"
             :debug="false"
           />
         </template>
       </ProjectBanner>
+
+      <!-- Cone Background
+      <ProjectBanner
+        :key="t.detailedExperiments.angularGradient.slug"
+        :slug="t.detailedExperiments.angularGradient.slug"
+        :title="t.detailedExperiments.angularGradient.title"
+        :subline="t.detailedExperiments.angularGradient.subline"
+        :webGL="true"
+        :headlinePosition="'left'"
+      >
+        <template #experiment>
+          <ThreejsConeBackground
+            class="background"
+            materialTexture="texture-cyan.png"
+            :colorBackground="'#95EBFE'"
+            :orbitControls="false"
+          />
+        </template>
+      </ProjectBanner>
+       -->
     </div>
 
     <!-- More -->
@@ -104,8 +124,8 @@
                 <!-- Tags -->
                 <ul class="tags">
                   <li v-for="(tag, index) in experiment.tags" :key="index" class="tag tag--border">
-                    <span>{{ tag.text }}</span>
-                    <span v-if="!!tag.tooltip" class="tag-tooltip">{{ tag.tooltip }}</span>
+                    <span>{{ t.tags[tag].text }}</span>
+                    <span v-if="!!t.tags[tag].tooltip" class="tag-tooltip">{{ t.tags[tag].tooltip }}</span>
                   </li>
                 </ul>
               </li>

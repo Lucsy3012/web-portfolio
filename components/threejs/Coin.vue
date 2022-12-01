@@ -120,7 +120,6 @@ export default {
 
     // GUI
     if (this.gui) {
-      // this.addDatGUI();
       this.addGUI();
     }
 
@@ -319,6 +318,7 @@ export default {
         this.lights.pointLight.color.set(parameters.colorLight);
       });
     },
+
     addControls(enabled = true) {
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       this.controls.screenSpacePanning = true;

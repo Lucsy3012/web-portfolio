@@ -61,6 +61,22 @@
           :accentColor="project.fields.accentColor"
         />
       </template>
+
+      <!-- Empty State -->
+      <section v-if="!projectsVisible" ref="empty-state" class="animate--js">
+        <div class="inner">
+          <div class="row justify-content--center">
+            <div class="col col-10 col-s-8 col-m-5 mb0 mb4-m text--center">
+              <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
+                {{ t.emptyState.title }}
+              </h2>
+              <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">
+                {{ t.emptyState.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -98,6 +114,8 @@ export default {
     return client.getEntries(apiParams)
       .then(entries => {
 
+        let projectsVisible = true
+
         // Initial filter setup
         entries.items.forEach(entry => {
           entry.visible = true
@@ -110,6 +128,7 @@ export default {
                 entry.visible = entry.fields?.[prop].includes(value)
               } else {
                 entry.visible = false
+                projectsVisible = false
               }
             }
           }
@@ -117,6 +136,7 @@ export default {
 
         return {
           filter,
+          projectsVisible,
           projects: entries.items,
         }
       })
@@ -124,6 +144,7 @@ export default {
   },
   data() {
     return {
+      projectsVisible: true,
       projects: []
     }
   },
@@ -178,6 +199,15 @@ export default {
       return uniqueArray
     },
   },
+  watch: {
+    projectsVisible(newVal, oldVal) {
+      if (newVal === false) {
+        this.$nextTick(() => {
+          this.$refs["empty-state"].classList.add('in')
+        })
+      }
+    }
+  },
   watchQuery(newQuery) {
     this.filter = newQuery
   },
@@ -187,6 +217,7 @@ export default {
 
       // Determine if project has filtered property & value
       if (type && filterName) {
+        this.projectsVisible = true
         this.projects.forEach(project => {
           const field = project.fields?.[type]
 
@@ -194,6 +225,7 @@ export default {
             project.visible = project.fields?.[type].includes(filterName)
           } else {
             project.visible = false
+            this.projectsVisible = false
           }
         })
       }

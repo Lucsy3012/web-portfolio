@@ -24,7 +24,7 @@ export default [
     services: [
       "Branding",
       "Identity Design",
-      "Logos",
+      "Logo",
       "Icon Design",
       "Copywriting"
     ]

@@ -1,5 +1,6 @@
 <template>
-  <div ref="container" class="canvas-container">
+  <div class="three-container">
+    <div ref="container" class="canvas-container" />
     <div ref="gui" class="gui" />
   </div>
 </template>
@@ -9,6 +10,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap'
+import { Pane } from "tweakpane";
 
 export default {
   name: 'Triangle',
@@ -84,6 +86,11 @@ export default {
       }
     }
   },
+  computed: {
+    t() {
+      return this.$t('gui')
+    }
+  },
   mounted() {
     this.init();
     this.animate();
@@ -116,7 +123,7 @@ export default {
         70,
         window.innerWidth / window.innerHeight,
         1,
-        50
+        100
       )
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
       this.renderer.setSize(window.innerWidth, window.innerHeight)
@@ -193,31 +200,56 @@ export default {
     // Add-ons
     // ------------------------
     addGUI() {
-      const dat = require('dat.gui')
-      const gui = new dat.GUI()
+      const t = this.t;
+
+      const pane = new Pane({
+        container: this.$refs.gui,
+        title: this.t.settingsTitle,
+        expanded: false
+      });
 
       // Folders
-      const guiLight = gui.addFolder('Light')
-      const guiGeometry = gui.addFolder('Geometry')
-      const guiMaterial = gui.addFolder('Material')
+      const paneScene = pane.addFolder({ title: t.folders.scene });
+      const paneMaterial = pane.addFolder({ title: t.material });
+      const panePosition = pane.addFolder({ title: t.position });
+      const paneLight = pane.addFolder({ title: t.folders.light });
 
-      guiLight.add(this.lights.pointLight, 'intensity').min(0).max(1).step(0.01)
-      guiLight.add(this.lights.pointLight.position, 'x').min(-20).max(20).step(0.1)
-      guiLight.add(this.lights.pointLight.position, 'y').min(-20).max(20).step(0.1)
-      guiLight.add(this.lights.pointLight.position, 'z').min(-20).max(20).step(0.1)
+      // Color parameters
+      let parameters = {
+        colorMaterial: this.colorMaterial,
+        colorLight: this.colorLight,
+        colorAmbientLight: this.colorMaterial,
+        colorBackground: this.colorBackground,
+      };
 
-      // Geometry
-      guiGeometry.add(this.objects.tetrahedron.position, 'x').min(-50).max(50).step(0.01).name('Tetrahedron Position X')
-      guiGeometry.add(this.objects.tetrahedron.position, 'y').min(-50).max(50).step(0.01).name('Tetrahedron Position Y')
-      guiGeometry.add(this.objects.tetrahedron.position, 'z').min(-50).max(50).step(0.01).name('Tetrahedron Position Z')
-      guiGeometry.add(this.objects.tetrahedron.rotation, 'x').min(0).max(Math.PI * 2).step(0.001).name('Tetrahedron X')
-      guiGeometry.add(this.objects.tetrahedron.rotation, 'y').min(0).max(Math.PI * 2).step(0.001).name('Tetrahedron Y')
-      guiGeometry.add(this.objects.tetrahedron.rotation, 'z').min(0).max(Math.PI * 2).step(0.001).name('Tetrahedron Z')
+      // Scene
+      paneScene.addInput(parameters, 'colorBackground', { picker: 'inline', label: t.backgroundColor }).on('change', (ev) => {
+        this.renderer.setClearColor(parameters.colorBackground);
+      });
+      paneScene.addInput(parameters, 'colorAmbientLight', { picker: 'inline', label: t.folders.ambientLight }).on('change', (ev) => {
+        this.lights.ambientLight.color.set(parameters.colorAmbientLight);
+      });
 
-      // Material
-      guiMaterial.add(this.objects.tetrahedron.material, 'metalness').min(0).max(1).step(0.001)
-      guiMaterial.add(this.objects.tetrahedron.material, 'roughness').min(0).max(1).step(0.001)
+
+      // Tetrahedron^Material
+      paneMaterial.addInput(this.objects.tetrahedron.material, 'metalness', { min: 0, max: 1, step: 0.001, label: t.metalness });
+      paneMaterial.addInput(this.objects.tetrahedron.material, 'roughness', { min: 0, max: 1, step: 0.001, label: t.roughness });
+      paneMaterial.addInput(parameters, 'colorMaterial', { picker: 'inline', label: t.color }).on('change', (ev) => {
+        this.objects.tetrahedron.material.color.set(parameters.colorMaterial);
+      });
+
+      // Tetrahedron Position
+      panePosition.addInput(this.objects.tetrahedron.position, 'y', { min: -15, max: 15, step: 0.01, label: t.closeness });
+      panePosition.addInput(this.objects.tetrahedron.position, 'x', { min: -50, max: 50, step: 0.01, label: t.x });
+      panePosition.addInput(this.objects.tetrahedron.position, 'z', { min: -50, max: 50, step: 0.01, label: t.y });
+
+      // Lights
+      paneLight.addInput(this.lights.pointLight.position, 'y', { min: -20, max: 20, step: 0.1, label: t.closeness });
+      paneLight.addInput(this.lights.pointLight.position, 'x', { min: -20, max: 20, step: 0.1, label: t.x });
+      paneLight.addInput(this.lights.pointLight.position, 'z', { min: -20, max: 20, step: 0.1, label: t.y });
+      paneLight.addInput(this.lights.pointLight, 'intensity', { min: 0, max: 4, step: 0.01, label: t.intensity });
     },
+
     addControls(enabled = true) {
       this.controls = new OrbitControls(this.camera, this.renderer.domElement)
       this.controls.screenSpacePanning = true
