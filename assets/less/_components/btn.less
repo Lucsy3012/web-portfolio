@@ -18,8 +18,14 @@
   }
 
   // Active
-  &.active,
-  &.nuxt-link-active {
+  &:is(.active, .nuxt-link-active) {
+    color: var(--site-contrast);
+  }
+}
+
+// Overwrite hover for button-links
+a.btn {
+  &:is(:hover, :focus) {
     color: var(--site-contrast);
   }
 }
@@ -31,8 +37,7 @@
   background-color: transparent;
 
   // Active
-  &.active,
-  &.nuxt-link-active {
+  &:is(.active, .nuxt-link-active) {
     color: var(--site-contrast);
     background-color: var(--site-color);
   }

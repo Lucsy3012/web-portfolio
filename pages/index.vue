@@ -51,7 +51,6 @@
                 :alt="t.about.me.title"
                 :width="540"
                 :height="684"
-                loading="lazy"
               >
             </picture>
           </div>
@@ -76,7 +75,7 @@
                 :alt="t.about.me.title"
                 :width="540"
                 :height="684"
-                loading="lazy"
+                fetchpriority="high"
               >
             </picture>
           </div>

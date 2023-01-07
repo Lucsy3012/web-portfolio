@@ -114,9 +114,6 @@ export default {
     return client.getEntries(apiParams)
       .then(entries => {
 
-        let projectsVisible = true
-
-        // Initial filter setup
         entries.items.forEach(entry => {
           entry.visible = true
 
@@ -128,11 +125,14 @@ export default {
                 entry.visible = entry.fields?.[prop].includes(value)
               } else {
                 entry.visible = false
-                projectsVisible = false
               }
             }
           }
         })
+
+        // Get if any project is visible
+        const entriesCheckArray = entries.items.map(entry => entry.visible);
+        const projectsVisible = entriesCheckArray.includes(true)
 
         return {
           filter,
@@ -225,9 +225,12 @@ export default {
             project.visible = project.fields?.[type].includes(filterName)
           } else {
             project.visible = false
-            this.projectsVisible = false
           }
         })
+
+        // Get if any project is visible
+        const entriesCheckArray = this.projects.map(project => project.visible);
+        this.projectsVisible = entriesCheckArray.includes(true)
       }
     },
     slugify(str) {

@@ -2,9 +2,16 @@
   <div class="container">
     <section class="dynamic-bg--container p0 animate--js in">
       <section class="section--xl section--filled dynamic-bg">
-
         <!-- Video -->
-        <video v-if="mainVideo && mainImage" loop autoplay muted playsinline :poster="resizeImageSrc(mainImage, 1920, 'jpg', 85)" class="background">
+        <video
+          v-if="mainVideo && mainImage"
+          loop
+          autoplay
+          muted
+          playsinline
+          :poster="resizeImageSrc(mainImage, 1920, 'jpg', 85)"
+          class="background"
+        >
           <source :src="mainVideo.fields.file.url" :type="mainVideo.fields.file.contentType">
           <img
             :src="mainImage.fields.file.url"
@@ -28,15 +35,18 @@
         <div class="inner">
           <div class="row">
             <div class="col col-12">
-
               <!-- Headline -->
 
               <!-- Color on Texture -->
               <template v-if="showsColorOnTexture">
                 <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33" :style="{ '--site-color': colorOnTexture }">
                   <span class="secondary">{{ title }}</span>
-                  <h1 class="primary">{{ title }}</h1>
-                  <h2 class="tertiary" v-if="subline">{{ subline }}</h2>
+                  <h1 class="primary">
+                    {{ title }}
+                  </h1>
+                  <h2 v-if="subline" class="tertiary">
+                    {{ subline }}
+                  </h2>
                 </div>
               </template>
 
@@ -44,11 +54,14 @@
               <template v-else>
                 <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33">
                   <span class="secondary">{{ title }}</span>
-                  <h1 class="primary">{{ title }}</h1>
-                  <h2 class="tertiary" v-if="subline">{{ subline }}</h2>
+                  <h1 class="primary">
+                    {{ title }}
+                  </h1>
+                  <h2 v-if="subline" class="tertiary">
+                    {{ subline }}
+                  </h2>
                 </div>
               </template>
-
             </div>
           </div>
         </div>
@@ -60,16 +73,29 @@
       <div class="inner">
         <div class="row" :class="{ 'justify-content--space-evenly': !!urlSideImage }">
           <div class="col col-10 col-s-8 col-m-5 col--keyfacts mb0 mb4-m">
-            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">{{ t.keyfacts }}</h2>
-            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">{{ description }}</p>
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
+              {{ t.keyfacts }}
+            </h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">
+              {{ description }}
+            </p>
+            <div v-if="link" class="mt2 mt3-m animate appearFromBottomTransform">
+              <a :href="link" class="btn" target="_blank">
+                {{ t.toLink }}
+              </a>
+            </div>
             <dl class="mt3 mt4-xl --site-color animate appearFromBottomTransform">
               <template v-for="(keyfact, index) in keyfactsList">
-                <dt class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom" :key="index">{{ keyfact.definition }}</dt>
-                <dd class="tm">{{ keyfact.term }}</dd>
+                <dt :key="index" class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom">
+                  {{ keyfact.definition }}
+                </dt>
+                <dd class="tm">
+                  {{ keyfact.term }}
+                </dd>
               </template>
             </dl>
           </div>
-          <div class="col col-10 col-s-8 col-m-5 col--keyfacts mt4-m" v-if="urlSideImage">
+          <div v-if="urlSideImage" class="col col-10 col-s-8 col-m-5 col--keyfacts mt4-m">
             <picture>
               <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(urlSideImage, 400, 'webp')" type="image/webp">
               <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(urlSideImage, 400, 'png')">
@@ -118,20 +144,22 @@
     -->
 
     <!-- Impressions Title -->
-    <section class="pt0 dynamic-bg--container animate--js headline-position--center mt5" id="impressions">
+    <section id="impressions" class="pt0 dynamic-bg--container animate--js headline-position--center mt5">
       <div class="inner">
         <div class="row dynamic-bg--offset--33">
           <div class="col col-12 headline--container">
             <div class="headline tb4 tb5-xs tb6-m tb7-xl">
               <span class="secondary">{{ t.impressions }}</span>
-              <h3 class="primary">{{ t.impressions }}</h3>
+              <h3 class="primary">
+                {{ t.impressions }}
+              </h3>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Impressions First -->
-      <section class="p0 project-image" v-if="impressionsFirst">
+      <section v-if="impressionsFirst" class="p0 project-image">
         <div class="inner">
           <div class="row">
             <div class="col col-12">
@@ -161,7 +189,7 @@
       </section>
     </section>
 
-    <section class="pt0 dynamic-bg--container animate--js project-image" v-for="impression in impressionsRest" :key="impression.sys.id">
+    <section v-for="impression in impressionsRest" :key="impression.sys.id" class="pt0 dynamic-bg--container animate--js project-image">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
@@ -191,12 +219,14 @@
     </section>
 
     <!-- Links -->
-    <section class="dynamic-bg--container pb0 animate--js in" id="links" v-if="!!links">
+    <section v-if="!!links" id="links" class="dynamic-bg--container pb0 animate--js in">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
             <span class="secondary">{{ t.links }}</span>
-            <h3 class="primary">{{ t.links }}</h3>
+            <h3 class="primary">
+              {{ t.links }}
+            </h3>
           </div>
         </div>
       </div>
@@ -211,13 +241,25 @@
         <div class="inner">
           <div class="row justify-content--center">
             <div class="col col-12 col-s-11 text--center">
-
               <!-- Color on Texture -->
               <template v-if="showsColorOnTexture">
                 <ul :style="{ '--site-color': colorOnTexture }">
                   <li v-for="(item, index) in linksList" :key="index">
-                    <a v-if="showsColorOnTexture" :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l" :style="{ '--site-color': colorOnTexture }">{{ item.name }}</a>
-                    <a v-else :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l">{{ item.name }}</a>
+                    <a
+                      v-if="showsColorOnTexture"
+                      :href="item.href"
+                      :title="item.name"
+                      target="_blank"
+                      class="tb4 tb5-s tb6-l"
+                      :style="{ '--site-color': colorOnTexture }"
+                    >{{ item.name }}</a>
+                    <a
+                      v-else
+                      :href="item.href"
+                      :title="item.name"
+                      target="_blank"
+                      class="tb4 tb5-s tb6-l"
+                    >{{ item.name }}</a>
                   </li>
                 </ul>
               </template>
@@ -226,8 +268,21 @@
               <template v-else>
                 <ul>
                   <li v-for="(item, index) in linksList" :key="index">
-                    <a v-if="showsColorOnTexture" :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l" :style="{ '--site-color': colorOnTexture }">{{ item.name }}</a>
-                    <a v-else :href="item.href" :title="item.name" target="_blank" class="tb4 tb5-s tb6-l">{{ item.name }}</a>
+                    <a
+                      v-if="showsColorOnTexture"
+                      :href="item.href"
+                      :title="item.name"
+                      target="_blank"
+                      class="tb4 tb5-s tb6-l"
+                      :style="{ '--site-color': colorOnTexture }"
+                    >{{ item.name }}</a>
+                    <a
+                      v-else
+                      :href="item.href"
+                      :title="item.name"
+                      target="_blank"
+                      class="tb4 tb5-s tb6-l"
+                    >{{ item.name }}</a>
                   </li>
                 </ul>
               </template>
@@ -245,54 +300,8 @@ import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 export default {
-  head() {
-    return {
-      title: this.title,
-      meta: [
-
-        // Meta
-        { hid: 'description', name: 'description', content: this.seoDescription },
-        { hid: 'image', itemprop: 'image', content: this.seoImage },
-
-        // Open Graph
-        { hid: 'og:description', property: 'og:description', content: this.seoDescription },
-        { hid: 'og:image', property: 'og:image', content: this.seoImage },
-
-        // Twitter
-        { hid: 'twitter:description', name: 'twitter:description', content: this.seoDescription },
-        { hid: 'twitter:image', name: 'twitter:image', content: this.seoImage },
-      ],
-      link: [
-        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-cyan.ico' },
-        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-cyan.ico' },
-        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-cyan.ico' },
-        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-cyan.ico' },
-      ]
-    }
-  },
-  data() {
-    return {
-      title: '',
-      subline: '',
-      metaDescription: '',
-      description: '',
-      longDescription: {},
-      keyfacts: [],
-      accentColor: '',
-      link: '',
-      links: [],
-      releaseDate: '',
-      mainImage: '',
-      mainVideo: '',
-      sideImage: '',
-      impressions: [],
-      materialTexture: 'texture-cyan.png',
-      materialTextureExternal: false,
-      colorOnTexture: '',
-    }
-  },
   asyncData({ i18n, params }) {
-    const slug = params.slug;
+    const {slug} = params;
 
     return client.getEntries({
       content_type: 'project',
@@ -326,6 +335,52 @@ export default {
         }
       })
       .catch(e => console.error(e))
+  },
+  data() {
+    return {
+      title: '',
+      subline: '',
+      metaDescription: '',
+      description: '',
+      longDescription: {},
+      keyfacts: [],
+      accentColor: '',
+      link: '',
+      links: [],
+      releaseDate: '',
+      mainImage: '',
+      mainVideo: '',
+      sideImage: '',
+      impressions: [],
+      materialTexture: 'texture-cyan.png',
+      materialTextureExternal: false,
+      colorOnTexture: '',
+    }
+  },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+
+        // Meta
+        { hid: 'description', name: 'description', content: this.seoDescription },
+        { hid: 'image', itemprop: 'image', content: this.seoImage },
+
+        // Open Graph
+        { hid: 'og:description', property: 'og:description', content: this.seoDescription },
+        { hid: 'og:image', property: 'og:image', content: this.seoImage },
+
+        // Twitter
+        { hid: 'twitter:description', name: 'twitter:description', content: this.seoDescription },
+        { hid: 'twitter:image', name: 'twitter:image', content: this.seoImage }
+      ],
+      link: [
+        { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-cyan.ico' },
+        { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-cyan.ico' },
+        { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-cyan.ico' },
+        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-cyan.ico' }
+      ]
+    }
   },
   computed: {
     t() {
@@ -520,7 +575,7 @@ dl {
 }
 
 // Description Button
-.btn {
+.btn--description {
   position: absolute;
   bottom: ~'calc(var(--section-padding, 120px) * 2)';
   transform: translateY(50%);

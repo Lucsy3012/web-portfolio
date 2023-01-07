@@ -8,6 +8,7 @@ export default {
     openDescription: "Beschreibung lesen",
     description: "Beschreibung",
     interactiveElement: "Interaktives Element",
+    toLink: "Zum Projekt",
     links: "Links",
     emptyState: {
       title: "Keine Ergebnisse",
@@ -25,6 +26,7 @@ export default {
     openDescription: "Read description",
     description: "Description",
     interactiveElement: "Interactive element",
+    toLink: "To the project",
     links: "Links",
     emptyState: {
       title: "No results",

@@ -8,7 +8,7 @@ export default {
         desc: "Hey! Mein Name ist Lucas Dietrich und ich bin Ende 1994 in Münster (Deutschland) geboren und aufgewachsen. Meine Freunde und Familie würden mich als jemanden beschreiben, der einem Perfektionist nahe kommt. Ordentlich, organisiert, minimalistisch. Ich sehe mich als eine kreative und introvertierte Seele, die offen und optimistisch der Zukunft entgegenblickt. Der Optimismus ist etwas, dass ich über die Zeit gelernt habe und für den mich mittlerweile viele bewundern. Ich bin ein begeisterter und rationaler Problemlöser, der gerne neue Fähigkeiten erlernt um meine Ziele zu erreichen und mich menschlich weiterzuentwicklen.",
         list: [
           {
-            title: "27 Jahre",
+            title: "28 Jahre",
             desc: "Alter"
           },
           {
@@ -79,7 +79,7 @@ export default {
         desc: "Hey! I'm Lucas Dietrich, born in 1994 and raised in my hometown Münster, Germany. My friends and family would describe me as someone close to a perfectionist. I like clean, organized and minimalistic places and workspaces. I'm a creative introvert and see myself as very honest, rational and thoughtful. One standout trait of mine is that I'm always optimistic, which is a trait I had to learn, but now I'm being admired for this. I'm an analyst and a problem solver who adores to learn new skills in my personal or professional life.",
         list: [
           {
-            title: "27 years",
+            title: "28 years",
             desc: "Age"
           },
           {

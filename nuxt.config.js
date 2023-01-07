@@ -5,6 +5,15 @@ const currentYear = currentDate.getFullYear();
 
 const sitemapRoutes = require('./utils/sitemapRoutes');
 
+// Add dev specific plugins
+let devPlugins = [];
+
+if (process.env.NODE_ENV !== 'production') {
+  devPlugins = [
+    { src: '~/plugins/perf', mode: 'client', ssr: false }
+  ]
+}
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -66,7 +75,8 @@ export default {
   plugins: [
     { src: '~/plugins/contentful' },
     { src: '~/plugins/slugify' },
-    { src: '~/plugins/animate.js', mode: 'client', ssr: false }
+    { src: '~/plugins/animate.js', mode: 'client', ssr: false },
+    ...devPlugins
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
