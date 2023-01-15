@@ -9,32 +9,17 @@
 /* eslint-disable */
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import {EffectComposer, RenderPass, EffectPass, BlendFunction, NoiseEffect, BloomEffect} from 'postprocessing';
 import gsap from 'gsap'
 import { Pane } from 'tweakpane';
+import three from '@/mixins/three'
+import math from '@/mixins/math'
+import bloomEffect from '@/mixins/postProcessing/bloomEffect'
 
 export default {
   name: 'Coin',
+  mixins: [three, math, bloomEffect],
   props: {
-    colorBackground: {
-      type: String,
-      required: false,
-      default: "#FFFFFF"
-    },
-    colorLight: {
-      type: String,
-      required: false,
-      default: "#FFFFFF"
-    },
-    colorAmbientLight: {
-      type: String,
-      required: false,
-      default: "#d6c78c"
-    },
-    colorMaterial: {
-      type: String,
-      required: false,
-      default: "#af9434"
-    },
     materialTextureFront: {
       type: String,
       required: false,
@@ -45,48 +30,12 @@ export default {
       required: false,
       default: "gold-coin-back.png"
     },
-    orbitControls: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    gui: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    debug: {
-      type: Boolean,
-      required: false,
-      default: false,
-    }
   },
   data() {
     return {
-      // dat: null,
-      renderer: null,
-      scene: null,
-      camera: null,
-      controls: null,
-      clock: null,
-      lights: {
-        pointLight: null,
-        hemisphereLight: null,
-        ambientLight: null,
-      },
       objects: {
         coin: null,
         group: null,
-      },
-      helpers: {
-        grid: null,
-        lightHelper: null,
-      },
-      mouse: {
-        position: {
-          x: 0,
-          y: 0
-        }
       },
       animation: {
         rotation: {
@@ -97,14 +46,6 @@ export default {
           }
         }
       },
-    }
-  },
-  computed: {
-    deg() {
-      return Math.PI / 180; // one degree
-    },
-    t() {
-      return this.$t('gui')
     }
   },
   mounted() {
@@ -119,15 +60,11 @@ export default {
     this.$refs.container.addEventListener('mouseup', this.mouseUp, true)
 
     // GUI
-    if (this.gui) {
-      this.addGUI();
-    }
+    this.addGUI();
 
     // Dev
-    if (this.debug) {
-      this.helperGrid();
-      this.helperLight();
-    }
+    this.helperGrid();
+    this.helperPointLight();
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.windowResizing, true)
@@ -144,7 +81,7 @@ export default {
         0.1,
         1000
       )
-      this.renderer = new THREE.WebGLRenderer({ antialias: true })
+      this.renderer = new THREE.WebGLRenderer({ powerPreference: "high-performance", antialias: true, stencil: false, depth: false })
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setClearColor(this.colorBackground);
@@ -152,10 +89,13 @@ export default {
       this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
       // Clock
-      this.clock = new THREE.Clock()
+      this.clock = new THREE.Clock();
 
       // Fog
       this.scene.fog = new THREE.FogExp2(this.colorBackground, 0.025);
+
+      // Post Processing
+      this.postProcessing();
 
       // Add Scene to DOM
       this.$refs.container.appendChild(this.renderer.domElement)
@@ -225,7 +165,7 @@ export default {
       requestAnimationFrame(this.animate);
 
       // Time
-      // this.clock.elapsedTime = this.clock.getElapsedTime()
+      this.getElapsedTime();
 
       // Animation
       this.frameAnimationRotate(this.objects.coin, 0, 0.0033);
@@ -236,6 +176,9 @@ export default {
 
       // Updates Renderer
       this.renderer.render(this.scene, this.camera);
+
+      // Post Processing
+      this.composer.render();
     },
 
     // Animations
@@ -245,7 +188,7 @@ export default {
       obj.rotation.z -= z;
     },
     frameAnimationCameraPosition() {
-      this.camera.position.x = (this.mouse.position.y) - 5;
+      this.camera.position.x = (this.mouse.y) - 5;
       this.camera.updateProjectionMatrix();
       this.camera.lookAt(new THREE.Vector3(0,0,0));
     },
@@ -253,6 +196,9 @@ export default {
     // Add-ons
     // ------------------------
     addGUI() {
+      if (!this.gui) return;
+
+      // Init
       const t = this.t;
 
       const pane = new Pane({
@@ -271,21 +217,13 @@ export default {
       };
 
       // Folders
-      // const paneCoinMaterial = pane.addFolder({ title: `Coin ${t.material}` });
       const paneCoinMaterial = pane.addFolder({ title: t.material });
       const paneCoinRotation = pane.addFolder({ title: t.rotation });
       const paneCoinPosition = pane.addFolder({ title: t.position });
       const paneLight = pane.addFolder({ title: t.folders.light });
+      const panePostProcessing = pane.addFolder({ title: 'Post Processing' });
 
       // Coin Material
-      /*
-      paneCoinMaterial.addInput(this.objects.coin.material[1], 'metalness', { min: 0, max: 1, step: 0.001, label: t.metalness });
-      paneCoinMaterial.addInput(this.objects.coin.material[1], 'roughness', { min: 0, max: 1, step: 0.001, label: t.roughness });
-      paneCoinMaterial.addInput(parameters, 'colorMaterial', { picker: 'inline', label: t.color }).on('change', (ev) => {
-        this.objects.coin.material[1].color.set(parameters.colorMaterial);
-      });
-      */
-
       paneCoinMaterial.addInput(parameters, 'bumpScale', { min: 0, max: 0.5, step: 0.01, label: t.bump }).on('change', (ev) => {
         this.objects.coin.material[0].bumpScale = parameters.bumpScale;
         this.objects.coin.material[1].bumpScale = parameters.bumpScale;
@@ -317,6 +255,19 @@ export default {
       paneLight.addInput(parameters, 'colorLight', { picker: 'inline', label: t.color }).on('change', (ev) => {
         this.lights.pointLight.color.set(parameters.colorLight);
       });
+
+      // Post Processing
+      // todo add translated labels
+      panePostProcessing.addInput(this.bloomEffectParams, 'intensity', { min: 0, max: 10, step: 0.01 }).on('change', (ev) => {
+        this.bloomEffect.intensity = ev.value;
+      });
+      // todo make work
+      panePostProcessing.addInput(this.bloomEffectParams, 'radius', { min: 0, max: 1, step: 0.01 }).on('change', (ev) => {
+        this.bloomEffect.mipmapBlurPass.radius = ev.value;
+      });
+      panePostProcessing.addInput(this.bloomEffectParams, 'opacity', { min: 0, max: 1, step: 0.01 }).on('change', (ev) => {
+        this.bloomEffect.blendMode.opacity.value = ev.value;
+      });
     },
 
     addControls(enabled = true) {
@@ -330,42 +281,27 @@ export default {
       this.controls.update();
     },
 
-    // Helpers
-    // ------------------------
-    helperGrid() {
-      this.helpers.grid = new THREE.GridHelper(10, 10);
-      this.scene.add(this.helpers.grid);
-    },
-    helperLight(size = 1, color = '#f55') {
-      this.helpers.lightHelper = new THREE.PointLightHelper(this.lights.pointLight, size, color);
-      this.scene.add(this.helpers.lightHelper);
+    postProcessing() {
+
+      // Add effects
+      this.bloomEffectParams.intensity = 1; // change defaults before adding effect
+      const bloomEffect = this.addBloomEffect()
+
+      // Todo noise effect as mixin
+      const noiseEffect = new NoiseEffect({ premultiply: false });
+      noiseEffect.blendMode.opacity.value = 0.7;
+      noiseEffect.blendMode.blendFunction = BlendFunction.REFLECT;
+
+      // Initialize passes
+      this.composer = new EffectComposer(this.renderer);
+      this.composer.addPass(new RenderPass(this.scene, this.camera));
+      this.composer.addPass(new EffectPass(this.camera, bloomEffect, noiseEffect));
     },
 
+    // Snapshots
+    // ------------------------
     saveSnapshot() {
       this.animation.rotation.y.snapshot = this.objects.coin.rotation.y;
-    },
-
-    // Non ThreeJS specific
-    // ------------------------
-    windowResizing(size) {
-      let width = window.innerWidth;
-      let height = window.innerHeight;
-
-      if (size === 'container') {
-        width = this.$refs.container.offsetWidth;
-        height = this.$refs.container.offsetHeight;
-      }
-
-      this.renderer.setSize(width, height);
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-    },
-    mouseMovingCameraPosition(e) {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      this.mouse.position.x = ((width * -0.5) + e.clientX) / width * 2;
-      this.mouse.position.y = ((height * -0.5) + e.clientY) / height * 2;
     },
 
     // GSAP
