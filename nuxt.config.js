@@ -1,9 +1,15 @@
+import getRedirects from './utils/redirects';
 require('dotenv').config()
 
+// Date variables
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 
+// Sitemap
 const sitemapRoutes = require('./utils/sitemapRoutes');
+
+// Redirects
+const allRedirects = getRedirects();
 
 // Add dev specific plugins
 let devPlugins = [];
@@ -90,9 +96,14 @@ export default {
   modules: [
     'nuxt-i18n',
     '@nuxtjs/dotenv',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/redirect-module'
   ],
 
+  // Redirects
+  redirect: async () => await allRedirects,
+
+  // Localization
   i18n: {
     locales: [
       { code: 'de', iso: 'de-DE', name: 'Deutsch', file: 'de.js' },

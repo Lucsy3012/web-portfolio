@@ -190,10 +190,11 @@ export default {
   asyncData({ i18n }) {
     return client.getEntries({
       content_type: 'project',
-      order: '-fields.releaseDate',
+      order: 'fields.highlightOrder',
       select: 'fields,sys.id,sys.createdAt',
-      limit: 3,
-      locale: i18n.locale
+      limit: 10,
+      locale: i18n.locale,
+      'fields.highlightOrder[exists]': true,
     })
       .then(entries => {
         return {
