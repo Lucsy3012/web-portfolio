@@ -16,7 +16,12 @@ export default {
     }
   },
   methods: {
-    addBloomEffect() {
+    addBloomEffect(params) {
+
+      // Params
+      if (params.hasOwnProperty('intensity')) this.bloomEffectParams.intensity = params.intensity
+      if (params.hasOwnProperty('radius')) this.bloomEffectParams.radius = params.radius
+      if (params.hasOwnProperty('opacity')) this.bloomEffectParams.opacity = params.opacity
 
       // Setup
       const bloomEffect = new BloomEffect()

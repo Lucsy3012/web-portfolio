@@ -1,4 +1,4 @@
-import * as THREE from "three";
+// import * as THREE from "three";
 
 export default {
   name: 'Three',
@@ -41,11 +41,12 @@ export default {
       window: {
         width: 0,
         height: 0,
+        resizingContext: 'window',
       },
       uniforms: {
         u_time: { type: 'float', value: 0 },
-        u_resolution: { type: 'vec2', value: new THREE.Vector2() },
-        u_mouse: { type: 'vec2', value: new THREE.Vector2() }
+        u_resolution: { type: 'vec2', value: { x: 0, y: 0 } },
+        u_mouse: { type: 'vec2', value: { x: 0, y: 0 } },
       },
     }
   },
@@ -90,6 +91,12 @@ export default {
     t() {
       return this.$t('gui')
     },
+    THREE () {
+      return this.$vendor.THREE
+    },
+    OrbitControls () {
+      return this.$vendor.OrbitControls
+    },
   },
   methods: {
 
@@ -101,21 +108,34 @@ export default {
       this.time.elapsedTimeOld = this.time.elapsedTime
     },
 
+    // Add-ons
+    // ------------------------
+    addControls(enabled = true) {
+      this.controls = new this.OrbitControls(this.camera, this.renderer.domElement)
+      this.controls.screenSpacePanning = true
+      this.controls.enableDamping = true
+      this.controls.minDistance = 1
+      this.controls.maxDistance = 100
+      this.controls.target.set(0, 0, 0)
+      this.controls.enabled = enabled
+      this.controls.update()
+    },
+
     // Helpers
     // ------------------------
     helperGrid() {
       if (!this.debug) return;
-      this.helpers.grid = new THREE.GridHelper(10, 10);
+      this.helpers.grid = new this.THREE.GridHelper(10, 10);
       this.scene.add(this.helpers.grid);
     },
     helperPointLight(size = 1, color = '#f55') {
       if (!this.debug) return;
-      this.helpers.pointLight = new THREE.PointLightHelper(this.lights.pointLight, size, color);
+      this.helpers.pointLight = new this.THREE.PointLightHelper(this.lights.pointLight, size, color);
       this.scene.add(this.helpers.pointLight);
     },
     helperDirectionalLight(size = 1, color = '#f55') {
       if (!this.debug) return;
-      this.helpers.directionalLight = new THREE.DirectionalLightHelper(this.lights.directionalLight, size, color);
+      this.helpers.directionalLight = new this.THREE.DirectionalLightHelper(this.lights.directionalLight, size, color);
       this.scene.add(this.helpers.directionalLight);
     },
 
@@ -128,12 +148,23 @@ export default {
       this.window.height = window.innerHeight;
 
       // Update global container parameters
-      this.container.width = this.$refs?.container.offsetWidth ?? 0;
-      this.container.height = this.$refs?.container.offsetHeight ?? 0;
+      this.container.width = this.$refs?.container?.offsetWidth ?? 0;
+      this.container.height = this.$refs?.container?.offsetHeight ?? 0;
+
+      // Update uniforms
+      this.uniforms.u_resolution.value.x = this.container.width;
+      this.uniforms.u_resolution.value.y = this.container.height;
 
       // Update renderer and camera with parameters
       this.renderer.setSize(this.window.width, this.window.height);
       this.camera.aspect = this.window.width / this.window.height;
+
+      // If the resizing context is the container, use the containers width and height
+      if (this.window.resizingContext === 'container') {
+        this.renderer.setSize(this.container.width, this.container.height);
+        this.camera.aspect = this.container.width / this.container.height;
+      }
+
       this.camera.updateProjectionMatrix();
     },
     mouseMovingCameraPosition(e) {
@@ -148,6 +179,10 @@ export default {
       // Update global mouse parameters
       this.mouse.x = ((this.window.width * -0.5) + e.clientX) / this.window.width * 2;
       this.mouse.y = ((this.window.height * -0.5) + e.clientY) / this.window.height * 2;
+
+      // Update uniforms
+      this.uniforms.u_mouse.value.x = this.mouse.x;
+      this.uniforms.u_mouse.value.y = this.mouse.y;
     },
   }
 }

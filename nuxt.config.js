@@ -82,6 +82,7 @@ export default {
     { src: '~/plugins/contentful' },
     { src: '~/plugins/slugify' },
     { src: '~/plugins/animate.js', mode: 'client', ssr: false },
+    { src: '~/plugins/vendor.client.js' },
     ...devPlugins
   ],
 
@@ -156,8 +157,7 @@ export default {
   build: {
     transpile: [
       'three',
-      'gsap',
-      'dat.gui'
+      'gsap'
     ],
     optimization: {
       minimize: true

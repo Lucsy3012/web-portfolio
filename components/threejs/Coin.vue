@@ -7,18 +7,16 @@
 
 <script>
 /* eslint-disable */
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import {EffectComposer, RenderPass, EffectPass, BlendFunction, NoiseEffect, BloomEffect} from 'postprocessing';
-import gsap from 'gsap'
+import { EffectComposer, RenderPass, EffectPass, BlendFunction, NoiseEffect } from 'postprocessing';
 import { Pane } from 'tweakpane';
 import three from '@/mixins/three'
+import gsap from '@/mixins/gsap'
 import math from '@/mixins/math'
 import bloomEffect from '@/mixins/postProcessing/bloomEffect'
 
 export default {
   name: 'Coin',
-  mixins: [three, math, bloomEffect],
+  mixins: [three, gsap, math, bloomEffect],
   props: {
     materialTextureFront: {
       type: String,
@@ -74,38 +72,38 @@ export default {
   },
   methods: {
     init() {
-      this.scene = new THREE.Scene()
-      this.camera = new THREE.PerspectiveCamera(
+      this.scene = new this.THREE.Scene()
+      this.camera = new this.THREE.PerspectiveCamera(
         70,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
       )
-      this.renderer = new THREE.WebGLRenderer({ powerPreference: "high-performance", antialias: true, stencil: false, depth: false })
+      this.renderer = new this.THREE.WebGLRenderer({ powerPreference: "high-performance", antialias: true, stencil: false, depth: false })
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setClearColor(this.colorBackground);
       this.renderer.shadowMap.enabled = true;
-      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      this.renderer.shadowMap.type = this.THREE.PCFSoftShadowMap;
 
       // Clock
-      this.clock = new THREE.Clock();
+      this.clock = new this.THREE.Clock();
 
       // Fog
-      this.scene.fog = new THREE.FogExp2(this.colorBackground, 0.025);
+      this.scene.fog = new this.THREE.FogExp2(this.colorBackground, 0.025);
 
       // Post Processing
       this.postProcessing();
 
       // Add Scene to DOM
-      this.$refs.container.appendChild(this.renderer.domElement)
+      this.$refs.container.appendChild(this.renderer.domElement);
 
 
       // Geometries
       // ------------------------
 
-      const geometry = new THREE.CylinderGeometry(1, 1, 0.15, 256)
-      const textureLoader = new THREE.TextureLoader();
+      const geometry = new this.THREE.CylinderGeometry(1, 1, 0.15, 256)
+      const textureLoader = new this.THREE.TextureLoader();
       // const matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
 
       const textureSide = textureLoader.load('/textures/gold-coin-side.png')
@@ -115,33 +113,33 @@ export default {
       const textureFrontDisplacement = textureLoader.load('/textures/gold-coin-front-depth.png')
       const textureBackDisplacement = textureLoader.load('/textures/gold-coin-back-depth.png')
 
-      textureSide.minFilter = THREE.NearestMipmapLinearFilter;
-      textureFront.minFilter = THREE.NearestMipmapLinearFilter;
-      textureBack.minFilter = THREE.NearestMipmapLinearFilter;
+      textureSide.minFilter = this.THREE.NearestMipmapLinearFilter;
+      textureFront.minFilter = this.THREE.NearestMipmapLinearFilter;
+      textureBack.minFilter = this.THREE.NearestMipmapLinearFilter;
 
       const materials = [
-        // new THREE.MeshPhongMaterial({ color: this.colorMaterial }),
-        // new THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement }),
-        // new THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement }),
-        new THREE.MeshPhongMaterial({ map: textureSide, bumpMap: textureSideDisplacement, bumpScale: 0.2 }),
-        new THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement, bumpScale: 0.2 }),
-        new THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement, bumpScale: 0.2 })
+        // new this.THREE.MeshPhongMaterial({ color: this.colorMaterial }),
+        // new this.THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement }),
+        // new this.THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement }),
+        new this.THREE.MeshPhongMaterial({ map: textureSide, bumpMap: textureSideDisplacement, bumpScale: 0.2 }),
+        new this.THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement, bumpScale: 0.2 }),
+        new this.THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement, bumpScale: 0.2 })
       ];
 
 
       /* Metallic Material */
-      // const material = new THREE.MeshStandardMaterial({ color: this.colorMaterial })
+      // const material = new this.THREE.MeshStandardMaterial({ color: this.colorMaterial })
       // materials[0].metalness = 0.35;
       // materials[0].roughness = 0.66;
 
-      this.objects.coin = new THREE.Mesh(geometry, materials)
+      this.objects.coin = new this.THREE.Mesh(geometry, materials)
       this.objects.coin.rotation.x = 30 * this.deg;
       this.objects.coin.rotation.y = 160 * this.deg;
       this.objects.coin.rotation.z = 90 * this.deg;
       this.objects.coin.position.x = -1;
       this.scene.add(this.objects.coin)
 
-      this.objects.group = new THREE.Group()
+      this.objects.group = new this.THREE.Group()
       this.objects.group.add(this.objects.coin)
 
       this.scene.add(this.objects.group)
@@ -149,11 +147,11 @@ export default {
 
       // Lights
       // ------------------------
-      this.lights.pointLight = new THREE.PointLight(this.colorLight, 0.75, 200)
+      this.lights.pointLight = new this.THREE.PointLight(this.colorLight, 0.75, 200)
       this.lights.pointLight.position.set(-5, 1, 1)
       this.scene.add(this.lights.pointLight)
 
-      this.lights.ambientLight = new THREE.AmbientLight(this.colorMaterial)
+      this.lights.ambientLight = new this.THREE.AmbientLight(this.colorMaterial)
       this.scene.add(this.lights.ambientLight)
 
 
@@ -182,6 +180,7 @@ export default {
     },
 
     // Animations
+    // ------------------------
     frameAnimationRotate(obj, x = 0, y = 0, z = 0) {
       obj.rotation.x -= x;
       obj.rotation.y -= y * this.animation.rotation.y.multiplier * this.animation.rotation.y.dynamicMultiplier;
@@ -190,7 +189,7 @@ export default {
     frameAnimationCameraPosition() {
       this.camera.position.x = (this.mouse.y) - 5;
       this.camera.updateProjectionMatrix();
-      this.camera.lookAt(new THREE.Vector3(0,0,0));
+      this.camera.lookAt(new this.THREE.Vector3(0,0,0));
     },
 
     // Add-ons
@@ -200,7 +199,6 @@ export default {
 
       // Init
       const t = this.t;
-
       const pane = new Pane({
         container: this.$refs.gui,
         title: this.t.settingsTitle,
@@ -257,35 +255,23 @@ export default {
       });
 
       // Post Processing
-      // todo add translated labels
-      panePostProcessing.addInput(this.bloomEffectParams, 'intensity', { min: 0, max: 10, step: 0.01 }).on('change', (ev) => {
+      // todo add extra folder
+      panePostProcessing.addInput(this.bloomEffectParams, 'intensity', { min: 0, max: 10, step: 0.01, label: t.intensity }).on('change', (ev) => {
         this.bloomEffect.intensity = ev.value;
       });
       // todo make work
-      panePostProcessing.addInput(this.bloomEffectParams, 'radius', { min: 0, max: 1, step: 0.01 }).on('change', (ev) => {
+      panePostProcessing.addInput(this.bloomEffectParams, 'radius', { min: 0, max: 1, step: 0.01, label: t.radius }).on('change', (ev) => {
         this.bloomEffect.mipmapBlurPass.radius = ev.value;
       });
-      panePostProcessing.addInput(this.bloomEffectParams, 'opacity', { min: 0, max: 1, step: 0.01 }).on('change', (ev) => {
+      panePostProcessing.addInput(this.bloomEffectParams, 'opacity', { min: 0, max: 1, step: 0.01, label: t.opacity }).on('change', (ev) => {
         this.bloomEffect.blendMode.opacity.value = ev.value;
       });
-    },
-
-    addControls(enabled = true) {
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.screenSpacePanning = true;
-      this.controls.enableDamping = true;
-      this.controls.minDistance = 1;
-      this.controls.maxDistance = 1000;
-      this.controls.target.set(0, 0, 0);
-      this.controls.enabled = enabled;
-      this.controls.update();
     },
 
     postProcessing() {
 
       // Add effects
-      this.bloomEffectParams.intensity = 1; // change defaults before adding effect
-      const bloomEffect = this.addBloomEffect()
+      const bloomEffect = this.addBloomEffect({ intensity: 1, opacity: 0 })
 
       // Todo noise effect as mixin
       const noiseEffect = new NoiseEffect({ premultiply: false });
@@ -309,7 +295,7 @@ export default {
     mouseDown() {
       this.saveSnapshot()
 
-      gsap.to(this.animation.rotation.y, {
+      this.gsap.to(this.animation.rotation.y, {
         multiplier: 0,
         duration: 0.5,
         ease: "power2.in",
@@ -318,12 +304,12 @@ export default {
     mouseUp() {
       this.saveSnapshot()
 
-      gsap.to(this.animation.rotation.y, {
+      this.gsap.to(this.animation.rotation.y, {
         multiplier: 1,
         duration: 0.5,
         ease: "power3.in",
       })
-      gsap.to(this.objects.coin.rotation, {
+      this.gsap.to(this.objects.coin.rotation, {
         y: this.animation.rotation.y.snapshot - Math.PI,
         duration: 1,
         ease: "circle.inOut",
