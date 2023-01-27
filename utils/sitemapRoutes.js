@@ -37,7 +37,7 @@ module.exports = async function sitemapRoutes() {
   // --------------------------------------
   const routes = [
     projectsRoutesDE,
-    projectsRoutesEN,
+    projectsRoutesEN
   ]
 
   return routes.flat();
