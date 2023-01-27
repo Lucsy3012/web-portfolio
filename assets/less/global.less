@@ -49,6 +49,7 @@ body {
   line-height: 1.74;
   color: var(--site-color-75, @color-black-75);
   background-color: var(--site-contrast, @color-white);
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -124,5 +125,6 @@ html.js-disabled .animate--js,
 @import "_globals/grid";
 @import "_globals/font";
 @import "_globals/keyframes";
+@import "_globals/transitions";
 @import "components";
 @import "pages";
