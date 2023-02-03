@@ -38,6 +38,8 @@
         <template #experiment>
           <ThreejsCoin
             colorBackground="#F3EFDD"
+            colorAmbientLight="#D6C78C"
+            colorMaterial="#AF9434"
             :gui="true"
             :debug="false"
           />

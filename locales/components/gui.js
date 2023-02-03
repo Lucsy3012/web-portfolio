@@ -20,6 +20,8 @@ export default {
     closeness: "Nähe",
     speed: "Geschwindigkeit",
     intensity: "Intensität",
+    radius: "Radius",
+    opacity: "Opazität",
 
     // Names
     folders: {
@@ -50,6 +52,8 @@ export default {
     closeness: "Closeness",
     speed: "Speed",
     intensity: "Intensity",
+    radius: "Radius",
+    opacity: "Opacity",
 
     // Names
     folders: {

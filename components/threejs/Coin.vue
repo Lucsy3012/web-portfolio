@@ -7,34 +7,17 @@
 
 <script>
 /* eslint-disable */
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import gsap from 'gsap'
+import { EffectComposer, RenderPass, EffectPass, BlendFunction, NoiseEffect } from 'postprocessing';
 import { Pane } from 'tweakpane';
+import three from '@/mixins/three'
+import gsap from '@/mixins/gsap'
+import math from '@/mixins/math'
+import bloomEffect from '@/mixins/postProcessing/bloomEffect'
 
 export default {
   name: 'Coin',
+  mixins: [three, gsap, math, bloomEffect],
   props: {
-    colorBackground: {
-      type: String,
-      required: false,
-      default: "#FFFFFF"
-    },
-    colorLight: {
-      type: String,
-      required: false,
-      default: "#FFFFFF"
-    },
-    colorAmbientLight: {
-      type: String,
-      required: false,
-      default: "#d6c78c"
-    },
-    colorMaterial: {
-      type: String,
-      required: false,
-      default: "#af9434"
-    },
     materialTextureFront: {
       type: String,
       required: false,
@@ -45,48 +28,12 @@ export default {
       required: false,
       default: "gold-coin-back.png"
     },
-    orbitControls: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    gui: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    debug: {
-      type: Boolean,
-      required: false,
-      default: false,
-    }
   },
   data() {
     return {
-      // dat: null,
-      renderer: null,
-      scene: null,
-      camera: null,
-      controls: null,
-      clock: null,
-      lights: {
-        pointLight: null,
-        hemisphereLight: null,
-        ambientLight: null,
-      },
       objects: {
         coin: null,
         group: null,
-      },
-      helpers: {
-        grid: null,
-        lightHelper: null,
-      },
-      mouse: {
-        position: {
-          x: 0,
-          y: 0
-        }
       },
       animation: {
         rotation: {
@@ -97,14 +44,6 @@ export default {
           }
         }
       },
-    }
-  },
-  computed: {
-    deg() {
-      return Math.PI / 180; // one degree
-    },
-    t() {
-      return this.$t('gui')
     }
   },
   mounted() {
@@ -119,53 +58,53 @@ export default {
     this.$refs.container.addEventListener('mouseup', this.mouseUp, true)
 
     // GUI
-    if (this.gui) {
-      this.addGUI();
-    }
+    this.addGUI();
 
     // Dev
-    if (this.debug) {
-      this.helperGrid();
-      this.helperLight();
-    }
+    this.helperGrid();
+    this.helperPointLight();
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.windowResizing, true)
     this.$refs.container.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
     this.$refs.container.removeEventListener('mousedown', this.mouseDown, true)
     this.$refs.container.removeEventListener('mouseup', this.mouseUp, true)
+    this.renderer.dispose()
   },
   methods: {
     init() {
-      this.scene = new THREE.Scene()
-      this.camera = new THREE.PerspectiveCamera(
+      this.scene = new this.THREE.Scene()
+      this.camera = new this.THREE.PerspectiveCamera(
         70,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
       )
-      this.renderer = new THREE.WebGLRenderer({ antialias: true })
+      this.renderer = new this.THREE.WebGLRenderer({ powerPreference: "high-performance", antialias: true, stencil: false, depth: false })
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.renderer.setPixelRatio(window.devicePixelRatio);
       this.renderer.setClearColor(this.colorBackground);
       this.renderer.shadowMap.enabled = true;
-      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      this.renderer.shadowMap.type = this.THREE.PCFSoftShadowMap;
 
       // Clock
-      this.clock = new THREE.Clock()
+      this.clock = new this.THREE.Clock();
 
       // Fog
-      this.scene.fog = new THREE.FogExp2(this.colorBackground, 0.025);
+      this.scene.fog = new this.THREE.FogExp2(this.colorBackground, 0.025);
+
+      // Post Processing
+      this.postProcessing();
 
       // Add Scene to DOM
-      this.$refs.container.appendChild(this.renderer.domElement)
+      this.$refs.container.appendChild(this.renderer.domElement);
 
 
       // Geometries
       // ------------------------
 
-      const geometry = new THREE.CylinderGeometry(1, 1, 0.15, 256)
-      const textureLoader = new THREE.TextureLoader();
+      const geometry = new this.THREE.CylinderGeometry(1, 1, 0.15, 256)
+      const textureLoader = new this.THREE.TextureLoader();
       // const matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
 
       const textureSide = textureLoader.load('/textures/gold-coin-side.png')
@@ -175,33 +114,33 @@ export default {
       const textureFrontDisplacement = textureLoader.load('/textures/gold-coin-front-depth.png')
       const textureBackDisplacement = textureLoader.load('/textures/gold-coin-back-depth.png')
 
-      textureSide.minFilter = THREE.NearestMipmapLinearFilter;
-      textureFront.minFilter = THREE.NearestMipmapLinearFilter;
-      textureBack.minFilter = THREE.NearestMipmapLinearFilter;
+      textureSide.minFilter = this.THREE.NearestMipmapLinearFilter;
+      textureFront.minFilter = this.THREE.NearestMipmapLinearFilter;
+      textureBack.minFilter = this.THREE.NearestMipmapLinearFilter;
 
       const materials = [
-        // new THREE.MeshPhongMaterial({ color: this.colorMaterial }),
-        // new THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement }),
-        // new THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement }),
-        new THREE.MeshPhongMaterial({ map: textureSide, bumpMap: textureSideDisplacement, bumpScale: 0.2 }),
-        new THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement, bumpScale: 0.2 }),
-        new THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement, bumpScale: 0.2 })
+        // new this.THREE.MeshPhongMaterial({ color: this.colorMaterial }),
+        // new this.THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement }),
+        // new this.THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement }),
+        new this.THREE.MeshPhongMaterial({ map: textureSide, bumpMap: textureSideDisplacement, bumpScale: 0.2 }),
+        new this.THREE.MeshPhongMaterial({ map: textureFront, bumpMap: textureFrontDisplacement, bumpScale: 0.2 }),
+        new this.THREE.MeshPhongMaterial({ map: textureBack, bumpMap: textureBackDisplacement, bumpScale: 0.2 })
       ];
 
 
       /* Metallic Material */
-      // const material = new THREE.MeshStandardMaterial({ color: this.colorMaterial })
+      // const material = new this.THREE.MeshStandardMaterial({ color: this.colorMaterial })
       // materials[0].metalness = 0.35;
       // materials[0].roughness = 0.66;
 
-      this.objects.coin = new THREE.Mesh(geometry, materials)
+      this.objects.coin = new this.THREE.Mesh(geometry, materials)
       this.objects.coin.rotation.x = 30 * this.deg;
       this.objects.coin.rotation.y = 160 * this.deg;
       this.objects.coin.rotation.z = 90 * this.deg;
       this.objects.coin.position.x = -1;
       this.scene.add(this.objects.coin)
 
-      this.objects.group = new THREE.Group()
+      this.objects.group = new this.THREE.Group()
       this.objects.group.add(this.objects.coin)
 
       this.scene.add(this.objects.group)
@@ -209,11 +148,11 @@ export default {
 
       // Lights
       // ------------------------
-      this.lights.pointLight = new THREE.PointLight(this.colorLight, 0.75, 200)
+      this.lights.pointLight = new this.THREE.PointLight(this.colorLight, 0.75, 200)
       this.lights.pointLight.position.set(-5, 1, 1)
       this.scene.add(this.lights.pointLight)
 
-      this.lights.ambientLight = new THREE.AmbientLight(this.colorMaterial)
+      this.lights.ambientLight = new this.THREE.AmbientLight(this.colorMaterial)
       this.scene.add(this.lights.ambientLight)
 
 
@@ -225,7 +164,7 @@ export default {
       requestAnimationFrame(this.animate);
 
       // Time
-      // this.clock.elapsedTime = this.clock.getElapsedTime()
+      this.getElapsedTime();
 
       // Animation
       this.frameAnimationRotate(this.objects.coin, 0, 0.0033);
@@ -236,25 +175,31 @@ export default {
 
       // Updates Renderer
       this.renderer.render(this.scene, this.camera);
+
+      // Post Processing
+      this.composer.render();
     },
 
     // Animations
+    // ------------------------
     frameAnimationRotate(obj, x = 0, y = 0, z = 0) {
       obj.rotation.x -= x;
       obj.rotation.y -= y * this.animation.rotation.y.multiplier * this.animation.rotation.y.dynamicMultiplier;
       obj.rotation.z -= z;
     },
     frameAnimationCameraPosition() {
-      this.camera.position.x = (this.mouse.position.y) - 5;
+      this.camera.position.x = (this.mouse.y) - 5;
       this.camera.updateProjectionMatrix();
-      this.camera.lookAt(new THREE.Vector3(0,0,0));
+      this.camera.lookAt(new this.THREE.Vector3(0,0,0));
     },
 
     // Add-ons
     // ------------------------
     addGUI() {
-      const t = this.t;
+      if (!this.gui) return;
 
+      // Init
+      const t = this.t;
       const pane = new Pane({
         container: this.$refs.gui,
         title: this.t.settingsTitle,
@@ -271,21 +216,13 @@ export default {
       };
 
       // Folders
-      // const paneCoinMaterial = pane.addFolder({ title: `Coin ${t.material}` });
       const paneCoinMaterial = pane.addFolder({ title: t.material });
       const paneCoinRotation = pane.addFolder({ title: t.rotation });
       const paneCoinPosition = pane.addFolder({ title: t.position });
       const paneLight = pane.addFolder({ title: t.folders.light });
+      const panePostProcessing = pane.addFolder({ title: 'Post Processing' });
 
       // Coin Material
-      /*
-      paneCoinMaterial.addInput(this.objects.coin.material[1], 'metalness', { min: 0, max: 1, step: 0.001, label: t.metalness });
-      paneCoinMaterial.addInput(this.objects.coin.material[1], 'roughness', { min: 0, max: 1, step: 0.001, label: t.roughness });
-      paneCoinMaterial.addInput(parameters, 'colorMaterial', { picker: 'inline', label: t.color }).on('change', (ev) => {
-        this.objects.coin.material[1].color.set(parameters.colorMaterial);
-      });
-      */
-
       paneCoinMaterial.addInput(parameters, 'bumpScale', { min: 0, max: 0.5, step: 0.01, label: t.bump }).on('change', (ev) => {
         this.objects.coin.material[0].bumpScale = parameters.bumpScale;
         this.objects.coin.material[1].bumpScale = parameters.bumpScale;
@@ -317,55 +254,41 @@ export default {
       paneLight.addInput(parameters, 'colorLight', { picker: 'inline', label: t.color }).on('change', (ev) => {
         this.lights.pointLight.color.set(parameters.colorLight);
       });
+
+      // Post Processing
+      // todo add extra folder
+      panePostProcessing.addInput(this.bloomEffectParams, 'intensity', { min: 0, max: 10, step: 0.01, label: t.intensity }).on('change', (ev) => {
+        this.bloomEffect.intensity = ev.value;
+      });
+      // todo make work
+      panePostProcessing.addInput(this.bloomEffectParams, 'radius', { min: 0, max: 1, step: 0.01, label: t.radius }).on('change', (ev) => {
+        this.bloomEffect.mipmapBlurPass.radius = ev.value;
+      });
+      panePostProcessing.addInput(this.bloomEffectParams, 'opacity', { min: 0, max: 1, step: 0.01, label: t.opacity }).on('change', (ev) => {
+        this.bloomEffect.blendMode.opacity.value = ev.value;
+      });
     },
 
-    addControls(enabled = true) {
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.screenSpacePanning = true;
-      this.controls.enableDamping = true;
-      this.controls.minDistance = 1;
-      this.controls.maxDistance = 1000;
-      this.controls.target.set(0, 0, 0);
-      this.controls.enabled = enabled;
-      this.controls.update();
+    postProcessing() {
+
+      // Add effects
+      const bloomEffect = this.addBloomEffect({ intensity: 1, opacity: 0 })
+
+      // Todo noise effect as mixin
+      const noiseEffect = new NoiseEffect({ premultiply: false });
+      noiseEffect.blendMode.opacity.value = 0.7;
+      noiseEffect.blendMode.blendFunction = BlendFunction.REFLECT;
+
+      // Initialize passes
+      this.composer = new EffectComposer(this.renderer);
+      this.composer.addPass(new RenderPass(this.scene, this.camera));
+      this.composer.addPass(new EffectPass(this.camera, bloomEffect, noiseEffect));
     },
 
-    // Helpers
+    // Snapshots
     // ------------------------
-    helperGrid() {
-      this.helpers.grid = new THREE.GridHelper(10, 10);
-      this.scene.add(this.helpers.grid);
-    },
-    helperLight(size = 1, color = '#f55') {
-      this.helpers.lightHelper = new THREE.PointLightHelper(this.lights.pointLight, size, color);
-      this.scene.add(this.helpers.lightHelper);
-    },
-
     saveSnapshot() {
       this.animation.rotation.y.snapshot = this.objects.coin.rotation.y;
-    },
-
-    // Non ThreeJS specific
-    // ------------------------
-    windowResizing(size) {
-      let width = window.innerWidth;
-      let height = window.innerHeight;
-
-      if (size === 'container') {
-        width = this.$refs.container.offsetWidth;
-        height = this.$refs.container.offsetHeight;
-      }
-
-      this.renderer.setSize(width, height);
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-    },
-    mouseMovingCameraPosition(e) {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      this.mouse.position.x = ((width * -0.5) + e.clientX) / width * 2;
-      this.mouse.position.y = ((height * -0.5) + e.clientY) / height * 2;
     },
 
     // GSAP
@@ -373,7 +296,7 @@ export default {
     mouseDown() {
       this.saveSnapshot()
 
-      gsap.to(this.animation.rotation.y, {
+      this.gsap.to(this.animation.rotation.y, {
         multiplier: 0,
         duration: 0.5,
         ease: "power2.in",
@@ -382,12 +305,12 @@ export default {
     mouseUp() {
       this.saveSnapshot()
 
-      gsap.to(this.animation.rotation.y, {
+      this.gsap.to(this.animation.rotation.y, {
         multiplier: 1,
         duration: 0.5,
         ease: "power3.in",
       })
-      gsap.to(this.objects.coin.rotation, {
+      this.gsap.to(this.objects.coin.rotation, {
         y: this.animation.rotation.y.snapshot - Math.PI,
         duration: 1,
         ease: "circle.inOut",

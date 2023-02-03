@@ -13,6 +13,7 @@
   right: 0;
   bottom: 100px;
   padding: clamp(12px, 5vw, 24px);
+  pointer-events: none;
 
   // Tweakpane settings
   --tp-font-family: 'Basier Circle', -apple-system, 'Arial', sans-serif;
@@ -23,6 +24,7 @@
   --tp-base-background-color: var(--site-color, @color-black);
 
   .tp-rotv {
+    pointer-events: initial;
     font-size: 12px;
   }
 }
