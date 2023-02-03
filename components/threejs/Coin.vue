@@ -69,6 +69,7 @@ export default {
     this.$refs.container.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
     this.$refs.container.removeEventListener('mousedown', this.mouseDown, true)
     this.$refs.container.removeEventListener('mouseup', this.mouseUp, true)
+    this.renderer.dispose()
   },
   methods: {
     init() {

@@ -117,7 +117,7 @@ export default {
         entries.items.forEach(entry => {
           entry.visible = true
 
-          if (filter) {
+          if (Object.keys(filter).length > 0) {
             for (const [prop, value] of Object.entries(filter)) {
               const field = entry.fields?.[prop]
 
@@ -144,6 +144,7 @@ export default {
   },
   data() {
     return {
+      filter: {},
       projectsVisible: true,
       projects: []
     }
@@ -208,9 +209,7 @@ export default {
       }
     }
   },
-  watchQuery(newQuery) {
-    this.filter = newQuery
-  },
+  watchQuery: ['filter'],
   methods: {
     updateFilters(filterName, type) {
       this.$router.push({ query: { [type]: filterName } })

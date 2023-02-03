@@ -64,6 +64,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener('resize', this.windowResizing, true) // doesn't work
     window.removeEventListener('mousemove', this.mouseMovingCameraPosition, true)
+    this.renderer.dispose()
   },
   methods: {
     init() {
