@@ -4,10 +4,11 @@
       <div class="inner">
         <div class="row">
           <div class="col col-12">
-
             <!-- Headline -->
             <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33 offset-overflow">
-              <h1 class="secondary">{{ t.title }}</h1>
+              <h1 class="secondary">
+                {{ t.title }}
+              </h1>
               <span class="primary">{{ t.titlePrimary }}</span>
             </div>
 
@@ -28,12 +29,20 @@
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-me mb0 mb4-m">
-            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">{{ t.about.me.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">{{ t.about.me.desc }}</p>
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
+              {{ t.about.me.title }}
+            </h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">
+              {{ t.about.me.desc }}
+            </p>
             <dl class="mt3 mt4-xl --site-color animate appearFromBottomTransform">
               <template v-for="(item, index) in t.about.me.list">
-                <dt class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom" :key="index">{{ item.title }}</dt>
-                <dd class="tm">{{ item.desc }}</dd>
+                <dt :key="index" class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom">
+                  {{ item.title }}
+                </dt>
+                <dd class="tm">
+                  {{ item.desc }}
+                </dd>
               </template>
             </dl>
           </div>
@@ -67,12 +76,20 @@
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-work mb0 mb4-m">
-            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">{{ t.about.work.title }}</h2>
-            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">{{ t.about.work.desc }}</p>
+            <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
+              {{ t.about.work.title }}
+            </h2>
+            <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">
+              {{ t.about.work.desc }}
+            </p>
             <dl class="mt3 mt4-xl --site-color animate appearFromBottomTransform">
               <template v-for="(item, index) in t.about.work.list">
-                <dt class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom" :key="index">{{ item.title }}</dt>
-                <dd class="tm">{{ item.desc }}</dd>
+                <dt :key="index" class="tf3 mt2 mt3-l --line-height-normal animate headlineAppearFromBottom">
+                  {{ item.title }}
+                </dt>
+                <dd class="tm">
+                  {{ item.desc }}
+                </dd>
               </template>
             </dl>
           </div>
@@ -102,12 +119,14 @@
     </section>
 
     <!-- Career -->
-    <section class="dynamic-bg--container mt4 mt5-l pb0 animate--js" id="career">
+    <section id="career" class="dynamic-bg--container mt4 mt5-l pb0 animate--js">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
             <span class="secondary">{{ t.career.title }}</span>
-            <h2 class="primary">{{ t.career.title }}</h2>
+            <h2 class="primary">
+              {{ t.career.title }}
+            </h2>
           </div>
         </div>
       </div>
@@ -124,14 +143,18 @@
               <ul>
                 <li
                   v-for="(item, index) in t.career.list"
+                  :key="index"
                   class="--site-color"
                   :class="{ 'mt2 mt3-l': index !== 0 }"
-                  :key="index"
                 >
-                  <div class="time tm">{{ item.time }}</div>
-                  <h3 class="title mt1 tf4 tf3-m --line-height-normal">{{ item.title }}</h3>
+                  <div class="time tm">
+                    {{ item.time }}
+                  </div>
+                  <h3 class="title mt1 tf4 tf3-m --line-height-normal">
+                    {{ item.title }}
+                  </h3>
                   <h4 class="company mt1 tm1 tf3-m --line-height-normal">
-                    <span class="display--inline-block display--none-xs" v-if="item.hasAt">@</span>
+                    <span v-if="item.hasAt" class="display--inline-block display--none-xs">@</span>
                     {{ item.company }}
                   </h4>
                 </li>
@@ -145,9 +168,29 @@
 </template>
 
 <script>
-import client from '~/plugins/contentful'
-
 export default {
+  asyncData({ i18n, $contentfulClient }) {
+    return $contentfulClient.getEntries({
+      content_type: 'project',
+      order: '-sys.createdAt',
+      limit: 6,
+      locale: i18n.locale
+    })
+      .then(entries => {
+        return {
+          projects: entries.items
+        }
+      })
+      .catch(e => console.error(e))
+  },
+  data() {
+    return {
+      images: {
+        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/0cbbc598dd4bb6c318b11c06a6872090/about-me.jpg",
+        aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",
+      }
+    }
+  },
   head() {
     return {
       title: this.t.title,
@@ -163,37 +206,15 @@ export default {
 
         // Twitter
         { hid: 'twitter:description', name: 'twitter:description', content: this.t.seoDescription },
-        { hid: 'twitter:image', name: 'twitter:image', content: this.t.seoImage },
+        { hid: 'twitter:image', name: 'twitter:image', content: this.t.seoImage }
       ],
       link: [
         { hid: 'favicon', rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon/favicon-magenta.ico' },
         { hid: 'favicon-apple', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon-magenta.ico' },
         { hid: 'favicon-32x32', rel: 'icon', sizes: '32x32', href: '/favicon/favicon-32x32-magenta.ico' },
-        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-magenta.ico' },
+        { hid: 'favicon-16x16', rel: 'icon', sizes: '16x16', href: '/favicon/favicon-16x16-magenta.ico' }
       ]
     }
-  },
-  data() {
-    return {
-      images: {
-        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/0cbbc598dd4bb6c318b11c06a6872090/about-me.jpg",
-        aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",
-      }
-    }
-  },
-  asyncData({ i18n }) {
-    return client.getEntries({
-      content_type: 'project',
-      order: '-sys.createdAt',
-      limit: 6,
-      locale: i18n.locale
-    })
-    .then(entries => {
-      return {
-        projects: entries.items
-      }
-    })
-    .catch(e => console.error(e))
   },
   computed: {
     t() {

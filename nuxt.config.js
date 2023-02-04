@@ -23,6 +23,21 @@ if (process.env.NODE_ENV !== 'production') {
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  ssr: false,
+
+  // Runtime Config
+  publicRuntimeConfig: {
+    baseURL: process.env.HOSTNAME || 'https://lucasdietrich.de',
+    contentfulSpaceId: process.env.CONTENTFUL_SPACE_ID,
+    contentfulEnvironment: process.env.CONTENTFUL_ENVIRONMENT,
+    contentfulPreviewHost: process.env.CONTENTFUL_PREVIEW_HOST,
+    contentfulDeliveryHost: process.env.CONTENTFUL_DELIVERY_HOST,
+    contentfulPreviewAccessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+    contentfulDeliveryAccessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+  },
+  privateRuntimeConfig: {
+    // Nothing here yet
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

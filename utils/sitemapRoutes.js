@@ -2,7 +2,8 @@ const contentful = require('contentful')
 
 const client = contentful.createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN
+  accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+  environment: process.env.CONTENTFUL_ENVIRONMENT,
 })
 
 module.exports = async function sitemapRoutes() {
@@ -20,7 +21,7 @@ module.exports = async function sitemapRoutes() {
       url: `/de/projekte/${i.fields.slug}`,
       changefreq: 'monthly',
       priority: 1,
-      lastmod: i.sys.updatedAt
+      lastmod: i.sys.updatedAt,
     }
   });
 

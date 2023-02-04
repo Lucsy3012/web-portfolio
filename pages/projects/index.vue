@@ -82,12 +82,11 @@
 </template>
 
 <script>
-import client from '~/plugins/contentful'
 import services from '~/assets/js/services'
 
 export default {
   name: 'ProjectsIndex',
-  asyncData({ route, i18n }) {
+  asyncData({ route, i18n, $contentfulClient }) {
     const filter = route.query;
 
     let apiParams = {
@@ -111,7 +110,7 @@ export default {
     }
      */
 
-    return client.getEntries(apiParams)
+    return $contentfulClient.getEntries(apiParams)
       .then(entries => {
 
         entries.items.forEach(entry => {

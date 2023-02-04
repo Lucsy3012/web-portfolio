@@ -1,13 +1,15 @@
-const contentful = require('contentful')
+export default (context, inject) => {
+  const contentful = require('contentful')
 
-console.log('process', process)
-console.log('process.env', process.env)
-console.log('CONTENTFUL_DELIVERY_ACCESS_TOKEN', process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN)
+  // Importing runtime config
+  const runtimeConfig = context.$config
 
-const client = contentful.createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
-  environment: process.env.CONTENTFUL_ENVIRONMENT,
-})
+  // Creating client
+  const client = contentful.createClient({
+    space: runtimeConfig.contentfulSpaceId,
+    accessToken: runtimeConfig.contentfulDeliveryAccessToken,
+    environment: runtimeConfig.contentfulEnvironment,
+  })
 
-module.exports = client
+  inject('contentfulClient', client)
+}
