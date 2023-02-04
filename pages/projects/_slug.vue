@@ -295,15 +295,14 @@
 </template>
 
 <script>
-import client from '~/plugins/contentful'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 export default {
-  asyncData({ i18n, params }) {
+  asyncData({ i18n, params, $contentfulClient }) {
     const {slug} = params;
 
-    return client.getEntries({
+    return $contentfulClient.getEntries({
       content_type: 'project',
       order: '-sys.createdAt',
       'fields.slug[in]': slug,

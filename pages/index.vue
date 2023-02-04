@@ -182,13 +182,12 @@
 </template>
 
 <script>
-import client from '~/plugins/contentful'
 import services from '~/assets/js/services'
 
 export default {
   name: 'HomePage',
-  asyncData({ i18n }) {
-    return client.getEntries({
+  asyncData({ i18n, $contentfulClient }) {
+    return $contentfulClient.getEntries({
       content_type: 'project',
       order: 'fields.highlightOrder',
       select: 'fields,sys.id,sys.createdAt',
