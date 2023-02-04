@@ -19,7 +19,7 @@ module.exports = async function sitemapRoutes() {
   const projectsRoutesDE = projectsDE.map(i => {
     return {
       url: `/de/projekte/${i.fields.slug}`,
-      changefreq: contentfulSpaceId,
+      changefreq: 'monthly',
       priority: 1,
       lastmod: i.sys.updatedAt,
     }
