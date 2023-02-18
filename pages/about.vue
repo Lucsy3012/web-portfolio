@@ -48,8 +48,8 @@
           </div>
           <div class="col col-10 col-s-8 col-m-5 col--about-me mt4-m">
             <picture>
-              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutMe, 604, 'webp')" type="image/webp">
-              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutMe, 604, 'jpg')">
+              <source media="(min-width: 1580px)" :srcset="resizeImageSrcSet(images.aboutMe, 560, 'webp')" type="image/webp">
+              <source media="(min-width: 1580px)" :srcset="resizeImageSrcSet(images.aboutMe, 560, 'jpg')">
               <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutMe, 540, 'webp')" type="image/webp">
               <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutMe, 540, 'jpg')">
               <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(images.aboutMe, 420, 'webp')" type="image/webp">
@@ -95,8 +95,8 @@
           </div>
           <div class="col col-10 col-s-8 col-m-5 col--about-work mt4-m">
             <picture>
-              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'webp')" type="image/webp">
-              <source media="(min-width: 1680px)" :srcset="resizeImageSrcSet(images.aboutWork, 604, 'jpg')">
+              <source media="(min-width: 1580px)" :srcset="resizeImageSrcSet(images.aboutWork, 560, 'webp')" type="image/webp">
+              <source media="(min-width: 1580px)" :srcset="resizeImageSrcSet(images.aboutWork, 560, 'jpg')">
               <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutWork, 540, 'webp')" type="image/webp">
               <source media="(min-width: 960px)" :srcset="resizeImageSrcSet(images.aboutWork, 540, 'jpg')">
               <source media="(min-width: 480px)" :srcset="resizeImageSrcSet(images.aboutWork, 420, 'webp')" type="image/webp">
@@ -186,7 +186,7 @@ export default {
   data() {
     return {
       images: {
-        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/0cbbc598dd4bb6c318b11c06a6872090/about-me.jpg",
+        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/d25679949c5412cb55e8246551edb9d7/about-me.jpg",
         aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",
       }
     }

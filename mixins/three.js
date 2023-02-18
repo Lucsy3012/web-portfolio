@@ -25,6 +25,8 @@ export default {
       helpers: {
         grid: null,
         pointLight: null,
+        pointLight2: null,
+        pointLight3: null,
         directionalLight: null,
         ambientLight: null,
         hemisphereLight: null,
@@ -32,6 +34,9 @@ export default {
       mouse: {
         x: 0,
         y: 0,
+      },
+      textures: {
+        loader: null,
       },
       time: {
         elapsedTime: 0,
@@ -113,7 +118,7 @@ export default {
     addControls(enabled = true) {
       this.controls = new this.OrbitControls(this.camera, this.renderer.domElement)
       this.controls.screenSpacePanning = true
-      this.controls.enableDamping = true
+      this.controls.enableDamping = false
       this.controls.minDistance = 1
       this.controls.maxDistance = 100
       this.controls.target.set(0, 0, 0)
@@ -131,7 +136,9 @@ export default {
     helperPointLight(size = 1, color = '#f55') {
       if (!this.debug) return;
       this.helpers.pointLight = new this.THREE.PointLightHelper(this.lights.pointLight, size, color);
+      this.helpers.pointLight2 = new this.THREE.PointLightHelper(this.lights.pointLight2, size, color);
       this.scene.add(this.helpers.pointLight);
+      this.scene.add(this.helpers.pointLight2);
     },
     helperDirectionalLight(size = 1, color = '#f55') {
       if (!this.debug) return;

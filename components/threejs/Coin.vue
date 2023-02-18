@@ -107,12 +107,12 @@ export default {
       const textureLoader = new this.THREE.TextureLoader();
       // const matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
 
-      const textureSide = textureLoader.load('/textures/gold-coin-side.png')
-      const textureFront = textureLoader.load('/textures/gold-coin-front.png')
-      const textureBack = textureLoader.load('/textures/gold-coin-back.png')
-      const textureSideDisplacement = textureLoader.load('/textures/gold-coin-side-depth.png')
-      const textureFrontDisplacement = textureLoader.load('/textures/gold-coin-front-depth.png')
-      const textureBackDisplacement = textureLoader.load('/textures/gold-coin-back-depth.png')
+      const textureSide = textureLoader.load('/textures/coin/gold-coin-side.png')
+      const textureFront = textureLoader.load('/textures/coin/gold-coin-front.png')
+      const textureBack = textureLoader.load('/textures/coin/gold-coin-back.png')
+      const textureSideDisplacement = textureLoader.load('/textures/coin/gold-coin-side-depth.png')
+      const textureFrontDisplacement = textureLoader.load('/textures/coin/gold-coin-front-depth.png')
+      const textureBackDisplacement = textureLoader.load('/textures/coin/gold-coin-back-depth.png')
 
       textureSide.minFilter = this.THREE.NearestMipmapLinearFilter;
       textureFront.minFilter = this.THREE.NearestMipmapLinearFilter;
@@ -276,7 +276,7 @@ export default {
 
       // Todo noise effect as mixin
       const noiseEffect = new NoiseEffect({ premultiply: false });
-      noiseEffect.blendMode.opacity.value = 0.7;
+      noiseEffect.blendMode.opacity.value = 0.5;
       noiseEffect.blendMode.blendFunction = BlendFunction.REFLECT;
 
       // Initialize passes

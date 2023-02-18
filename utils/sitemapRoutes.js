@@ -1,9 +1,17 @@
 const contentful = require('contentful')
 
+// Get all API information
+let space = process.env.CONTENTFUL_SPACE_ID
+let accessToken = process.env.CONTENTFUL_ACCESS_TOKEN
+let environment = process.env.CONTENTFUL_ENVIRONMENT
+let host = process.env.CONTENTFUL_HOST
+
+// Client
 const client = contentful.createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
-  environment: process.env.CONTENTFUL_ENVIRONMENT,
+  space,
+  accessToken,
+  environment,
+  host
 })
 
 module.exports = async function sitemapRoutes() {

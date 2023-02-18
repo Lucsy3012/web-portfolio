@@ -30,10 +30,8 @@ export default {
     baseURL: process.env.HOSTNAME || 'https://lucasdietrich.de',
     contentfulSpaceId: process.env.CONTENTFUL_SPACE_ID,
     contentfulEnvironment: process.env.CONTENTFUL_ENVIRONMENT,
-    contentfulPreviewHost: process.env.CONTENTFUL_PREVIEW_HOST,
-    contentfulDeliveryHost: process.env.CONTENTFUL_DELIVERY_HOST,
-    contentfulPreviewAccessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
-    contentfulDeliveryAccessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+    contentfulHost: process.env.CONTENTFUL_HOST,
+    contentfulAccessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   },
   privateRuntimeConfig: {
     // Nothing here yet

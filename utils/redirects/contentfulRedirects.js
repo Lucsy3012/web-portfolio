@@ -1,21 +1,17 @@
 const contentful = require('contentful')
 
 // Get all API information
-let accessToken = process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN
 let space = process.env.CONTENTFUL_SPACE_ID
-let host = process.env.CONTENTFUL_DELIVERY_HOST
-
-// Development environment
-if (process.env.NODE_ENV === 'development') {
-  accessToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-  host = process.env.CONTENTFUL_PREVIEW_HOST
-}
+let accessToken = process.env.CONTENTFUL_ACCESS_TOKEN
+let environment = process.env.CONTENTFUL_ENVIRONMENT
+let host = process.env.CONTENTFUL_HOST
 
 // Client
 const client = contentful.createClient({
   space,
   accessToken,
-  host,
+  environment,
+  host
 })
 
 function redirectMap (items) {

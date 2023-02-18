@@ -12,7 +12,10 @@ export default {
     roughness: "Rauheit",
     bump: "Unebenheit",
     color: "Farbe",
+    colorEmissive: "Emittierende Farbe",
+    colorSpecular: "Spektralfarbe",
     backgroundColor: "Hintergrundfarbe",
+    scale: "Skalierung",
     position: "Position",
     rotation: "Drehung",
     rotationSpeed: "Drehungsgeschwindigkeit",
@@ -22,13 +25,50 @@ export default {
     intensity: "Intensität",
     radius: "Radius",
     opacity: "Opazität",
+    transmission: "Transmission",
+    ior: "Lichtbrechungsindex",
+    thickness: "Dicke",
+    specularIntensity: "Spiegelungsintensität",
+    specularColor: "Spiegelungsfarbe",
+    envMapIntensity: "Umgebungsintensität",
+    lightIntensity: "Lichtintensität",
+    exposure: "Belichtung",
+    clearcoat: "Clearcoat",
+    reflectivity: "Reflektivität",
+    shininess: "Glanz",
+    wireframe: "Wireframe",
+
+    // Geometries
+    cube: "Würfel",
+    sphere: "Kugel",
+    torus: "Torus",
+    torusKnot: "Torus Knoten",
+    tetrahedron: "Tetrahedron",
+    icosahedron: "Icosahedron",
+
+    // Textures
+    textures: {
+      name: "Texturen",
+      glass: {
+        name: "Glas",
+        diagonally: "Diagonal",
+        iceBrushed: "Eis (verweht)",
+        iceRough: "Eis (rau)",
+        shattered: "Zerbrochen",
+        spectral: "Spektral",
+        squared: "Quadratisch",
+      },
+    },
 
     // Names
     folders: {
       scene: "Szene",
       light: "Licht",
+      postProcessing: "Post Processing",
       pointLight: "Lichtquelle",
-      ambientLight: "Grundbeleuchtung"
+      ambientLight: "Grundbeleuchtung",
+      outerObject: "Äußeres Objekt",
+      innerObject: "Inneres Objekt",
     },
   },
   en: {
@@ -44,7 +84,10 @@ export default {
     roughness: "Roughness",
     bump: "Bump",
     color: "Color",
+    colorEmissive: "Emissive color",
+    colorSpecular: "Specular color",
     backgroundColor: "Background color",
+    scale: "Scale",
     position: "Position",
     rotation: "Rotation",
     rotationSpeed: "Rotation speed",
@@ -54,13 +97,50 @@ export default {
     intensity: "Intensity",
     radius: "Radius",
     opacity: "Opacity",
+    transmission: "Transmission",
+    ior: "Index-of-refraction",
+    thickness: "Thickness",
+    specularIntensity: "Specular intensity",
+    specularColor: "Specular color",
+    envMapIntensity: "Environment map intensity",
+    lightIntensity: "Light intensity",
+    exposure: "Exposure",
+    clearcoat: "Clearcoat",
+    reflectivity: "Reflectivity",
+    shininess: "Shininess",
+    wireframe: "Wireframe",
+
+    // Geometries
+    cube: "Cube",
+    sphere: "Sphere",
+    torus: "Torus",
+    torusKnot: "Torus knot",
+    tetrahedron: "Tetrahedron",
+    icosahedron: "Icosahedron",
+
+    // Textures
+    textures: {
+      name: "Textures",
+      glass: {
+        name: "Glass",
+        diagonally: "Diagonally",
+        iceBrushed: "Ice (brushed)",
+        iceRough: "Ice (rough)",
+        shattered: "Shattered",
+        spectral: "Spectral",
+        squared: "Squared",
+      },
+    },
 
     // Names
     folders: {
       scene: "Scene",
       light: "Light",
+      postProcessing: "Post processing",
       pointLight: "Point light",
-      ambientLight: "Ambient light"
+      ambientLight: "Ambient light",
+      outerObject: "Outer object",
+      innerObject: "Inner object",
     },
   }
 }

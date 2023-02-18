@@ -17,6 +17,11 @@ export default {
         title: "Tetrahedron",
         subline: "Tetrahedron mit dynamischer Lichtquelle",
       },
+      iceCube: {
+        slug: "iceCube",
+        title: "Eiswürfel",
+        subline: "Transmission- und Lichtbrechungsmaterialen",
+      },
       angularGradient: {
         slug: "angular-gradient",
         title: "Verlauf",
@@ -87,6 +92,11 @@ export default {
         slug: "tetrahedron",
         title: "Tetrahedron",
         subline: "Tetrahedron with dynamic light source",
+      },
+      iceCube: {
+        slug: "iceCube",
+        title: "Ice Cube",
+        subline: "Transmission and refraction materials",
       },
       angularGradient: {
         slug: "angular-gradient",
