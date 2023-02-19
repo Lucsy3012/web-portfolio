@@ -96,7 +96,7 @@ export default {
       // const matcapTexture = textureLoader.load('/textures/' + this.materialTexture)
       // const material = new this.THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 
-      const geometry = new this.THREE.TetrahedronGeometry(9, 0)
+      const geometry = new this.THREE.TetrahedronBufferGeometry(9, 0)
       const material = new this.THREE.MeshStandardMaterial({ color: this.colorMaterial })
       material.metalness = 0.2;
       material.roughness = 1;

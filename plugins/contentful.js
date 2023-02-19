@@ -7,8 +7,9 @@ export default (context, inject) => {
   // Creating client
   const client = contentful.createClient({
     space: runtimeConfig.contentfulSpaceId,
-    accessToken: runtimeConfig.contentfulDeliveryAccessToken,
+    accessToken: runtimeConfig.contentfulAccessToken,
     environment: runtimeConfig.contentfulEnvironment,
+    host: runtimeConfig.contentfulHost,
   })
 
   inject('contentfulClient', client)

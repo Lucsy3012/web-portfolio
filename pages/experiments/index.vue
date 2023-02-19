@@ -26,6 +26,29 @@
 
     <!-- Detailed experiments -->
     <div id="experiments">
+      <!-- Ice Cube -->
+      <ProjectBanner
+        :key="t.detailedExperiments.iceCube.slug"
+        :slug="t.detailedExperiments.iceCube.slug"
+        :title="t.detailedExperiments.iceCube.title"
+        :subline="t.detailedExperiments.iceCube.subline"
+        :webGL="true"
+        :headlinePosition="'left'"
+      >
+        <template #experiment>
+          <ThreejsTransmissionCube
+            colorBackground="#D1D8F1"
+            colorMaterial="#7DFFE3"
+            colorMaterial2="#BFFFFB"
+            colorLight="#208DBF"
+            colorLight2="#FF8321"
+            :orbitControls="false"
+            :gui="true"
+            :debug="false"
+          />
+        </template>
+      </ProjectBanner>
+
       <!-- Coin -->
       <ProjectBanner
         :key="t.detailedExperiments.coin.slug"
@@ -66,26 +89,6 @@
           />
         </template>
       </ProjectBanner>
-
-      <!-- Cone Background
-      <ProjectBanner
-        :key="t.detailedExperiments.angularGradient.slug"
-        :slug="t.detailedExperiments.angularGradient.slug"
-        :title="t.detailedExperiments.angularGradient.title"
-        :subline="t.detailedExperiments.angularGradient.subline"
-        :webGL="true"
-        :headlinePosition="'left'"
-      >
-        <template #experiment>
-          <ThreejsConeBackground
-            class="background"
-            materialTexture="texture-cyan.png"
-            :colorBackground="'#95EBFE'"
-            :orbitControls="false"
-          />
-        </template>
-      </ProjectBanner>
-       -->
     </div>
 
     <!-- More -->

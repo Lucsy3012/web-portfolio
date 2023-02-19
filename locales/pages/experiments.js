@@ -4,7 +4,7 @@ export default {
     openDescription: "Beschreibung lesen",
     description: "Beschreibung",
     links: "Links",
-    seoDescription: "Entdecke meine experimentelle Projekte, die vor allem mit Three.js umgesetzt wurden",
+    seoDescription: "Entdecke meine experimentelle Projekte, die ich vor allem mit Three.js umgesetzt habe",
     seoImage: "/og-image/og-image-experiments-de.jpg",
     detailedExperiments: {
       coin: {
@@ -16,6 +16,11 @@ export default {
         slug: "tetrahedron",
         title: "Tetrahedron",
         subline: "Tetrahedron mit dynamischer Lichtquelle",
+      },
+      iceCube: {
+        slug: "iceCube",
+        title: "Eiswürfel",
+        subline: "Transmission- und Lichtbrechungsmaterialen",
       },
       angularGradient: {
         slug: "angular-gradient",
@@ -75,7 +80,7 @@ export default {
     openDescription: "Read description",
     description: "Description",
     links: "Links",
-    seoDescription: "Discover my experimental projects which have been mainly developed with Three.js",
+    seoDescription: "Discover my experimental projects which I have mainly developed with Three.js",
     seoImage: "/og-image/og-image-experiments-en.jpg",
     detailedExperiments: {
       coin: {
@@ -87,6 +92,11 @@ export default {
         slug: "tetrahedron",
         title: "Tetrahedron",
         subline: "Tetrahedron with dynamic light source",
+      },
+      iceCube: {
+        slug: "iceCube",
+        title: "Ice Cube",
+        subline: "Transmission and refraction materials",
       },
       angularGradient: {
         slug: "angular-gradient",
