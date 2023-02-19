@@ -4,7 +4,7 @@ export default {
     openDescription: "Beschreibung lesen",
     description: "Beschreibung",
     links: "Links",
-    seoDescription: "Entdecke meine experimentelle Projekte, die vor allem mit Three.js umgesetzt wurden",
+    seoDescription: "Entdecke meine experimentelle Projekte, die ich vor allem mit Three.js umgesetzt habe",
     seoImage: "/og-image/og-image-experiments-de.jpg",
     detailedExperiments: {
       coin: {
@@ -80,7 +80,7 @@ export default {
     openDescription: "Read description",
     description: "Description",
     links: "Links",
-    seoDescription: "Discover my experimental projects which have been mainly developed with Three.js",
+    seoDescription: "Discover my experimental projects which I have mainly developed with Three.js",
     seoImage: "/og-image/og-image-experiments-en.jpg",
     detailedExperiments: {
       coin: {

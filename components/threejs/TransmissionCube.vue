@@ -214,6 +214,7 @@ export default {
       this.groups.innerObjectGroup.add(this.objects.innerTorusKnot)
       this.groups.cubeGroup.add(this.objects.cube)
       this.groups.cubeGroup.add(this.groups.innerObjectGroup)
+      this.groups.cubeGroup.scale.set(1.25, 1.25, 1.25)
 
       this.scene.add(this.groups.cubeGroup)
 
@@ -289,13 +290,6 @@ export default {
       this.lights.pointLight.position.z = Math.cos(this.mouse.x * amplitude) * -start
       this.lights.pointLight2.position.x = Math.sin(this.mouse.x * -amplitude) * start
       this.lights.pointLight2.position.z = Math.cos(this.mouse.x * -amplitude) * start
-
-      // this.lights.pointLight.position.x = Math.sin(this.clock.elapsedTime) * x
-      // this.lights.pointLight.position.y = Math.sin(this.clock.elapsedTime / 3) * y
-      // this.lights.pointLight.position.z = Math.cos(this.clock.elapsedTime) * z
-      // this.lights.pointLight2.position.x = Math.sin(this.clock.elapsedTime - Math.PI) * x
-      // this.lights.pointLight2.position.y = Math.sin((this.clock.elapsedTime / 3) - Math.PI) * y
-      // this.lights.pointLight2.position.z = Math.cos(this.clock.elapsedTime - Math.PI) * z
     },
 
     // Add-ons
@@ -323,16 +317,16 @@ export default {
         visibleObject: 'cube',
         lightIntensity: 5,
         exposure: 1,
-        scale: 1,
+        scale: 1.5,
         textures: t.textures.glass.iceBrushed
       };
 
       // Folders
-      const paneScene = pane.addFolder({ title: t.folders.scene, expanded: true });
+      const paneScene = pane.addFolder({ title: t.folders.scene, expanded: false });
       const paneCubeMaterial = pane.addFolder({ title: t.textures.glass.name });
       const paneInnerObjectMaterial = pane.addFolder({ title: t.folders.innerObject });
-      const paneLight = pane.addFolder({ title: t.folders.light, expanded: true });
-      const panePostProcessing = pane.addFolder({ title: t.folders.postProcessing });
+      const paneLight = pane.addFolder({ title: t.folders.light, expanded: false });
+      const panePostProcessing = pane.addFolder({ title: t.folders.postProcessing, expanded: false });
 
       // Scene
       paneScene.addInput(parameters, 'colorBackground', { picker: 'inline', label: t.backgroundColor }).on('change', (ev) => {
@@ -357,7 +351,7 @@ export default {
       paneCubeMaterial.addInput(this.objects.cube.material, 'thickness', { min: 0, max: 10, step: 0.01, label: t.thickness });
       paneCubeMaterial.addInput(this.objects.cube.material, 'clearcoat', { min: 0, max: 1, step: 0.01, label: t.clearcoat });
       paneCubeMaterial.addInput(this.objects.cube.material, 'reflectivity', { min: 0, max: 0.1, step: 0.001, label: t.reflectivity });
-      paneCubeMaterial.addInput(parameters, 'scale', { min: 0.66, max: 1.5, step: 0.01, label: t.scale }).on('change', (ev) => {
+      paneCubeMaterial.addInput(parameters, 'scale', { min: 1, max: 2, step: 0.01, label: t.scale }).on('change', (ev) => {
         this.groups.cubeGroup.scale.set(ev.value, ev.value, ev.value);
       });
       paneCubeMaterial.addInput(parameters, 'textures',{ options: {
