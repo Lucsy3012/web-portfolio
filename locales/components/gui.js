@@ -25,7 +25,7 @@ export default {
     intensity: "Intensität",
     radius: "Radius",
     opacity: "Opazität",
-    transmission: "Transmission",
+    transmission: "Durchlässigkeit",
     ior: "Lichtbrechungsindex",
     thickness: "Dicke",
     specularIntensity: "Spiegelungsintensität",
@@ -33,7 +33,7 @@ export default {
     envMapIntensity: "Umgebungsintensität",
     lightIntensity: "Lichtintensität",
     exposure: "Belichtung",
-    clearcoat: "Clearcoat",
+    clearcoat: "Beschichtung",
     reflectivity: "Reflektivität",
     shininess: "Glanz",
     wireframe: "Wireframe",
@@ -51,6 +51,7 @@ export default {
       name: "Texturen",
       glass: {
         name: "Glas",
+        alternativeName: "Eis",
         diagonally: "Diagonal",
         iceBrushed: "Eis (verweht)",
         iceRough: "Eis (rau)",
@@ -123,6 +124,7 @@ export default {
       name: "Textures",
       glass: {
         name: "Glass",
+        alternativeName: "Ice",
         diagonally: "Diagonally",
         iceBrushed: "Ice (brushed)",
         iceRough: "Ice (rough)",

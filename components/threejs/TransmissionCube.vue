@@ -68,7 +68,6 @@ export default {
     }
   },
   mounted() {
-    this.rgbeLoader();
     this.init();
     this.animate();
     this.addControls(this.orbitControls);
@@ -249,11 +248,6 @@ export default {
       // Animation
       this.frameAnimationRotate(this.groups.cubeGroup, 0.33, 0.66)
       this.frameAnimationScale(this.groups.innerObjectGroup)
-      // this.frameAnimationPosition(this.groups.cubeGroup, 0, 0.5, 0.5)
-      // this.camera.position.x = 2 + (Math.sin(this.mouse.x) * 0.5)
-      // this.camera.position.z = 2 + (Math.cos(this.mouse.x) * 0.5)
-      // this.camera.position.y = 0.5 + (this.mouse.y * 0.5)
-
       this.frameAnimationLightPosition(3, 2)
 
       // Updates Renderer
@@ -266,9 +260,6 @@ export default {
     // Animations
     // ------------------------
     frameAnimationRotate(obj, x = 0, y = 0, z = 0) {
-      // obj.rotation.x = x * this.clock.elapsedTime;
-      // obj.rotation.y = y * this.clock.elapsedTime;
-      // obj.rotation.z = z * this.clock.elapsedTime;
       obj.rotation.x += (x + this.time.delta) * this.animation.group.speed * (Math.PI / 720);
       obj.rotation.y += (y + this.time.delta) * this.animation.group.speed * (Math.PI / 720);
       obj.rotation.z += (z + this.time.delta) * this.animation.group.speed * (Math.PI / 720);
@@ -323,7 +314,7 @@ export default {
 
       // Folders
       const paneScene = pane.addFolder({ title: t.folders.scene, expanded: false });
-      const paneCubeMaterial = pane.addFolder({ title: t.textures.glass.name });
+      const paneCubeMaterial = pane.addFolder({ title: t.textures.glass.alternativeName });
       const paneInnerObjectMaterial = pane.addFolder({ title: t.folders.innerObject });
       const paneLight = pane.addFolder({ title: t.folders.light, expanded: false });
       const panePostProcessing = pane.addFolder({ title: t.folders.postProcessing, expanded: false });
@@ -339,8 +330,11 @@ export default {
         this.renderer.toneMappingExposure = parameters['exposure'];
       });
 
-      // Glass Cube Material
+      // Ice Cube Material
       paneCubeMaterial.addInput(this.animation.group, 'speed', {  min: 0, max: 2, step: 0.1, label: t.rotationSpeed });
+      paneCubeMaterial.addInput(parameters, 'scale', { min: 1, max: 2, step: 0.01, label: t.scale }).on('change', (ev) => {
+        this.groups.cubeGroup.scale.set(ev.value, ev.value, ev.value);
+      });
       paneCubeMaterial.addInput(parameters, 'colorMaterial', { picker: 'inline', label: t.color }).on('change', (ev) => {
         this.objects.cube.material.color.set(parameters.colorMaterial);
       });
@@ -351,15 +345,12 @@ export default {
       paneCubeMaterial.addInput(this.objects.cube.material, 'thickness', { min: 0, max: 10, step: 0.01, label: t.thickness });
       paneCubeMaterial.addInput(this.objects.cube.material, 'clearcoat', { min: 0, max: 1, step: 0.01, label: t.clearcoat });
       paneCubeMaterial.addInput(this.objects.cube.material, 'reflectivity', { min: 0, max: 0.1, step: 0.001, label: t.reflectivity });
-      paneCubeMaterial.addInput(parameters, 'scale', { min: 1, max: 2, step: 0.01, label: t.scale }).on('change', (ev) => {
-        this.groups.cubeGroup.scale.set(ev.value, ev.value, ev.value);
-      });
       paneCubeMaterial.addInput(parameters, 'textures',{ options: {
-          [t.textures.glass.diagonally]: 'diagonally',
           [t.textures.glass.iceBrushed]: 'iceBrushed',
           [t.textures.glass.iceRough]: 'iceRough',
           [t.textures.glass.shattered]: 'shattered',
           [t.textures.glass.spectral]: 'spectral',
+          [t.textures.glass.diagonally]: 'diagonally',
           [t.textures.glass.squared]: 'squared'
         }, label: t.textures.name }).on('change', (ev) => {
 
@@ -452,18 +443,13 @@ export default {
 
     loadTextures() {
       const glassTextures = {
-        diagonally: {},
         iceBrushed: {},
         iceRough: {},
         shattered: {},
         spectral: {},
+        diagonally: {},
         squared: {}
       }
-
-      // Glass: Diagonally
-      glassTextures.diagonally.map = this.textures.loader.load('/textures/glass/color/diagonally.jpg')
-      glassTextures.diagonally.normalMap = this.textures.loader.load('/textures/glass/normal/diagonally.jpg')
-      glassTextures.diagonally.roughnessMap = this.textures.loader.load('/textures/glass/roughness/diagonally.jpg')
 
       // Glass: Ice (brushed)
       glassTextures.iceBrushed.map = this.textures.loader.load('/textures/glass/color/ice-brushed.jpg')
@@ -485,6 +471,11 @@ export default {
       glassTextures.spectral.normalMap = this.textures.loader.load('/textures/glass/normal/spectral.jpg')
       glassTextures.spectral.roughnessMap = this.textures.loader.load('/textures/glass/roughness/spectral.jpg')
 
+      // Glass: Diagonally
+      glassTextures.diagonally.map = this.textures.loader.load('/textures/glass/color/diagonally.jpg')
+      glassTextures.diagonally.normalMap = this.textures.loader.load('/textures/glass/normal/diagonally.jpg')
+      glassTextures.diagonally.roughnessMap = this.textures.loader.load('/textures/glass/roughness/diagonally.jpg')
+
       // Glass: Squared
       glassTextures.squared.map = this.textures.loader.load('/textures/glass/color/squared.jpg')
       glassTextures.squared.normalMap = this.textures.loader.load('/textures/glass/normal/squared.jpg')
@@ -492,13 +483,6 @@ export default {
 
       // Add to global object
       this.textures.glass = glassTextures
-    },
-
-    // todo Loaders
-    rgbeLoader() {
-      this.loader = new this.$vendor.RGBELoader().load('/textures/environmentMaps/night/original.hdr');
-      this.loader.mapping = this.THREE.EquirectangularReflectionMapping;
-      this.loader.encoding = this.THREE.sRGBEncoding;
     }
   }
 }
