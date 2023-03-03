@@ -183,9 +183,11 @@
 
 <script>
 import services from '~/assets/js/services'
+import date from '@/mixins/date'
 
 export default {
   name: 'HomePage',
+  mixins: [date],
   asyncData({ i18n, $contentfulClient }) {
     return $contentfulClient.getEntries({
       content_type: 'project',
@@ -247,7 +249,7 @@ export default {
     slugify(str) {
       return this.$slugify(str)
     }
-  }
+  },
 }
 </script>
 
