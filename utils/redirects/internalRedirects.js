@@ -1,3 +1,5 @@
 export default [
-  // empty yet
+
+  // Resolve Open Redirect Issue
+  { from: '\\\\.*', to: '/', statusCode: 301, }
 ]
