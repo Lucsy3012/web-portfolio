@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <section class="animate--js in">
+    <section v-animate-in-view class="in">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
@@ -25,7 +25,7 @@
     </section>
 
     <!-- Projects filter -->
-    <section id="filter" class="pt0 animate--js in">
+    <section id="filter" v-animate-in-view class="pt0 in">
       <div class="inner">
         <div class="row">
           <div class="col col-12 text--center">
@@ -63,7 +63,7 @@
       </template>
 
       <!-- Empty State -->
-      <section v-if="!projectsVisible" ref="empty-state" class="animate--js">
+      <section v-if="!projectsVisible" ref="empty-state" v-animate-in-view>
         <div class="inner">
           <div class="row justify-content--center">
             <div class="col col-10 col-s-8 col-m-5 mb0 mb4-m text--center">

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <section class="dynamic-bg--container p0 animate--js in">
+    <section v-animate-in-view class="dynamic-bg--container p0 in">
       <section class="section--xl section--filled dynamic-bg">
         <!-- Video -->
         <video
@@ -69,7 +69,7 @@
     </section>
 
     <!-- Keyfacts -->
-    <section class="static-bg static-bg--accent mt3 mt4-l section--keyfacts animate--js" :style="`--site-accent: ${accentColor}`">
+    <section v-animate-in-view class="static-bg static-bg--accent mt3 mt4-l section--keyfacts" :style="`--site-accent: ${accentColor}`">
       <div class="inner">
         <div class="row" :class="{ 'justify-content--space-evenly': !!urlSideImage }">
           <div class="col col-10 col-s-8 col-m-5 col--keyfacts mb0 mb4-m">
@@ -119,7 +119,7 @@
     </section>
 
     <!-- Todo Description Title
-    <section class="pt0 dynamic-bg--container animate--js headline-position--center mt5" id="description" v-if="hasDescription">
+    <section v-animate-in-view class="pt0 dynamic-bg--container headline-position--center mt5" id="description" v-if="hasDescription">
       <div class="inner">
         <div class="row dynamic-bg--offset--33">
           <div class="col col-12 headline--container">
@@ -132,7 +132,7 @@
       </div>
     </section>
 
-    <section class="pt0 dynamic-bg--container animate--js" v-if="hasDescription">
+    <section v-animate-in-view class="pt0 dynamic-bg--container" v-if="hasDescription">
       <div class="inner">
         <div class="row justify-content--center">
           <div class="col col-12 col-s-8 col-max">
@@ -144,7 +144,7 @@
     -->
 
     <!-- Impressions Title -->
-    <section id="impressions" class="pt0 dynamic-bg--container animate--js headline-position--center mt5">
+    <section id="impressions" v-animate-in-view class="pt0 dynamic-bg--container headline-position--center mt5">
       <div class="inner">
         <div class="row dynamic-bg--offset--33">
           <div class="col col-12 headline--container">
@@ -189,7 +189,12 @@
       </section>
     </section>
 
-    <section v-for="impression in impressionsRest" :key="impression.sys.id" class="pt0 dynamic-bg--container animate--js project-image">
+    <section
+      v-for="impression in impressionsRest"
+      :key="impression.sys.id"
+      v-animate-in-view
+      class="pt0 dynamic-bg--container project-image"
+    >
       <div class="inner">
         <div class="row">
           <div class="col col-12">
@@ -219,7 +224,12 @@
     </section>
 
     <!-- Links -->
-    <section v-if="!!links" id="links" class="dynamic-bg--container pb0 animate--js in">
+    <section
+      v-if="!!links"
+      id="links"
+      v-animate-in-view
+      class="dynamic-bg--container pb0 in"
+    >
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">

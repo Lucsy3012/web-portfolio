@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <section class="animate--js in">
+    <section v-animate-in-view class="in">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
@@ -138,13 +138,13 @@
     </div>
 
     <!-- Services -->
-    <section id="services" class="dynamic-bg--container pb0 animate--js">
+    <section id="services" v-animate-in-view class="dynamic-bg--container pb0">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
             <span class="secondary">{{ t.services.title }}</span>
             <h2 class="primary">
-              {{ t.services.title }}
+              {{ translations.services.title }}
             </h2>
           </div>
         </div>
@@ -188,8 +188,16 @@ import date from '@/mixins/date'
 export default {
   name: 'HomePage',
   mixins: [date],
-  asyncData({ i18n, $contentfulClient }) {
-    return $contentfulClient.getEntries({
+  async asyncData({ i18n, $contentfulClient, $axios }) {
+    const langCode = i18n.localeProperties.code
+    const translations = await $axios.$get(`api/translations/get-translation`, {
+      params: {
+        file: '_e921050100901',
+        langCode
+      }
+    })
+
+    const content = await $contentfulClient.getEntries({
       content_type: 'project',
       order: 'fields.highlightOrder',
       select: 'fields,sys.id,sys.createdAt',
@@ -203,9 +211,15 @@ export default {
         }
       })
       .catch(e => console.error(e))
+
+    return {
+      translations,
+      ...content
+    }
   },
   data() {
     return {
+      translations: {},
       images: {
         // aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/0cbbc598dd4bb6c318b11c06a6872090/about-me.jpg",
         aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/6jsGA8FqgzP8mMBMTRw4b1/336ce75b09f2d650e0dee5b9426c087f/about-me-landscape.jpg",
@@ -248,7 +262,7 @@ export default {
     },
     slugify(str) {
       return this.$slugify(str)
-    }
+    },
   },
 }
 </script>

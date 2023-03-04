@@ -1,4 +1,5 @@
 import url from 'url'
+import fetch from 'node-fetch'
 import safeStringify from 'safe-json-stringify'
 import { export404, unwrap } from '../utils/fetch'
 

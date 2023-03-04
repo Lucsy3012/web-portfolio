@@ -95,7 +95,7 @@ export default {
   plugins: [
     { src: '~/plugins/contentful' },
     { src: '~/plugins/slugify' },
-    { src: '~/plugins/animate.js', mode: 'client', ssr: false },
+    { src: '~/plugins/animations.js', mode: 'client', ssr: false },
     { src: '~/plugins/vendor.client.js' },
     ...devPlugins
   ],
@@ -111,8 +111,10 @@ export default {
   modules: [
     'nuxt-i18n',
     '@nuxtjs/dotenv',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/redirect-module'
+    '@nuxtjs/redirect-module',
+    '@nuxtjs/axios',
+    '~/modules/localazy',
+    '@nuxtjs/sitemap' // needs to be last
   ],
 
   // Redirects

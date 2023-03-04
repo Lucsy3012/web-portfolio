@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <section class="animate--js in">
+    <section v-animate-in-view class="in">
       <div class="inner">
         <div class="row">
           <div class="col col-12">
@@ -25,7 +25,7 @@
     </section>
 
     <!-- Person -->
-    <section class="static-bg static-bg--solar mt3 mt4-l section--about-me animate--js">
+    <section v-animate-in-view class="static-bg static-bg--solar mt3 mt4-l section--about-me">
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-me mb0 mb4-m">
@@ -72,7 +72,7 @@
     </section>
 
     <!-- Work -->
-    <section class="static-bg static-bg--accent mt4 mt5-l section--about-me animate--js">
+    <section v-animate-in-view class="static-bg static-bg--accent mt4 mt5-l section--about-me">
       <div class="inner">
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-work mb0 mb4-m">
@@ -119,7 +119,7 @@
     </section>
 
     <!-- Career -->
-    <section id="career" class="dynamic-bg--container mt4 mt5-l pb0 animate--js">
+    <section id="career" v-animate-in-view class="dynamic-bg--container mt4 mt5-l pb0">
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
