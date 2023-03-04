@@ -34,6 +34,7 @@ export default {
     contentfulAccessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   },
   privateRuntimeConfig: {
+    localazyToken: process.env.LOCALAZY_TOKEN,
     // Nothing here yet
   },
 

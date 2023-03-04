@@ -1,0 +1,13 @@
+{
+    "writeKey": "a7879797933200630823-6252b51c31a70af40c09756aabcb6eaa744732a8170cc9708b0f4ae77e564f25",
+    "readKey": "a7879797933200630823-53bc68dd3601de766fd773db70164f29c999100dba65c59934ee9b440d215369",
+    "upload": {
+        "type": "js",
+        "files": {
+            "pattern": "locales/pages/*.js",
+            "file": "${file}",
+            "path": "${path}",
+            "features": ["multilingual"]
+        }
+    }
+}
