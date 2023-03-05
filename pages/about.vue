@@ -7,9 +7,9 @@
             <!-- Headline -->
             <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33 offset-overflow">
               <h1 class="secondary">
-                {{ t.title }}
+                {{ translations.title }}
               </h1>
-              <span class="primary">{{ t.titlePrimary }}</span>
+              <span class="primary">{{ translations.titlePrimary }}</span>
             </div>
 
             <!-- Background Object Animation -->
@@ -30,10 +30,10 @@
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-me mb0 mb4-m">
             <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
-              {{ t.about.me.title }}
+              {{ translations.about.me.title }}
             </h2>
             <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">
-              {{ t.about.me.desc }}
+              {{ translations.about.me.desc }}
             </p>
             <dl class="mt3 mt4-xl --site-color animate appearFromBottomTransform">
               <template v-for="(item, index) in t.about.me.list">
@@ -59,8 +59,8 @@
               <img
                 class="mt4 mt3-m mt4-l image--about-me animate appearFromBottomTransform"
                 :src="resizeImageSrcSet(images.aboutMe, 420, 'jpg')"
-                :title="t.about.me.title"
-                :alt="t.about.me.title"
+                :title="translations.about.me.title"
+                :alt="translations.about.me.title"
                 :width="540"
                 :height="684"
                 loading="lazy"
@@ -77,10 +77,10 @@
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-8 col-m-5 col--about-work mb0 mb4-m">
             <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
-              {{ t.about.work.title }}
+              {{ translations.about.work.title }}
             </h2>
             <p class="mt1 mt2-m --site-color-66 animate appearFromBottomTransform">
-              {{ t.about.work.desc }}
+              {{ translations.about.work.desc }}
             </p>
             <dl class="mt3 mt4-xl --site-color animate appearFromBottomTransform">
               <template v-for="(item, index) in t.about.work.list">
@@ -106,8 +106,8 @@
               <img
                 class="mt4 mt3-m mt4-l image--about-work animate appearFromBottomTransform"
                 :src="resizeImageSrcSet(images.aboutWork, 420, 'jpg')"
-                :title="t.about.work.title"
-                :alt="t.about.work.title"
+                :title="translations.about.work.title"
+                :alt="translations.about.work.title"
                 :width="540"
                 :height="684"
                 loading="lazy"
@@ -123,9 +123,9 @@
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
-            <span class="secondary">{{ t.career.title }}</span>
+            <span class="secondary">{{ translations.career.title }}</span>
             <h2 class="primary">
-              {{ t.career.title }}
+              {{ translations.career.title }}
             </h2>
           </div>
         </div>
@@ -169,22 +169,22 @@
 
 <script>
 export default {
-  asyncData({ i18n, $contentfulClient }) {
-    return $contentfulClient.getEntries({
-      content_type: 'project',
-      order: '-sys.createdAt',
-      limit: 6,
-      locale: i18n.locale
+  async asyncData({ i18n, $axios }) {
+    const langCode = i18n.localeProperties.code
+    const translations = await $axios.$get(`api/translations/get-translation`, {
+      params: {
+        file: '_e1125940100901', // https://localazy.com/p/portfolio-website/files/12594/901
+        langCode
+      }
     })
-      .then(entries => {
-        return {
-          projects: entries.items
-        }
-      })
-      .catch(e => console.error(e))
+
+    return {
+      translations
+    }
   },
   data() {
     return {
+      translations: {},
       images: {
         aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/d25679949c5412cb55e8246551edb9d7/about-me.jpg",
         aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",

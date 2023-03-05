@@ -1,5 +1,5 @@
 <template>
-  <section class="project-banner section--xl pt0 dynamic-bg--container animate--js" :class="headlinePositionClass">
+  <section v-animate-in-view class="project-banner section--xl pt0 dynamic-bg--container" :class="headlinePositionClass">
     <div class="inner">
       <!-- Mobile -->
       <div class="row mb2 container-mobile">

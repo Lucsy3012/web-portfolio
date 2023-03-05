@@ -1,0 +1,37 @@
+[
+  {
+    "id": "_e921050100901",
+    "name": "home.js",
+    "path": "locales/pages",
+    "type": "js-multilingual",
+    "link": "https://localazy.com/p/portfolio-website/files/-7895/901"
+  },
+  {
+    "id": "_e954860100901",
+    "name": "projects.js",
+    "path": "locales/pages",
+    "type": "js-multilingual",
+    "link": "https://localazy.com/p/portfolio-website/files/-4514/901"
+  },
+  {
+    "id": "_e1125940100901",
+    "name": "about.js",
+    "path": "locales/pages",
+    "type": "js-multilingual",
+    "link": "https://localazy.com/p/portfolio-website/files/12594/901"
+  },
+  {
+    "id": "_e750270100901",
+    "name": "experiments.js",
+    "path": "locales/pages",
+    "type": "js-multilingual",
+    "link": "https://localazy.com/p/portfolio-website/files/-24973/901"
+  },
+  {
+    "id": "_e1153340100901",
+    "name": "legal.js",
+    "path": "locales/pages",
+    "type": "js-multilingual",
+    "link": "https://localazy.com/p/portfolio-website/files/15334/901"
+  }
+]

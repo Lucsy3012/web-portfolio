@@ -6,10 +6,10 @@
           <div class="col col-12">
             <!-- Headline -->
             <div class="headline tb5 tb6-m tb7-xl --site-color text--center simulate-offset-33">
-              <span class="secondary">{{ t.firstname }}</span>
-              <span class="primary">{{ t.lastname }}</span>
+              <span class="secondary">{{ translations.firstname }}</span>
+              <span class="primary">{{ translations.lastname }}</span>
               <h1 class="tertiary">
-                {{ t.jobTitle }}
+                {{ translations.jobTitle }}
               </h1>
             </div>
 
@@ -32,10 +32,10 @@
         <div class="row justify-content--space-evenly">
           <div class="col col-10 col-s-9 col-m-5 col-l-6 col--about-me">
             <h2 class="tf3 tf4-s tf5-xl --site-color animate headlineAppearFromBottom pt2">
-              {{ t.about.me.title }}
+              {{ translations.about.me.title }}
             </h2>
             <p class="mt1 mt2-m --site-color-66 animate appearFromTop">
-              {{ t.about.me.desc }}
+              {{ translations.about.me.desc }}
             </p>
             <picture>
               <source media="(min-width: 1280px)" :srcset="resizeImageSrcSet(images.aboutMe, 1440, 'webp')" type="image/webp">
@@ -47,8 +47,8 @@
               <img
                 class="mt4 mt3-m mt4-l image--about-me"
                 :src="resizeImageSrcSet(images.aboutMe, 420, 'jpg')"
-                :title="t.about.me.title"
-                :alt="t.about.me.title"
+                :title="translations.about.me.title"
+                :alt="translations.about.me.title"
                 :width="540"
                 :height="684"
               >
@@ -71,8 +71,8 @@
               <img
                 class="mt4 mt3-m mt4-l image--about-work"
                 :src="resizeImageSrcSet(images.aboutMe, 420, 'jpg')"
-                :title="t.about.me.title"
-                :alt="t.about.me.title"
+                :title="translations.about.me.title"
+                :alt="translations.about.me.title"
                 :width="540"
                 :height="684"
                 fetchpriority="high"
@@ -88,21 +88,21 @@
       <section class="section--xl overflow--hidden">
         <div class="tb3 tb4-s tb5-xl --site-color rolling-title">
           <h2 class="tf3 tf4-s tf5-xl">
-            {{ t.projects.title }}
+            {{ translations.projects.title }}
           </h2>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="tf3 tf4-s tf5-xl">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
-          <span class="--site-color-33">{{ t.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="tf3 tf4-s tf5-xl">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
+          <span class="--site-color-33">{{ translations.projects.title }}</span>
         </div>
       </section>
       <template v-for="project in projects">
@@ -125,11 +125,11 @@
           <div class="row">
             <div class="col col-12 text--center">
               <h3 class="--eyebrow --site-color mb1">
-                {{ t.projects.cta.eyebrow }}
+                {{ translations.projects.cta.eyebrow }}
               </h3>
               <NuxtLink :to="localePath('projects')" class="tb3 tb4-s tb5-xl cta">
-                <span>{{ t.projects.cta.btn[0] }}</span>
-                <span>{{ t.projects.cta.btn[1] }}</span>
+                <span>{{ translations.projects.cta.btn[0] }}</span>
+                <span>{{ translations.projects.cta.btn[1] }}</span>
               </NuxtLink>
             </div>
           </div>
@@ -142,7 +142,7 @@
       <div class="row dynamic-bg--offset--33">
         <div class="col col-12">
           <div class="headline tb5 tb6-m tb7-xl --site-color text--center">
-            <span class="secondary">{{ t.services.title }}</span>
+            <span class="secondary">{{ translations.services.title }}</span>
             <h2 class="primary">
               {{ translations.services.title }}
             </h2>
@@ -192,12 +192,12 @@ export default {
     const langCode = i18n.localeProperties.code
     const translations = await $axios.$get(`api/translations/get-translation`, {
       params: {
-        file: '_e921050100901',
+        file: '_e921050100901', // https://localazy.com/p/portfolio-website/files/-7895/901
         langCode
       }
     })
 
-    const content = await $contentfulClient.getEntries({
+    const contentfulData = await $contentfulClient.getEntries({
       content_type: 'project',
       order: 'fields.highlightOrder',
       select: 'fields,sys.id,sys.createdAt',
@@ -214,7 +214,7 @@ export default {
 
     return {
       translations,
-      ...content
+      ...contentfulData
     }
   },
   data() {
