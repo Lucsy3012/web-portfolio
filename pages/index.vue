@@ -208,7 +208,7 @@ export default {
     return {
       images: {
         // aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/0cbbc598dd4bb6c318b11c06a6872090/about-me.jpg",
-        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/6jsGA8FqgzP8mMBMTRw4b1/336ce75b09f2d650e0dee5b9426c087f/about-me-landscape.jpg",
+        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/6jsGA8FqgzP8mMBMTRw4b1/8a255f34202e1e4079fb873819fd1e07/about-me-landscape.jpg",
         // aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",
         aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/1FkJ5qrcXS6vtb7iZXTcSb/d787ca456362aa45afd1876a02aca625/about-workspace-landscape.jpg",
       }
