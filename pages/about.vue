@@ -186,7 +186,7 @@ export default {
   data() {
     return {
       images: {
-        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/d25679949c5412cb55e8246551edb9d7/about-me.jpg",
+        aboutMe: "https://images.ctfassets.net/rlw7c1gzufpy/5wK2hatwH6hTyDYXceLuJX/29e03c15127285d5520e7cde1e6f0762/about-me.jpg",
         aboutWork: "https://images.ctfassets.net/rlw7c1gzufpy/bnLGLKEkp3FfScQbAWgPS/dd59972bc054e7033189903c9b7442ef/about-workspace.jpg",
       }
     }
