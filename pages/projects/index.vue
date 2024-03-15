@@ -34,7 +34,7 @@
                 v-for="(service, index) in servicesPrepared"
                 :key="`${index}-${slugify(service.name)}`"
                 class="filter-btn"
-                :class="{ 'filter-btn--active': propertyExists(filter, service.type, service.name)}"
+                :class="{ 'filter-btn--active': propertyExists($route.query, service.type, service.name)}"
                 @click="updateFilters(service.name, service.type)"
               >
                 {{ service.name }}
@@ -208,7 +208,7 @@ export default {
       }
     }
   },
-  watchQuery: ['filter'],
+  watchQuery: ['filter', 'technologies', 'responsibilities'],
   methods: {
     updateFilters(filterName, type) {
       this.$router.push({ query: { [type]: filterName } })
