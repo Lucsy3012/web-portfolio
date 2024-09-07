@@ -1,5 +1,9 @@
 # nuxt-starter
 
+## Requirements
+* npm
+* node v16
+
 ## Build Setup
 
 ```bash
@@ -15,6 +19,16 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+```
+
+## Troubleshooting
+
+#### On Crypto module error
+`Error: error:0308010C:digital envelope routines::unsupported`
+
+```bash
+# change node version to 16
+$ nvm use 16
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

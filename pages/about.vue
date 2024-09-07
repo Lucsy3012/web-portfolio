@@ -169,20 +169,6 @@
 
 <script>
 export default {
-  asyncData({ i18n, $contentfulClient }) {
-    return $contentfulClient.getEntries({
-      content_type: 'project',
-      order: '-sys.createdAt',
-      limit: 6,
-      locale: i18n.locale
-    })
-      .then(entries => {
-        return {
-          projects: entries.items
-        }
-      })
-      .catch(e => console.error(e))
-  },
   data() {
     return {
       images: {

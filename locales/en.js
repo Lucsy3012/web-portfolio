@@ -9,6 +9,7 @@ import home from "~/locales/pages/home"
 import about from "~/locales/pages/about"
 import projects from "~/locales/pages/projects"
 import experiments from "~/locales/pages/experiments"
+import book from "~/locales/pages/book"
 import contact from "~/locales/pages/contact"
 import legal from "~/locales/pages/legal"
 
@@ -22,6 +23,7 @@ export default {
   about: about.en,
   projects: projects.en,
   experiments: experiments.en,
+  book: book.en,
   contact: contact.en,
   legal: legal.en
 }
