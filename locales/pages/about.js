@@ -19,7 +19,7 @@ export default {
       },
       work: {
         title: "Arbeit",
-        desc: "Ich habe bereits früh in meiner Karriere Gestaltung und Entwicklung für mich entdeckt, speziell im Website-Kontext. Im Moment arbeite ich als aufstrebender Web-Entwickler/-Designer bei der shopware AG. Dort erweitere ich die Code-Basis, entwickle neue Ideen und optimiere bereits vorhandene Funktionen für die Website. Zudem liebe ich es, in anderen Bereichen kreativ aktiv zu sein, wie zum Beispiel Video-Produktionen, 3D-Animationen, Illustrationen oder sogar das Schreiben von Texten. In einer perfekten Zukunft hätte ich gerne eine eigenes Buch veröffentlicht und ein Kinderbuch illustriert. Seit kurzem entdecke ich auch mit Freude das Designen von Apps für mich!",
+        desc: "Ich habe bereits früh in meiner Karriere Gestaltung und Entwicklung für mich entdeckt, speziell im Website-Kontext. Im Moment arbeite ich als aufstrebender UX Engineer bei der shopware AG. Dort erweitere ich die Code-Basis, entwickle neue Ideen und optimiere bereits vorhandene Funktionen für die Website. Zudem liebe ich es, in anderen Bereichen kreativ aktiv zu sein, wie zum Beispiel Video-Produktionen, 3D-Animationen, Illustrationen oder sogar das Schreiben von Texten. In einer perfekten Zukunft hätte ich gerne eine eigenes Buch veröffentlicht (mittlerweile erreicht!) und ein Kinderbuch illustriert. Seit kurzem entdecke ich auch mit Freude das Designen von Apps für mich!",
         list: [
           {
             title: "Creative Developer",
@@ -96,7 +96,7 @@ export default {
       },
       work: {
         title: "Work",
-        desc: "Early on in my career I was gaining experience and pleasure in working on websites, creatively and in the development. Currently I'm working as a web developer at shopware AG. I develop new ideas for our website, help to further improve and expand the website's code base, functionality and usability. Despite my neophobia I really adore to experiment with other creative work like video production, animations, illustrations or even writing for books. Since 2021 I'm getting more into app design as well and loving it!",
+        desc: "Early on in my career I was gaining experience and pleasure in working on websites, creatively and in the development. Currently I'm working as an UX Engineer at shopware AG. I develop new ideas for our website, help to further improve and expand the website's code base, functionality and usability. Despite my neophobia I really adore to experiment with other creative work like video production, animations, illustrations or even writing for books (update: I've written and published my first ever book). Since 2021 I'm getting more into app design as well and loving it!",
         list: [
           {
             title: "Creative Developer",
