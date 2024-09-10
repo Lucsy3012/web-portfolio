@@ -132,28 +132,32 @@ export default {
     pages: {
       'legal': {
         de: '/impressum',
-        en: '/legal-notice',
+        en: '/legal-notice'
       },
       'about': {
         de: '/ueber-mich',
-        en: '/about-me',
+        en: '/about-me'
       },
       'projects/index': {
         de: '/projekte',
-        en: '/projects',
+        en: '/projects'
       },
       'projects/_slug': {
         de: '/projekte/:slug',
-        en: '/projects/:slug',
+        en: '/projects/:slug'
       },
       'experiments/index': {
         de: '/experimente',
-        en: '/experiments',
+        en: '/experiments'
+      },
+      'book': {
+        de: '/buch',
+        en: '/book'
       },
       'contact': {
         de: '/kontakt',
-        en: '/contact',
-      },
+        en: '/contact'
+      }
     }
   },
 

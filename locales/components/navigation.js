@@ -16,6 +16,11 @@ export default {
       button: false
     },
     {
+      key: "book",
+      name: "Buch",
+      button: false
+    },
+    {
       key: "contact",
       name: "Du hast ein Projekt für mich?",
       button: true
@@ -35,6 +40,11 @@ export default {
     {
       key: "experiments",
       name: "Experiments",
+      button: false
+    },
+    {
+      key: "book",
+      name: "Book",
       button: false
     },
     {
