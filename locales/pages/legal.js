@@ -4,7 +4,7 @@ export default {
     address: {
       title: "Angaben gemäß § 5 TMG",
       name: "Lucas Dietrich",
-      street: "Zum Erlenbusch 21",
+      street: "Höftestr. 32",
       city: "Münster",
       zip: "48167",
     },
@@ -49,7 +49,7 @@ export default {
     address: {
       title: "Angaben gemäß § 5 TMG",
       name: "Lucas Dietrich",
-      street: "Zum Erlenbusch 21",
+      street: "Höftestr. 32",
       city: "Münster",
       zip: "48167",
     },

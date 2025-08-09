@@ -8,7 +8,7 @@ export default {
         desc: "Hey! Mein Name ist Lucas Dietrich und ich bin Ende 1994 in Münster (Deutschland) geboren und aufgewachsen. Meine Freunde und Familie würden mich als jemanden beschreiben, der einem Perfektionist nahe kommt. Ordentlich, organisiert, minimalistisch. Ich sehe mich als eine kreative und introvertierte Seele, die offen und optimistisch der Zukunft entgegenblickt. Der Optimismus ist etwas, dass ich über die Zeit gelernt habe und für den mich mittlerweile viele bewundern. Ich bin ein begeisterter und rationaler Problemlöser, der gerne neue Fähigkeiten erlernt um meine Ziele zu erreichen und mich menschlich weiterzuentwicklen.",
         list: [
           {
-            title: "29 Jahre",
+            title: "30 Jahre",
             desc: "Alter"
           },
           {
@@ -26,7 +26,7 @@ export default {
             desc: "Job"
           },
           {
-            title: "8 Jahre",
+            title: "9 Jahre",
             desc: "Berufserfahrung"
           }
         ],
