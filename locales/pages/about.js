@@ -85,7 +85,7 @@ export default {
         desc: "Hey! I'm Lucas Dietrich, born in 1994 and raised in my hometown Münster, Germany. My friends and family would describe me as someone close to a perfectionist. I like clean, organized and minimalistic places and workspaces. I'm a creative introvert and see myself as very honest, rational and thoughtful. One standout trait of mine is that I'm always optimistic, which is a trait I had to learn, but now I'm being admired for this. I'm an analyst and a problem solver who adores to learn new skills in my personal or professional life.",
         list: [
           {
-            title: "29 years",
+            title: "30 years",
             desc: "Age"
           },
           {
@@ -103,7 +103,7 @@ export default {
             desc: "Job"
           },
           {
-            title: "8 years",
+            title: "9 years",
             desc: "Professional experience"
           }
         ],
