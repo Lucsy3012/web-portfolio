@@ -3,7 +3,10 @@
     <nav>
       <ul>
         <li v-for="item in navItems" :key="item.key">
-          <NuxtLink :to="localePath({ name: item.key })" :class="{ 'btn btn-border': item.button }">
+          <a v-if="item.external" :href="item.external" :class="{ 'btn btn-border': item.button }">
+            <span @click="navigationDeactivate()">{{ item.name }}</span>
+          </a>
+          <NuxtLink v-else :to="localePath({ name: item.key })" :class="{ 'btn btn-border': item.button }">
             <span @click="navigationDeactivate()">{{ item.name }}</span>
           </NuxtLink>
         </li>
