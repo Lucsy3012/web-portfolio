@@ -1,8 +1,13 @@
 <template>
   <section class="announcement">
+    <!--
     <NuxtLink class="tm-2 --site-contrast" :to="localePath({ name: t.linkInternal })">
       {{ t.message }}
     </NuxtLink>
+    -->
+    <a class="tm-2 --site-contrast" :href="t.link" target="_blank" rel="noopener">
+      {{ t.message }}
+    </a>
   </section>
 </template>
 
