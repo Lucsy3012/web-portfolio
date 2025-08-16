@@ -21,6 +21,12 @@ export default {
       button: false
     },
     {
+      key: "prints",
+      name: "Prints",
+      external: "https://prints.lucasdietrich.de",
+      button: false
+    },
+    {
       key: "contact",
       name: "Du hast ein Projekt für mich?",
       button: true
@@ -45,6 +51,12 @@ export default {
     {
       key: "book",
       name: "Book",
+      button: false
+    },
+    {
+      key: "prints",
+      name: "Prints",
+      external: "https://prints.lucasdietrich.de",
       button: false
     },
     {
