@@ -27,8 +27,14 @@ export default {
       button: false
     },
     {
+      key: "photography",
+      name: "Fotografie",
+      external: "https://photography.lucasdietrich.de",
+      button: false
+    },
+    {
       key: "contact",
-      name: "Du hast ein Projekt für mich?",
+      name: "Kontakt",
       button: true
     }
   ],
@@ -60,8 +66,14 @@ export default {
       button: false
     },
     {
+      key: "photography",
+      name: "Photography",
+      external: "https://photography.lucasdietrich.de",
+      button: false
+    },
+    {
       key: "contact",
-      name: "You have a project for me?",
+      name: "Contact",
       button: true
     }
   ],
