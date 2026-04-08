@@ -1,10 +1,10 @@
 export default {
   de: {
-    message: "Entdecke jetzt meine neue Website mit dem Projektname ”Luminate” – eine Sammlung meiner Drucke!",
-    link: "https://prints.lucasdietrich.de"
+    message: "Entdecke jetzt meine neue Fotografie-Website ”Esque” – eine Sammlung aller meiner Fotografien!",
+    link: "https://photography.lucasdietrich.de"
   },
   en: {
-    message: "Check out my new website with the project name ”Luminate” – a collection of my prints!",
-    link: "https://prints.lucasdietrich.de"
+    message: "Check out my new photography website ”Esque” – a collection of my photography efforts!",
+    link: "https://photography.lucasdietrich.de"
   }
 }
